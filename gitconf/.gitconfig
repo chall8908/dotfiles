@@ -1,0 +1,28 @@
+[user]
+  name = Chris Hall
+  email = chall8908@gmail.com
+[alias]
+  co = checkout
+  stat = status
+  c = commit
+  ps = push
+  pl = pull
+  m = merge
+  b = branch
+  sm = submodule
+  smu = submodule update
+  smi = submodule init
+  psf = push -f origin HEAD
+  psto = push -u origin HEAD
+  amend = commit --amend
+  cached = diff --cached
+  staged = diff --cached
+[color]
+  ui = true
+[core]
+  editor = emacs -nw
+  excludesfile = /home/chris/.gitignore_global
+[branch]
+  autosetuprebase = always
+[push]
+  default = current
