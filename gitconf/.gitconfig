@@ -17,6 +17,7 @@
   amend = commit --amend
   cached = diff --cached
   staged = diff --cached
+  exec = "!exec "
 [color]
   ui = true
 [core]
