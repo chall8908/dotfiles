@@ -18,6 +18,8 @@
   cached = diff --cached
   staged = diff --cached
   exec = "!exec "
+  del = push origin --delete
+	reps = "!f() { git del $1 && git ps $2 }; f"
 [color]
   ui = true
 [core]
