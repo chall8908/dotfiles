@@ -1,3 +1,6 @@
 [submodule "gitconf"]
 	path = gitconf
 	url = git@github.com:chall8908/gitconf
+[submodule "emacs"]
+	path = emacs
+	url = git@github.com:chall8908/emacs
