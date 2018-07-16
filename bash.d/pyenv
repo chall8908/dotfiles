@@ -1,0 +1,4 @@
+#-*- sh -*- Emacs mode
+
+# Initialize pyenv
+which pyenv > /dev/null && eval "$(pyenv init -)"

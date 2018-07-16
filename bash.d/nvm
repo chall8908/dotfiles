@@ -1,0 +1,15 @@
+#-*- sh -*- Emacs mode
+
+export NVM_DIR="$HOME/.nvm"
+
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# lazy load NVM proper
+nvm() {
+    unset -f nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    nvm $@
+}
+# Automatically source nvm if the current folder looks like it has javascript dependencies
+# This is mostly useful when spawning a shell inside a project
+test -e package.json && nvm > /dev/null

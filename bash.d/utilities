@@ -1,0 +1,15 @@
+#-*- sh -*- Emacs mode
+
+append_to_path() {
+    export PATH="$PATH:$1"
+}
+
+prepend_to_path() {
+    export PATH="$1:$PATH"
+}
+
+string_join() {
+    IFS=$1
+    shift # shift off the delimiter
+    echo "$*"
+}

@@ -1,0 +1,45 @@
+#-*- sh -*- Emacs mode
+
+# Get _absolute_ directory path to this file
+pushd . > /dev/null
+__SCRIPT_PATH="${BASH_SOURCE[0]}"
+while([ -h "${__SCRIPT_PATH}" ]); do
+    cd "`dirname "${__SCRIPT_PATH}"`" > /dev/null
+    __SCRIPT_PATH="$(readlink "`basename "${__SCRIPT_PATH}"`")"
+done
+export CONFIG_DIR="$(cd "$(dirname "${__SCRIPT_PATH}")" && pwd)"
+popd > /dev/null
+
+[[ -s "$CONFIG_DIR/variables" ]] && source "$CONFIG_DIR/variables" # Source custom variables
+[[ -s "$CONFIG_DIR/local/variables" ]] && source "$CONFIG_DIR/local/variables"
+
+[[ -s "$CONFIG_DIR/utilities" ]] && source "$CONFIG_DIR/utilities" # Source custom 'utilities
+
+[[ -s "$CONFIG_DIR/functions" ]] && source "$CONFIG_DIR/functions" # Source custom functions
+
+# source everyting else in the local folder
+for f in "$( find "$CONFIG_DIR/local" -type f -not -name 'variables')"; do
+    source $f
+done
+
+# Add bin in home directory to path
+prepend_to_path "$HOME/bin"
+
+# Add some global yarn shit to the path
+prepend_to_path "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
+
+source "$CONFIG_DIR/ssh"
+source "$CONFIG_DIR/history"
+
+prepend_to_path "$GOPATH/bin"
+
+[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+
+# if [ -z "${ITERM_ORIG_PS1+xxx}" ]
+# then
+#     test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# fi
+
+source "$CONFIG_DIR/pyenv"
+source "$CONFIG_DIR/rvm"
+source "$CONFIG_DIR/nvm"

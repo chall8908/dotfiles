@@ -1,0 +1,48 @@
+#-*- sh -*- Emacs mode
+
+# cd into my work directory
+work-dir() {
+    cd $WORK_DIR/$1
+}
+
+# Autocomplete folders in my work directory
+_work_dir() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    # lists workdir and chops off the path leading to them
+    local projects="$( ls -d $WORK_DIR/$cur*/ 2>/dev/null | sed s\|$WORK_DIR/\|\| )"
+
+    COMPREPLY=( $( compgen -S ' ' -W "$projects" -- $cur ) )
+
+    return 0
+}
+
+complete -F _work_dir -o nospace work-dir
+
+# cd into personal directory
+my-dir() {
+    cd $PERSONAL_DIR/$1
+}
+
+# Autocomplete folders in my personal directory
+_my_dir() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    # lists workdir and chops off the path leading to them
+    local projects="$( ls -d $PERSONAL_DIR/$cur*/ 2>/dev/null | sed s\|$PERSONAL_DIR/\|\| )"
+
+    COMPREPLY=( $( compgen -S ' ' -W "$projects" -- $cur ) )
+
+    return 0
+}
+
+complete -F _my_dir -o nospace my-dir
+
+# find example files in the current directory and copy them, if they don't already exist
+copy-examples() {
+    find . -name '*.example' -or -name '*.sample' | sed 's/\(.*\)\.\(.*\)/cp -n \1.\2 \1/' | bash
+}
+
+outside() {
+    local locale="$(string_join '+' $@)"
+    locale="${locale:-Chicago}"
+    curl "wttr.in/$locale"
+}

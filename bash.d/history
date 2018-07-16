@@ -1,0 +1,8 @@
+#-*- sh -*- Emacs mode
+
+# Update history handling
+# Ignore duplicate commands
+export HISTCONTROL=erasedups
+
+# Always append to the history
+shopt -s histappend
