@@ -18,7 +18,9 @@ popd > /dev/null
 [[ -s "$CONFIG_DIR/functions" ]] && source "$CONFIG_DIR/functions" # Source custom functions
 
 # source everyting else in the local folder
-for f in "$( find "$CONFIG_DIR/local" -type f -not -name 'variables')"; do
+file_string="$(find "$CONFIG_DIR/local" -type f -not \( -name 'variables' -or -name '.gitkeep' \))"
+file_array=( $file_string )
+for f in "${file_array[@]}"; do
     source $f
 done
 
