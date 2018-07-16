@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Using RMV to do some slightly janky shit here
+# Check to see if node is defined
+if [[ ! $(command -v node > /dev/null 2>&1) ]]; then
+    # If not, check if we're in a git repo and that repo contains a package.json file at root
+    # If it does, source nvm
+    git exec test -e package.json > /dev/null 2>&1 && nvm > /dev/null
+fi
