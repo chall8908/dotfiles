@@ -45,3 +45,5 @@ source "$CONFIG_DIR/kiex"
 source "$CONFIG_DIR/pyenv"
 source "$CONFIG_DIR/rvm"
 source "$CONFIG_DIR/nvm"
+
+[[ -s "$CONFIG_DIR/aliases" ]] && source "$CONFIG_DIR/aliases" # Source custom aliases
