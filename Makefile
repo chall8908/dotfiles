@@ -11,19 +11,18 @@ srcdir = ${abspath .}
 .SUFFIXES:
 
 TARGETS= ${DESTDIR}/.emacs.d ${DESTDIR}/.bash_profile ${DESTDIR}/.gitconfig
+REMOTES= ${srcdir}/emacs/.emacs.d ${srcdir}/gitconf/.gitconfig
 
 all: $(TARGETS)
 
-${srcdir}/emacs/.emacs.d:
-	git submodule update --init emacs
-
-${srcdir}/gitconf/.gitconfig:
-	git submodule update --init gitconf
+init: $(REMOTES)
 
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs/.emacs.d
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/.gitconfig
 
+$(REMOTES):
+	git submodule update --init $(dirname $@)
 
 $(TARGETS):
 	ln -s $< $@
