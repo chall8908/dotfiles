@@ -10,6 +10,6 @@ nvm() {
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     nvm $@
 }
-# Automatically source nvm if the current folder looks like it has javascript dependencies
+# Automatically source nvm if the current folder or project looks like it has javascript dependencies
 # This is mostly useful when spawning a shell inside a project
-test -e package.json && nvm > /dev/null
+( test -e package.json || git exec test -e package.json ) && nvm > /dev/null
