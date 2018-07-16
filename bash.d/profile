@@ -35,13 +35,13 @@ source "$CONFIG_DIR/history"
 
 prepend_to_path "$GOPATH/bin"
 
-[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
-
 # if [ -z "${ITERM_ORIG_PS1+xxx}" ]
 # then
 #     test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 # fi
 
+# Load language version managers
+source "$CONFIG_DIR/kiex"
 source "$CONFIG_DIR/pyenv"
 source "$CONFIG_DIR/rvm"
 source "$CONFIG_DIR/nvm"
