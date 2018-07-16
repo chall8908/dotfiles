@@ -41,7 +41,7 @@ copy-examples() {
     find . -name '*.example' -or -name '*.sample' | sed 's/\(.*\)\.\(.*\)/cp -n \1.\2 \1/' | bash
 }
 
-outside() {
+weather() {
     local locale="$(string_join '+' $@)"
     locale="${locale:-Chicago}"
     curl "wttr.in/$locale"
