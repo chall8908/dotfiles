@@ -41,3 +41,5 @@
   prune = 1
 [help]
   autocorrect = 25
+[rebase]
+	autosquash = true
