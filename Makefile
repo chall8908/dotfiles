@@ -26,3 +26,8 @@ $(REMOTES):
 
 $(TARGETS):
 	ln -s $< $@
+
+.PHONY: clean
+
+clean:
+	rm $(TARGETS)
