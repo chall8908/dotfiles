@@ -1,6 +1,6 @@
 [user]
   name = Chris Hall
-  email = chall8908@gmail.com
+  email = chall@selectrehab.com
 [alias]
   lg = log --oneline --graph --decorate
   co = checkout
@@ -39,6 +39,8 @@
   default = current
 [fetch]
   prune = 1
+[credential]
+  helper = osxkeychain
 [help]
   autocorrect = 25
 [rebase]
