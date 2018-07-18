@@ -1,0 +1,45 @@
+[user]
+  name = Chris Hall
+  email = chall8908@gmail.com
+[alias]
+  lg = log --oneline --graph --decorate
+  co = checkout
+  stat = status
+  c = commit
+  ps = push
+  pl = pull
+  m = merge
+  b = branch
+  sm = submodule
+  smu = submodule update
+  smi = submodule init
+  psf = "!f() { git push -f \"${1:-origin}\" HEAD; }; f"
+  psto = "!f() { git push -u \"${1:-origin}\" HEAD; }; f"
+  amend = commit --amend
+  cached = diff --cached
+  staged = diff --cached
+  stagetool = difftool --cached
+  exec = "!exec "
+  del = push origin --delete
+  reps = "!f() { git del $1 && git ps $2 }; f"
+[diff]
+  tool = icdiff
+[difftool]
+  prompt = false
+[difftool "icdiff"]
+  cmd = icdiff --line-numbers $LOCAL $REMOTE
+[color]
+  ui = true
+[core]
+  editor = emacs -nw
+  excludesfile = ~/.gitignore_global
+[branch]
+  autosetuprebase = always
+[push]
+  default = current
+[fetch]
+  prune = 1
+[help]
+  autocorrect = 25
+[rebase]
+	autosquash = true
