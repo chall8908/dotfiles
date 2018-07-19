@@ -1,5 +1,7 @@
 #-*- sh -*- Emacs mode
 
+[[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+
 # Get _absolute_ directory path to this file
 pushd . > /dev/null
 __SCRIPT_PATH="${BASH_SOURCE[0]}"
@@ -27,18 +29,10 @@ done
 # Add bin in home directory to path
 prepend_to_path "$HOME/bin"
 
-# Add some global yarn shit to the path
-prepend_to_path "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
-
 source "$CONFIG_DIR/ssh"
 source "$CONFIG_DIR/history"
 
 prepend_to_path "$GOPATH/bin"
-
-# if [ -z "${ITERM_ORIG_PS1+xxx}" ]
-# then
-#     test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-# fi
 
 # Load language version managers
 source "$CONFIG_DIR/kiex"
