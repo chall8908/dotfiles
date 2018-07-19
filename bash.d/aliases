@@ -1,5 +1,8 @@
 # -*- sh -*-
 
+# Open emacs in the terminal
+alias emacs="emacs -nw"
+
 # bundler aliases
 alias bi="bundle install"
 alias be="bundle exec"
