@@ -1,0 +1,2 @@
+GIT_PROMPT_ONLY_IN_REPO=1
+source "$CONFIG_DIR/bash-git-prompt/gitprompt.sh"

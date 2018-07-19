@@ -1,3 +1,6 @@
 [submodule "emacs"]
 	path = emacs
 	url = git@github.com:chall8908/emacs
+[submodule "bash.d/bash-git-prompt"]
+	path = bash.d/bash-git-prompt
+	url = https://github.com/magicmonty/bash-git-prompt.git
