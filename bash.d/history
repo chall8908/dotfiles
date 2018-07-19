@@ -1,8 +1,11 @@
 #-*- sh -*- Emacs mode
 
 # Update history handling
-# Ignore duplicate commands
-export HISTCONTROL=erasedups
+# Ignore duplicate lines or lines that start with a space
+export HISTCONTROL=ignoreboth
+
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 
 # Always append to the history
 shopt -s histappend
