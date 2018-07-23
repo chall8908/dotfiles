@@ -1,4 +1,9 @@
 #-*- sh -*- Emacs mode
 
 # Initialize pyenv
-which pyenv > /dev/null && eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+prepend_to_path "$PYENV_ROOT/bin"
+if pyenv &> /dev/null; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
