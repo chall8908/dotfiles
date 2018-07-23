@@ -22,6 +22,13 @@ all: $(TARGETS)
 
 init: $(REMOTES)
 
+install: all
+	${srcdir}/install-all.sh
+
+uninstall:
+	${srcdir}/uninstall-all.sh
+	make clean # must be run _after_ uninstall script
+
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs/.emacs.d
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
