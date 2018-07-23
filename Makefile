@@ -15,7 +15,7 @@ TARGETS= ${DESTDIR}/.emacs.d \
          ${DESTDIR}/.gitconfig \
          ${DESTDIR}/.Xresources
 
-REMOTES= ${srcdir}/emacs/.emacs.d \
+REMOTES= ${srcdir}/emacs \
          ${srcdir}/bash.d/bash-git-prompt
 
 all: $(TARGETS)
@@ -29,13 +29,13 @@ uninstall:
 	${srcdir}/uninstall-all.sh
 	make clean # must be run _after_ uninstall script
 
-${DESTDIR}/.emacs.d: ${srcdir}/emacs/.emacs.d
+${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
 ${DESTDIR}/.Xresources: ${srcdir}/.Xresources
 
 $(REMOTES):
-	git submodule update --init $(dirname $@)
+	git submodule update --init
 
 $(TARGETS):
 	ln -s $< $@
