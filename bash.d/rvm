@@ -1,9 +1,9 @@
 #-*- sh -*- Emacs mode
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-append_to_path "$HOME/.rvm/bin"
+export RVM_ROOT="$HOME/.rvm"
+append_to_path "$RVM_ROOT/bin"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[[ -s "$RVM_ROOT/scripts/rvm" ]] && source "$RVM_ROOT/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # Ensure that new shells created in a project directory have their ruby version set correctly
 __rvm_project_rvmrc;
