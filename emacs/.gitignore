@@ -10,4 +10,7 @@ ido.last
 elpa/
 
 # ignore backups
-backups
+backups/
+
+# Ignore last update
+.last-package-update-day

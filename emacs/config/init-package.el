@@ -1,9 +1,12 @@
-;;; package-setup --- Setup package management
+;;; init-package --- Setup package management
 ;;; Commentary:
 ;;; Code:
 
 ;; configure elpa directory
 (setq package-user-dir (concat user-emacs-directory "elpa"))
+
+;; ensure package directory exists
+(make-directory package-user-dir t)
 
 ;; Require package
 (require 'package)
@@ -23,7 +26,15 @@
   (require 'use-package))
 
 (setq use-package-always-pin "melpa-stable")
+; tell use-package to install all packages automatically
 (setq use-package-always-ensure t)
 
-(provide 'package-setup)
-;;; package-setup.el ends here
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe)
+  )
+
+(provide 'init-package)
+;;; init-package.el ends here
