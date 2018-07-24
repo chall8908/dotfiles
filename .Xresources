@@ -5,7 +5,7 @@ URxvt.iso14755 : false;
 URxvt.scrollBar: false
 
 ! Non-shit font
-URxvt.font: xft:ubuntu mono:size=12
+URxvt.font: xft:ubuntu mono:size=13
 
 ! Start as a login shell
 URxvt*loginShell: true
@@ -13,7 +13,15 @@ URxvt*loginShell: true
 ! Enable left mouse click url launcher
 URxvt*matcher.button: 1
 URxvt*perl-ext:
-URxvt*perl-ext-common: default,matcher
+URxvt*perl-ext-common: default,matcher,clipboard,osc-clipboard
+
+! configure clipboard extension (ctrl-shift-c/v to copy & paste)
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+
+XTerm*VT100.Translations: #override \
+Ctrl Shift<Key>V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+Ctrl Shift<Key>C: select-set(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
 
 ! special
 *.foreground:   #b7b8b9
