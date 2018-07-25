@@ -1,9 +1,12 @@
 #!/bin/bash -l
 
 # ensure this isn't run before the system has been configured
-if [ -z "$CONFIG_DIR" ]; then
+if [ -z "$CONFIG_DIR" ] && [! -r "$HOME/.bash_profile"]; then
     echo 'Please perform initial setup with `make` first'
     exit 1
+else
+    # Source profile, we probably got called during initial setup
+    source "$HOME/.bash_profile"
 fi
 
 # install RVM
