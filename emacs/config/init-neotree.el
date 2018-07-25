@@ -8,6 +8,7 @@
         neo-autorefresh t
         neo-force-change-root t)
   (neo-global--open) ;; automatically open neotree on startup
+  (other-window 1)   ;; select the default window instead of the tree
   )
 
 (provide 'init-neotree)

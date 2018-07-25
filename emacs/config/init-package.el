@@ -3,10 +3,14 @@
 ;;; Code:
 
 ;; configure elpa directory
-(setq package-user-dir (concat user-emacs-directory "elpa"))
+(setq package-user-dir (expand-directory-name "elpa" user-emacs-directory))
 
 ;; ensure package directory exists
 (make-directory package-user-dir t)
+
+(setq package-archives '()      ; unset package archives
+      byte-compile-warnings nil ; don't show compile warnings
+      )
 
 ;; Require package
 (require 'package)
@@ -20,11 +24,19 @@
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 
+;; tell Emacs not to enable packages, since we are
+(setq package-enable-at-startup nil)
 (package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package)
+  )
 
 (eval-when-compile
   (require 'use-package))
 
+;; IMPORTANT: Packages only on melpa need to be manually `:pin'd to `melpa'
 (setq use-package-always-pin "melpa-stable")
 ; tell use-package to install all packages automatically
 (setq use-package-always-ensure t)
@@ -35,6 +47,8 @@
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe)
   )
+
+(use-package diminish)
 
 (provide 'init-package)
 ;;; init-package.el ends here

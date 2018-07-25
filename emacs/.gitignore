@@ -5,6 +5,7 @@ auto-save-list
 ac-comphist.dat
 tramp
 ido.last
+recentf
 
 # ignore packages
 elpa/

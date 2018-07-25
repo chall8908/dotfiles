@@ -19,6 +19,9 @@
  truncate-lines nil
  )
 
+;; TODO: docs
+(setq resize-minibuffer-mode t)
+
 ;; Use y or n instead of yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -58,8 +61,6 @@
 
 (add-to-list 'auto-coding-alist '("." . utf-8))
 
-(require 'copy-paste)
-
 ;; Don't clutter up directories with files
 (let
     ((backup-directory (concat user-emacs-directory "backups")))
@@ -73,6 +74,17 @@
         delete-old-versions nil
         delete-by-moving-to-trash nil)
   )
+
+(defun custom-goto-match-beginning ()
+  "Use with isearch hook to end search at first char of match."
+  (when isearch-forward (goto-char isearch-other-end)))
+
+(add-hook 'isearch-mode-end-hook 'custom-goto-match-beginning)
+
+(cond
+ ((string-equal system-type "darwin")    (require 'mac-behavior))
+ ((string-equal system-type "gnu/linux") (require 'linux-behavior))
+ )
 
 (provide 'behavior)
 ;;; behavior.el ends here

@@ -1,6 +1,8 @@
-;;; package --- Summary
+;;; general-keybinds --- Provides Emeacs-wide keybindings
 ;;; Commentary:
 ;;; Code:
+
+(use-package multiple-cursors)
 
 ;; Helpful key bindings
 (global-set-key (kbd "M-g") 'goto-line)
