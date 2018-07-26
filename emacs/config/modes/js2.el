@@ -19,10 +19,20 @@
               (hs-minor-mode t)))
   )
 
-(use-package ac-js2
-  :after (auto-complete)
-  :pin melpa
-  )
+(use-package tern
+  :diminish
+  :config
+  (add-hook 'js2-mode-hook 'tern-mode)
+  (setq tern-command (append tern-command '("--no-port-file")))
+)
+
+(use-package company-tern
+  :init
+  (add-to-list 'company-backends '(company-tern company-web-html :with company-yasnippet))
+
+  :config
+  (setq company-tern-property-marker nil)
+)
 
 (provide 'js2)
 ;;; js2.el ends here

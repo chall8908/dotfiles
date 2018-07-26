@@ -21,13 +21,13 @@ ROOT is the path to start in if NAME is relative."
 (add-to-list 'load-path config-dir)
 
 ;; Tell custom to write to custom.el instead of this file
-(setq custom-file (expand-file-name "custom.el" config-dir))
+(setq custom-file (expand-file-name "customize-settings.el" config-dir))
 
-(require 'custom)        ; loads custom-set stuff
+(require 'customize-settings) ; loads custom-set stuff
 (require 'whoami)
 (require 'init-package)
-(require 'behavior)      ; configure general behavior
-(require 'tmux-keybinds) ; fix keybinds in tmux
+(require 'behavior)           ; configure general behavior
+(require 'tmux-keybinds)      ; fix keybinds in tmux
 (require 'init-neotree)
 
 ;; setup midnight to clean unused buffers
@@ -39,7 +39,10 @@ ROOT is the path to start in if NAME is relative."
 (use-package evil-nerd-commenter)
 
 (require 'init-yasnippet)
+(require 'init-company)
 (require 'init-flycheck)
+(require 'init-ivy)
+(require 'init-avy)
 (require 'init-modes)
 
 (require 'general-keybinds) ; Add additional general keybindings

@@ -10,10 +10,5 @@
   :config (setq emmet-expand-jsx-className? t)
   )
 
-(use-package ac-emmet
-  :after (auto-complete)
-  :pin melpa
-  )
-
 (provide 'emmet)
 ;;; emmet.el ends here

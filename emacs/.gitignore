@@ -15,3 +15,6 @@ backups/
 
 # Ignore last update
 .last-package-update-day
+
+# ignore font check file
+fonts-installed

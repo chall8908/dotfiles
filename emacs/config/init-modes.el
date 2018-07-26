@@ -36,6 +36,7 @@
 (require 'git)
 (require 'markdown)
 (require 'js2)
+(require 'ruby)
 (require 'web)
 (require 'emmet)
 

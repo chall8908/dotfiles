@@ -57,12 +57,8 @@
                    ))))
   )
 
-(use-package ac-html
-  :after (auto-complete)
-  )
-
-(use-package ac-html-bootstrap
-  :after (auto-complete)
+(use-package company-web
+  :after company
   )
 
 (provide 'web)

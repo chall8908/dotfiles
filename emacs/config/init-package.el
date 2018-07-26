@@ -8,6 +8,8 @@
 ;; ensure package directory exists
 (make-directory package-user-dir t)
 
+;; TODO: Switch to straight.el
+;; see https://github.com/raxod502/straight.el#bootstrapping-straightel
 (setq package-archives '()      ; unset package archives
       byte-compile-warnings nil ; don't show compile warnings
       )
@@ -24,8 +26,6 @@
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 
-;; tell Emacs not to enable packages, since we are
-(setq package-enable-at-startup nil)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
