@@ -18,6 +18,7 @@ else
     \curl -sSL https://get.rvm.io | bash -s stable -- --ignore-dotfiles # We're already configured for RVM, so we don't need it to add anything
     ln -s "$RVM_ROOT/hooks/after_cd_nvm" "$CONFIG_DIR/rvm_hacks/after_cd_nvm"
     source "$CONFIG_DIR/rvm"
+    rvm install ruby # Install the most recent ruby
 fi
 
 # install NVM
@@ -28,6 +29,7 @@ else
     mkdir "$HOME/.nvm"
     \curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
     source "$CONFIG_DIR/nvm"
+    nvm install --lts # install the latest Long Term Stable
 fi
 
 # Install PyEnv
@@ -38,4 +40,6 @@ else
     rm -rf "$PYENV_ROOT" 2 > /dev/null # The install script doesn't seem to want to work if this directory is here already
     \curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
     source "$CONFIG_DIR/pyenv"
+    # Determine latest version of cpython and install it
+    pyenv install "$(pyenv install -l | grep -v '[[:alpha:]]' | tail -1 | tr -d ' ')"
 fi
