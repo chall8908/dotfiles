@@ -13,7 +13,8 @@ srcdir = ${abspath .}
 TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
 	${DESTDIR}/.gitconfig \
-	${DESTDIR}/.Xresources
+	${DESTDIR}/.Xresources \
+	${DESTDIR}/.rvmrc
 
 REMOTES=${srcdir}/emacs \
 	${srcdir}/bash.d/bash-git-prompt
@@ -29,6 +30,7 @@ ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
 ${DESTDIR}/.Xresources: ${srcdir}/.Xresources
+${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 
 $(REMOTES): init
 
