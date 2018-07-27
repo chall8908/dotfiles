@@ -1,0 +1,13 @@
+# ignore autosave
+auto-save-list
+
+# ignore often changed files
+ac-comphist.dat
+tramp
+ido.last
+
+# ignore packages
+elpa/
+
+# ignore backups
+backups
