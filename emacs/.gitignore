@@ -1,0 +1,20 @@
+# ignore autosave
+auto-save-list
+
+# ignore often changed files
+ac-comphist.dat
+tramp
+ido.last
+recentf
+
+# ignore packages
+elpa/
+
+# ignore backups
+backups/
+
+# Ignore last update
+.last-package-update-day
+
+# ignore font check file
+fonts-installed
