@@ -2,8 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-;; this doesn't seem to work under urxvt.  Maybe it's Ubuntu/GNOME fucking up?
-(setq select-enable-clipboard t)
+;; use xclip from GNU's ELPA to ensure that copy-paste works correctly in xterm
+(use-package xclip
+  :pin gnu
+  :config
+  (xclip-mode 1)
+  )
 
 (provide 'linux-behavior)
 
