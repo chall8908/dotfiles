@@ -3,7 +3,11 @@
 ;;; Code:
 
 (use-package ivy
+  :pin melpa
   :diminish ivy-mode
+  :demand t
+  :bind (:map ivy-minibuffer-map
+              ("RET" . ivy-alt-done))
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t
