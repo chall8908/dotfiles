@@ -43,3 +43,5 @@
   autocorrect = 25
 [rebase]
 	autosquash = true
+[merge]
+	conflictStyle = diff3
