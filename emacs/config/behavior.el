@@ -17,7 +17,12 @@
  indent-tabs-mode nil
  ;; display continuation lines
  truncate-lines nil
- )
+ ;; don't autosave
+ auto-save-default nil
+ ;; don't backup
+ make-backup-files nil
+ ;; don't generate lockfiles
+ create-lockfiles nil)
 
 ;; TODO: docs
 (setq resize-minibuffer-mode t)
@@ -26,9 +31,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq tab-width 2)
-
-;; Don't autosave
-(auto-save-mode -1)
 
 ;; scrolling
 ;; scroll one line at a time (less "jumpy" than defaults)
@@ -57,20 +59,6 @@
 (setq default-process-coding-system '(utf-8 . utf-8))
 
 (add-to-list 'auto-coding-alist '("." . utf-8))
-
-;; Don't clutter up directories with files
-(let
-    ((backup-directory (concat user-emacs-directory "backups")))
-
-  (make-directory backup-directory t)
-
-  (setq backup-directory-alist `(("." . ,backup-directory))
-        make-backup-files nil
-        version-control nil
-        backup-by-copying-when-linked nil
-        delete-old-versions nil
-        delete-by-moving-to-trash nil)
-  )
 
 (defun custom-goto-match-beginning ()
   "Use with isearch hook to end search at first char of match."
