@@ -1,15 +1,17 @@
 #-*- sh -*- Emacs mode
 
 append_to_path() {
-    if ! [ -z "${PATH##*$1*}" ]; then
-        export PATH="$PATH:$1"
-    fi
+    case ":$PATH:" in
+        *":$1:"*) :;; # Already on path
+        *) PATH="$1:$PATH";;
+    esac
 }
 
 prepend_to_path() {
-    if ! [ -z "${PATH##*$1*}" ]; then
-        export PATH="$1:$PATH"
-    fi
+    case ":$PATH:" in
+        *":$1:"*) :;; # Already on path
+        *) PATH="$PATH:$1";;
+    esac
 }
 
 string_join() {
