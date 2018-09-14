@@ -41,6 +41,7 @@ source "$CONFIG_DIR/kiex"
 source "$CONFIG_DIR/pyenv"
 source "$CONFIG_DIR/rvm"
 source "$CONFIG_DIR/nvm"
+source "$CONFIG_DIR/ocaml"
 
 # Special configuration for when we're in a git repo
 source "$CONFIG_DIR/git"

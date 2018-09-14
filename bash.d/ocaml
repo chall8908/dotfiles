@@ -1,0 +1,5 @@
+#-*- sh -*-
+
+if [ -d "$HOME/.opam" ]; then
+    source /home/chall/.opam/opam-init/init.sh > /dev/null
+fi
