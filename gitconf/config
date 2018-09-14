@@ -2,26 +2,52 @@
   name = Chris Hall
   email = chall8908@gmail.com
 [alias]
+  # Logging, Timeline, and Statistics
   lg = log --oneline --graph --decorate
+  graph = log --graph -20 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+  history = log -20 --format=format:'%Cgreen%h %Cblue(%aN, %ar)%Creset %s'
+  stats = ! git-quick-stats
+  contributors = shortlog -s -n --no-merges
+
+  # Lists
+  branches = branch -a
+  tags = tag
+  stashes = stash list
+  remotes = remote -v
+
+  # Tree Management
   co = checkout
-  stat = status
   c = commit
-  ps = push
-  pl = pull
   m = merge
   b = branch
+  unmerged = branch --no-merged
+  amend = commit --amend
+  stage-all = add -u
+  unstage = reset -q HEAD --
+  uncommit = reset --mixed HEAD~
+  untrack = rm -r --cached
+  stat = status
+  staged = diff --cached --diff-algorithm=minimal -w
+  stagetool = difftool --cached
+
+  # Remote commands
+  ps = push
+  pl = pull
+  psf = "!f() { git push -f \"${1:-origin}\" HEAD; }; f"
+  overwrite = psf
+  psto = "!f() { git push -u \"${1:-origin}\" HEAD; }; f"
+  publish = psto
+  delete = push origin --delete --
+  repush = "!f() { git del $1 && git ps $2 }; f"
+
+  # Subodule commands
   sm = submodule
   smu = submodule update
   smi = submodule init
-  psf = "!f() { git push -f \"${1:-origin}\" HEAD; }; f"
-  psto = "!f() { git push -u \"${1:-origin}\" HEAD; }; f"
-  amend = commit --amend
-  cached = diff --cached
-  staged = diff --cached
-  stagetool = difftool --cached
+
+  # Utilities
   exec = "!exec "
-  del = push origin --delete
-  reps = "!f() { git del $1 && git ps $2 }; f"
+
 [diff]
   tool = icdiff
 [difftool]
