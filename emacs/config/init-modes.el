@@ -22,6 +22,10 @@
   :after (css-mode)
   :mode "\\.s[ca]ss$")
 
+(use-package tuareg-mode
+  :ensure tuareg
+  :mode "\\.ml[ilyp]?$")
+
 ;; Sql Mode
 (eval-after-load "sql"
   '(load-library "sql-indent"))
