@@ -3,7 +3,9 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        electric-pair-delete-pair
         indent-for-tab-command
+        ruby-electric-bar
         ruby-electric-closing-char
         ruby-electric-delete-backward-char
         ruby-electric-matching-char
