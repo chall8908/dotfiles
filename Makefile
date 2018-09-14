@@ -44,7 +44,7 @@ uninstall:
 
 # Utility targets
 xrdb: ${DESTDIR}/.Xresources
-	xrdb -merge $<
+	xrdb $<
 
 init:
 	git submodule update --init --recursive
