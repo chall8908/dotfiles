@@ -32,6 +32,8 @@ prepend_to_path "$HOME/bin"
 source "$CONFIG_DIR/ssh"
 source "$CONFIG_DIR/history"
 
+source "$CONFIG_DIR/fzf"
+
 prepend_to_path "$GOPATH/bin"
 
 # Load language version managers

@@ -1,0 +1,16 @@
+#-*- sh -*- Emacs mode
+
+# Setup fzf
+# https://github.com/junegunn/fzf
+# ---------
+if [ -d "$PERSONAL_DIR/fzf/bin" ]; then
+    append_to_path "$PERSONAL_DIR/fzf/bin"
+
+    # Auto-completion
+    # ---------------
+    [[ $- == *i* ]] && source "$PERSONAL_DIR/fzf/shell/completion.bash" 2> /dev/null
+
+    # Key bindings
+    # ------------
+    source "$PERSONAL_DIR/fzf/shell/key-bindings.bash"
+fi
