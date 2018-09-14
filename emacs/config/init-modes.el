@@ -5,27 +5,22 @@
 (add-to-list 'load-path (expand-directory-name "modes" config-dir))
 
 (use-package python-mode
-  :mode "\.py$"
-  )
+  :mode "\\.py$")
 
 (use-package yaml-mode
-  :mode "\.yaml$"
-  )
+  :mode "\\.yaml$")
 
 (use-package groovy-mode
-  :mode "\.groovy$"
+  :mode "\\.groovy$"
   :config
-  (setq groovy-indent-offset 2)
-  )
+  (setq groovy-indent-offset 2))
 
 (use-package css-mode
-  :mode "'\.css$"
-  )
+  :mode "\\.css$")
 
 (use-package scss-mode
   :after (css-mode)
-  :mode "'\.s[ca]ss$"
-  )
+  :mode "\\.s[ca]ss$")
 
 ;; Sql Mode
 (eval-after-load "sql"
