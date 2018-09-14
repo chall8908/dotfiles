@@ -6,3 +6,9 @@ alias emacs='emacs -nw'
 # bundler aliases
 alias bi='bundle install'
 alias be='bundle exec'
+
+# Use bat over cat if it's installed
+# https://github.com/sharkdp/bat
+if which bat > /dev/null; then
+    alias cat='bat'
+fi
