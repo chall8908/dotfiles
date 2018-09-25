@@ -14,6 +14,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
 	${DESTDIR}/.gitconfig \
 	${DESTDIR}/.Xresources \
+	${DESTDIR}/.xinitrc \
 	${DESTDIR}/.rvmrc
 
 REMOTES=${srcdir}/emacs \
@@ -29,7 +30,8 @@ install:
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
-${DESTDIR}/.Xresources: ${srcdir}/.Xresources
+${DESTDIR}/.Xresources: ${srcdir}/x/resources
+${DESTDIR}/.xinitrc: ${srcdir}/x/initrc
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 
 $(REMOTES): init
