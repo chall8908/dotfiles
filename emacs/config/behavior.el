@@ -30,7 +30,8 @@
 ;; Use y or n instead of yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(setq tab-width 2)
+(setq-default tab-width 2)
+(setq tab-stop-list (number-sequence tab-width 120 tab-width))
 
 ;; scrolling
 ;; scroll one line at a time (less "jumpy" than defaults)

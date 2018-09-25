@@ -16,7 +16,9 @@
   (setq groovy-indent-offset 2))
 
 (use-package css-mode
-  :mode "\\.css$")
+  :mode "\\.css$"
+  :config
+  (setq css-indent-offset tab-width))
 
 (use-package scss-mode
   :after (css-mode)
