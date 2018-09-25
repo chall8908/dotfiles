@@ -5,7 +5,7 @@
   # Logging, Timeline, and Statistics
   lg = log --oneline --graph --decorate
   graph = log --graph -20 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
-  history = log -20 --format=format:'%Cgreen%h %Cblue(%aN, %ar)%Creset %s'
+  history = ! git-pretty-history
   stats = ! git-quick-stats
   contributors = shortlog -s -n --no-merges
 

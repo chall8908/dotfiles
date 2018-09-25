@@ -1,0 +1,3 @@
+#!/bin/bash
+
+( echo 'Commit | Committed | Author | Description | Branch' ; git log --color=always --topo-order -20 --format=format:'%Cred%h | %Cgreen%ar | %C(bold blue)%aN | %Creset%s |%C(yellow)%d' "$@" ) | column -ts '|'

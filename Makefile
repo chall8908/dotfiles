@@ -13,6 +13,7 @@ srcdir = ${abspath .}
 TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
 	${DESTDIR}/.gitconfig \
+	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xresources \
 	${DESTDIR}/.xinitrc \
 	${DESTDIR}/.rvmrc
@@ -29,6 +30,7 @@ install: all
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
+${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
 ${DESTDIR}/.Xresources: ${srcdir}/x/resources
 ${DESTDIR}/.xinitrc: ${srcdir}/x/initrc
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
