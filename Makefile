@@ -17,14 +17,13 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.xinitrc \
 	${DESTDIR}/.rvmrc
 
-REMOTES=${srcdir}/emacs \
-	${srcdir}/bash.d/bash-git-prompt
+REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install uninstall xrdb init
+.PHONY: all install uninstall xrdb init clean
 
 all: $(TARGETS)
 
-install:
+install: all
 	${srcdir}/install-all.sh
 
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -43,6 +42,9 @@ $(TARGETS):
 uninstall:
 	${srcdir}/uninstall-all.sh
 	rm $(TARGETS) # must be run _after_ uninstall script
+
+clean:
+	rm $(TARGETS)
 
 # Utility targets
 xrdb: ${DESTDIR}/.Xresources
