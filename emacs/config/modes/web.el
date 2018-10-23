@@ -5,7 +5,7 @@
 (use-package web-mode
   ;; :after (yasnippet flycheck)
   :after (yasnippet)
-  :mode ("\.erb$"       ; embedded Ruby
+  :mode ("\.erb$"    ; embedded Ruby
          "\.js[x]?$" ; JS + JSX
          "\.eex$"    ; embedded Elixir
          "\.html$"

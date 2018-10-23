@@ -14,5 +14,9 @@
 (use-package react-snippets
   :after (yasnippet))
 
+(use-package ivy-yasnippet
+  :pin melpa
+  :after (ivy yasnippet))
+
 (provide 'init-yasnippet)
 ;;; init-yasnippet.el ends here

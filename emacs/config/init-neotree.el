@@ -20,6 +20,7 @@
   ;; :after (all-the-icons)
   :pin melpa
   :config
+  (add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
   (setq neo-autorefresh t
         neo-show-hidden-files t
         neo-force-change-root t

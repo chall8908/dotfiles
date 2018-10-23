@@ -12,5 +12,8 @@
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   )
 
+(use-package flyspell-correct-ivy
+  :after ivy)
+
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

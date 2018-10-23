@@ -27,6 +27,7 @@ ROOT is the path to start in if NAME is relative."
 (require 'whoami)
 (require 'init-package)
 (require 'behavior)           ; configure general behavior
+(require 'appearance)         ; configure general appearance
 (require 'tmux-keybinds)      ; fix keybinds in tmux
 (require 'init-neotree)
 
@@ -38,6 +39,8 @@ ROOT is the path to start in if NAME is relative."
 
 (use-package evil-nerd-commenter)
 
+(require 'init-git)
+(require 'init-ac)
 (require 'init-yasnippet)
 (require 'init-company)
 (require 'init-flycheck)
@@ -46,7 +49,6 @@ ROOT is the path to start in if NAME is relative."
 (require 'init-modes)
 
 (require 'general-keybinds) ; Add additional general keybindings
-(require 'appearance)       ; configure general appearance
 
 (provide 'init)
 ;;; init.el ends here

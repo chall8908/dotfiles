@@ -5,6 +5,7 @@
       '(
         electric-pair-delete-pair
         indent-for-tab-command
+        markdown-outdent-or-delete
         ruby-electric-bar
         ruby-electric-closing-char
         ruby-electric-delete-backward-char
