@@ -1,21 +1,42 @@
 #-*- sh -*- Emacs mode
 
-append_to_path() {
+function append_to_path() {
     case ":$PATH:" in
         *":$1:"*) :;; # Already on path
         *) PATH="$1:$PATH";;
     esac
 }
 
-prepend_to_path() {
+function prepend_to_path() {
     case ":$PATH:" in
         *":$1:"*) :;; # Already on path
         *) PATH="$PATH:$1";;
     esac
 }
 
-string_join() {
+function string_join() {
     IFS=$1
     shift # shift off the delimiter
     echo "$*"
+}
+
+# Ripped out of Git Bash Prompt so that I can use it elsewhere
+function set_last_command_status() {
+    local exit_code=${GIT_PROMPT_LAST_COMMAND_STATE:-$?}
+    local command_indicator
+    local command_state
+
+    if [ "$exit_code" = 0 ]; then
+        command_indicator="$BrightGreen✔";
+    else
+        command_indicator="$Red✘-_LAST_COMMAND_STATE_";
+    fi
+
+    # replace _LAST_COMMAND_STATE_ token with the actual state
+    LAST_COMMAND_STATUS="${command_indicator//_LAST_COMMAND_STATE_/$exit_code}$ResetColor"
+}
+
+function update_prompt() {
+    local new_prompt="_LAST_COMMAND_STATUS_ ${BrightGreen}\u@\h${ResetColor}:${BrightBlue}\w\n\A${ResetColor} \$ "
+    PS1="${new_prompt//_LAST_COMMAND_STATUS_/$LAST_COMMAND_STATUS}"
 }
