@@ -5,6 +5,7 @@
       '(
         electric-pair-delete-pair
         indent-for-tab-command
+        ivy-next-line
         markdown-outdent-or-delete
         ruby-electric-bar
         ruby-electric-closing-char
@@ -12,6 +13,7 @@
         ruby-electric-hash
         ruby-electric-matching-char
         ruby-electric-space/return
+        sh-assignment
         yaml-electric-backspace
         ))
 
