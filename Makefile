@@ -14,8 +14,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
 	${DESTDIR}/.gitconfig \
 	${DESTDIR}/bin/git-pretty-history \
-	${DESTDIR}/.Xresources \
-	${DESTDIR}/.xinitrc \
+	${DESTDIR}/.Xdefaults \
 	${DESTDIR}/.rvmrc
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
@@ -31,8 +30,7 @@ ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
 ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
-${DESTDIR}/.Xresources: ${srcdir}/x/resources
-${DESTDIR}/.xinitrc: ${srcdir}/x/initrc
+${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 
 $(REMOTES): init
@@ -50,8 +48,8 @@ clean:
 	rm $(TARGETS)
 
 # Utility targets
-xrdb: ${DESTDIR}/.Xresources
-	xrdb $<
+xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
+	xrdb -merge -I${HOME} $^
 
 init:
 	git submodule update --init --recursive

@@ -1,14 +1,14 @@
+! Non-shit font
+*font: xft:firacode:size=9
+
+! Start as a login shell
+*loginShell: true
+
 ! Disable annoying iso bullshit
 URxvt.iso14755 : false;
 
 ! Disable ugly ass scrollbar
 URxvt.scrollBar: false
-
-! Non-shit font
-URxvt*font: xft:ubuntu mono:size=13
-
-! Start as a login shell
-URxvt*loginShell: true
 
 ! Enable left mouse click url launcher
 URxvt*matcher.button: 1
@@ -21,7 +21,7 @@ URxvt.keysym.C-V: perl:clipboard:paste
 
 XTerm*VT100.Translations: #override \
 Ctrl Shift<Key>V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
-Ctrl Shift<Key>C: select-set(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+Ctrl Shift<Key>C: select-set(CLIPBOARD,PRIMARY,CUT_BUFFER0)
 
 ! special
 *.foreground:   #b7b8b9
