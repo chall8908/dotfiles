@@ -37,8 +37,9 @@ _my_dir() {
 complete -F _my_dir -o nospace my-dir
 
 # find example files in the current directory and copy them, if they don't already exist
+# but _not_ anything in a .git subdirectory
 copy-examples() {
-    find . -name '*.example' -or -name '*.sample' | sed 's/\(.*\)\.\(.*\)/cp -n \1.\2 \1/' | bash
+    find . -name '*.example' -or -name '*.sample' -not -path '*/.git/*' | sed 's/\(.*\)\.\(.*\)/cp -n \1.\2 \1/' | bash
 }
 
 weather() {
