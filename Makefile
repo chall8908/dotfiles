@@ -15,7 +15,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.gitconfig \
 	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xdefaults \
-	${DESTDIR}/.rvmrc
+	${DESTDIR}/.rvmrc \
+	${DESTDIR}/.config/kitty/kitty.conf
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
@@ -32,6 +33,7 @@ ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
 ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
+${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
 
 $(REMOTES): init
 
