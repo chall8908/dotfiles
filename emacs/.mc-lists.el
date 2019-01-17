@@ -6,9 +6,11 @@
         electric-pair-delete-pair
         indent-for-tab-command
         ivy-next-line
+        kill-region
         markdown-outdent-or-delete
         ruby-electric-bar
         ruby-electric-closing-char
+        ruby-electric-curlies
         ruby-electric-delete-backward-char
         ruby-electric-hash
         ruby-electric-matching-char
