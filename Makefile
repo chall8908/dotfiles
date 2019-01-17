@@ -38,6 +38,7 @@ ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 $(REMOTES): init
 
 $(TARGETS):
+	mkdir -p ${@D}
 	ln -s $< $@
 
 # Cleanup
