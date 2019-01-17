@@ -37,7 +37,7 @@
 (global-set-key (kbd "C-x f") 'neotree-toggle)
 
 (defun open-init ()
-  "Open this file in a buffer."
+  "Open the init.el file in a buffer."
   (interactive)
   (find-file user-init-file)
   )

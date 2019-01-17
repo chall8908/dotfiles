@@ -19,7 +19,6 @@
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   (add-to-list 'package-archives (cons "melpa"        (concat proto "://melpa.org/packages/")) t)
   (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   (add-to-list 'package-archives (cons "gnu"          (concat proto "://elpa.gnu.org/packages/")) t))
@@ -41,8 +40,10 @@
 
 (use-package auto-package-update
   :config
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
+  (setq auto-package-update-delete-old-versions t
+        auto-package-update-hide-results t)
+  ;; Check for updates at noon daily
+  (auto-package-update-at-time "12:00")
   (auto-package-update-maybe)
   )
 
