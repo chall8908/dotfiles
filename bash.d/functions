@@ -47,3 +47,9 @@ weather() {
     locale="${locale:-Chicago}"
     curl "wttr.in/$locale"
 }
+
+crypto() {
+    local coin="${1:-ETH}"
+    local range="${2:-4w}"
+    curl -o - "rate.sx/$coin@$range"
+}
