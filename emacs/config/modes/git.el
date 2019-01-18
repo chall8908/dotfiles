@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; disable vc-git
-(setq vc-handled-backends ())
-
 ;; log edit mode for Commits and whatnot
 (use-package log-edit)
 (require 'vc-git)
