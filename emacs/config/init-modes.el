@@ -29,8 +29,10 @@
   :mode "\\.ml[ilyp]?$")
 
 ;; Sql Mode
-(eval-after-load "sql"
-  '(load-library "sql-indent"))
+(use-package sql-indent
+  :pin gnu
+  :after (sql-mode)
+  )
 (add-hook 'sql-mode-hook 'sql-highlight-postgres-keywords)
 
 (require 'elixir)
