@@ -47,7 +47,8 @@
   :pin melpa
   :after company
   :init
-  (add-to-list 'company-backends #'company-tabnine))
+  (add-to-list 'company-backends #'company-tabnine)
+  (setq company-tabnine-no-continue t))
 
 (provide 'init-company)
 
