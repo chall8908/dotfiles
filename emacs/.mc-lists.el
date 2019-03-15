@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         electric-pair-delete-pair
+        end-of-visual-line
         indent-for-tab-command
         ivy-next-line
         kill-region
@@ -16,6 +17,7 @@
         ruby-electric-matching-char
         ruby-electric-space/return
         sh-assignment
+        web-mode-element-insert
         yaml-electric-backspace
         ))
 
