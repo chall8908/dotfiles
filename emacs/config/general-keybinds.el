@@ -21,11 +21,14 @@
 ;; window managment
 (global-unset-key (kbd "C-x <right>"))
 (global-unset-key (kbd "C-x <left>"))
+(global-unset-key (kbd "C-x -"))
 
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 (global-set-key (kbd "C-x <left>") 'windmove-left)
+(global-set-key (kbd "C-x |") 'split-window-right)
+(global-set-key (kbd "C-x -") 'split-window-below)
 
 ;; buffer management
 (global-unset-key (kbd "C-b"))
