@@ -42,6 +42,39 @@ copy-examples() {
     find . -name '*.example' -or -name '*.sample' -not -path '*/.git/*' | sed 's/\(.*\)\.\(.*\)/cp -n \1.\2 \1/' | bash
 }
 
+# Look for dependency containing files and install dependencies for them
+install-dependencies() {
+    echo 'Checking for dependencies...'
+
+    local dependencies_found=0
+
+    # Ruby dependencies
+    if [ -f 'Gemfile' ]; then
+        dependencies_found=1
+        bundle install
+    fi
+
+    # JavaScript dependencies
+    if [ -f 'package.json' ]; then
+        dependencies_found=1
+        if [ -f 'package.lock' ]; then
+            npm install
+        else
+            yarn install
+        fi
+    fi
+
+    # Python dependencies
+    if [ -f 'requirements.txt' ]; then
+        dependencies_found=1
+        pip install -r requirements.txt
+    fi
+
+    if [ $dependencies_found -eq 0 ]; then
+        echo 'No dependencies found.'
+    fi
+}
+
 weather() {
     local locale="$(string_join '+' $@)"
     locale="${locale:-Chicago}"
