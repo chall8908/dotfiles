@@ -39,6 +39,7 @@
 (require 'git)
 (require 'markdown)
 (require 'js2)
+(require 'typescript)
 (require 'ruby)
 (require 'web)
 (require 'emmet)
