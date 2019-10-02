@@ -15,6 +15,9 @@ ROOT is the path to start in if NAME is relative."
 ;; Actual configuration starts here ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Fix https://debbugs.gnu.org/34341
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (defvar config-dir (expand-directory-name "config" user-emacs-directory)
   "Directory containing user configuration files."
   )
