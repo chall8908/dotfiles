@@ -36,6 +36,9 @@ eval $PROMPT_COMMAND
 # Add bin in home directory to path
 prepend_to_path "$HOME/bin"
 
+# Configure shell options
+source "$CONFIG_DIR/shopt"
+
 source "$CONFIG_DIR/ssh"
 source "$CONFIG_DIR/history"
 
