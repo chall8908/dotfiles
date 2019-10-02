@@ -35,6 +35,7 @@
   )
 (add-hook 'sql-mode-hook 'sql-highlight-postgres-keywords)
 
+(require 'persp)
 (require 'elixir)
 (require 'git)
 (require 'markdown)

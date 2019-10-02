@@ -31,11 +31,7 @@ ROOT is the path to start in if NAME is relative."
 (require 'tmux-keybinds)      ; fix keybinds in tmux
 (require 'init-neotree)
 
-;; setup midnight to clean unused buffers
-(use-package midnight
-  :config
-  (midnight-delay-set 'midnight-delay "1:00am")
-  )
+(require 'init-midnight)      ; setup midnight to clean unused buffers
 
 (use-package evil-nerd-commenter)
 
