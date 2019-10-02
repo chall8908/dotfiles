@@ -9,6 +9,11 @@ else
     source "$HOME/.bash_profile"
 fi
 
+# Install system packages
+sudo apt build-dep emacs # So we can install emacs 26.1 which isn't in the Ubuntu repos
+# Download the "latest", as of this writing, emacs
+\curl -o "$PERSONAL_DIR/emacs-26.1.tar.xz" https://mirror.clarkson.edu/gnu/emacs/emacs-26.1.tar.xz
+
 # install RVM
 if rvm &> /dev/null; then
     echo 'RVM already installed'
