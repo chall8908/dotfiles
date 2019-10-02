@@ -25,6 +25,8 @@
         neo-show-hidden-files t
         neo-force-change-root t
         neo-create-file-auto-open t
+        neo-toggle-window-keep-p t
+        neo-hide-cursor t
         neo-theme 'nerd)
   (neo-global--open) ;; automatically open neotree on startup
   (other-window 1)   ;; select the default window instead of the tree

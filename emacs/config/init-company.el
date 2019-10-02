@@ -32,9 +32,7 @@
         ;;                     company-echo-metadata-frontend)
         )
 
-  (add-to-list 'company-backends 'company-keywords)
-  (add-to-list 'company-backends 'company-capf)
-  (add-to-list 'company-backends 'company-files)
+  (add-to-list 'company-backends 'company-ispell)
   )
 
 (use-package company-shell

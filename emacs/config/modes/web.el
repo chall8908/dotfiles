@@ -11,8 +11,6 @@
          "\.html$"
          )
 
-  :bind ("C-c r" . web-mode-reload)
-
   :config
   ;; for better jsx syntax-highlighting in web-mode
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
