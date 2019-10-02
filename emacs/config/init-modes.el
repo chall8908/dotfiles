@@ -35,6 +35,12 @@
   )
 (add-hook 'sql-mode-hook 'sql-highlight-postgres-keywords)
 
+;; Puppet mode
+(use-package puppet-mode
+  :mode "\\.e?pp$"
+  :bind (("C-c a" . puppet-align-block))
+  )
+
 (require 'persp)
 (require 'elixir)
 (require 'git)
