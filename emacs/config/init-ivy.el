@@ -26,12 +26,12 @@
                                            (persp-frame-switch  . nil))))
 
   (add-hook 'ivy-ignore-buffers
-            #'lambda (b)
-            (when persp-mode
-              (let (persp (get-current-persp))
-                (if persp
-                    (not (persp-contain-buffer-p b persp))
-                  nil))))
+            #'(lambda (b)
+                (when persp-mode
+                  (let (persp (get-current-persp))
+                    (if persp
+                        (not (persp-contain-buffer-p b persp))
+                      nil)))))
   )
 
 (use-package counsel
