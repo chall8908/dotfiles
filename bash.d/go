@@ -1,0 +1,6 @@
+#-*- sh -*- Emacs mode
+
+export GOPATH="$HOME/.go"
+
+append_to_path "$GOPATH/bin"
+append_to_path "/usr/local/go/bin"
