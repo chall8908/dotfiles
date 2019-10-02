@@ -8,6 +8,8 @@
   history = ! git-pretty-history
   stats = ! git-quick-stats
   contributors = shortlog -s -n --no-merges
+  changes-in = "!f() { git diff \"$1^\" \"$1\"; }; f"
+  last-change = changes-in HEAD
 
   # Lists
   branches = branch -a
