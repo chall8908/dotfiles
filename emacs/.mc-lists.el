@@ -8,7 +8,11 @@
         indent-for-tab-command
         ivy-next-line
         kill-region
+        markdown-enter-key
         markdown-outdent-or-delete
+        puppet-align-block
+        puppet-apply
+        puppet-interpolate
         ruby-electric-bar
         ruby-electric-closing-char
         ruby-electric-curlies
@@ -19,8 +23,11 @@
         sh-assignment
         web-mode-element-insert
         yaml-electric-backspace
+        yaml-electric-bar-and-angle
+        yaml-electric-dash-and-dot
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        overwrite-mode
         ))
