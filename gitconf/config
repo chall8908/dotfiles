@@ -36,12 +36,12 @@
   # Remote commands
   ps = push
   pl = pull
-  psf = "!f() { git push -f \"${1:-origin}\" HEAD; }; f"
+  psf = "!f() { git push --force-with-lease \"${1:-origin}\" HEAD; }; f"
   overwrite = psf
   psto = "!f() { git push -u \"${1:-origin}\" HEAD; }; f"
   publish = psto
   delete = push origin --delete --
-  repush = "!f() { git del $1 && git ps $2 }; f"
+  repush = "!f() { git delete $1 && git psto $2; }; f"
 
   # Subodule commands
   sm = submodule
@@ -68,6 +68,7 @@
   default = current
 [fetch]
   prune = 1
+  pruneTags = 1
 [help]
   autocorrect = 25
 [rebase]
