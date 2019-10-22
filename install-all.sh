@@ -1,5 +1,7 @@
 #!/bin/bash -l
 
+set -euo pipefail
+
 # ensure this isn't run before the system has been configured
 if [ -z "$CONFIG_DIR" ] && [! -r "$HOME/.bash_profile"]; then
     echo 'Please perform initial setup with `make` first'
@@ -23,6 +25,32 @@ if ! which emacs &> /dev/null; then
 else
     echo 'Found Emacs'
 fi
+
+if ! which spotifyd &> /dev/null; then
+    echo 'Installing spotifyd...'
+    sudo apt install libasound2-dev libssl-dev libpulse-dev libdbus-1-dev
+    \curl -L https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz | tar -C $PERSONAL_DIR -xa
+    pushd "$PERSONAL_DIR/spotifyd-0.2.19"
+    echo 'Compiling.  This will take awhile...'
+    cargo build --release --features pulseaudio_backend,dbus_keyring,dbus_mpris
+    cp "$PERSONAL_DIR/spotifyd-0.2.19/target/release/spotifyd" ~/bin/
+    mkdir -p ~/.config/systemd/user/
+    sed -e "s|/usr/bin/spotifyd|$HOME/bin/spotifyd" "$PERSONAL_DIR/spotifyd-0.2.19/contrib/spotifyd.service" > ~/.config/systemd/user/
+    systemctl --user enable spotifyd.service
+    systemctl --user start spotifyd.service
+    popd
+else
+    echo 'Found spotifyd'
+fi
+
+if ! which spt &&> /dev/null; then
+    echo 'Installing spotify-tui...'
+    \curl -L https://github.com/Rigellute/spotify-tui/releases/download/v0.7.5/spotify-tui-linux.tar.gz | tar -C ~/bin/ -xa
+else
+    echo 'Found spotify-tui'
+fi
+
+sudo apt install -y libsecret-tools
 
 # install RVM
 if rvm &> /dev/null; then
