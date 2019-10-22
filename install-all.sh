@@ -10,9 +10,19 @@ else
 fi
 
 # Install system packages
-sudo apt build-dep emacs # So we can install emacs 26.1 which isn't in the Ubuntu repos
-# Download the "latest", as of this writing, emacs
-\curl -o "$PERSONAL_DIR/emacs-26.1.tar.xz" https://mirror.clarkson.edu/gnu/emacs/emacs-26.1.tar.xz
+if ! which emacs &> /dev/null; then
+    # Download the "latest", as of this writing, emacs
+    echo 'Installing Emacs 26.3..'
+    sudo apt build-dep -y emacs
+    \curl -L https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz | tar -C $PERSONAL_DIR -xa
+    pushd "$PERSONAL_DIR/emacs-26.3"
+    ./configure
+    make
+    sudo make install
+    popd
+else
+    echo 'Found Emacs'
+fi
 
 # install RVM
 if rvm &> /dev/null; then
