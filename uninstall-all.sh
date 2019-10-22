@@ -6,6 +6,16 @@ if [ -z "$CONFIG_DIR" ]; then
     exit 1
 fi
 
+if which spotifyd &> /dev/null; then
+    rm ~/bin/spotifyd ~/.config/systemd/user/spotifyd.service
+fi
+
+if which spt &&> /dev/null; then
+    rm ~/bin/spt
+fi
+
+sudo apt remove -y libsecret-tools
+
 # install RVM
 if rvm &> /dev/null; then
     rm -rf "$RVM_ROOT"
@@ -26,3 +36,5 @@ if pyenv --help &> /dev/null; then
 else
     echo 'PyEnv not installed'
 fi
+
+sudo apt autoremove -y

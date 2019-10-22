@@ -27,6 +27,8 @@ else
 fi
 
 if ! which spotifyd &> /dev/null; then
+    # See https://github.com/Spotifyd/spotifyd#configuration-file for how to set
+    # up credentials in secret-tools (installed below)
     echo 'Installing spotifyd...'
     sudo apt install libasound2-dev libssl-dev libpulse-dev libdbus-1-dev
     \curl -L https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz | tar -C $PERSONAL_DIR -xa
