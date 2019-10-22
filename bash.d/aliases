@@ -12,6 +12,8 @@ emacs() {
 alias bi='bundle install'
 alias be='bundle exec'
 
+alias lint="git grep -lz ://standardjs.com | xargs -0 standard --parser babel-eslint -v --fix"
+
 # Use bat over cat if it's installed
 # https://github.com/sharkdp/bat
 if which bat > /dev/null; then
