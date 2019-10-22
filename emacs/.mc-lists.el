@@ -21,6 +21,7 @@
         ruby-electric-matching-char
         ruby-electric-space/return
         sh-assignment
+        suspend-frame
         web-mode-element-insert
         yaml-electric-backspace
         yaml-electric-bar-and-angle
