@@ -13,3 +13,7 @@ nvm() {
 # Automatically source nvm if the current folder or project looks like it has javascript dependencies
 # This is mostly useful when spawning a shell inside a project
 ( test -e package.json || git exec test -e package.json ) && nvm > /dev/null
+
+# Add Yarn global bin to the path
+append_to_path "$HOME/.config/yarn/global/node_modules/.bin"
+append_to_path "$HOME/.yarn/bin"
