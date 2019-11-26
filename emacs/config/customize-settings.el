@@ -9,7 +9,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (tern js2-mode markdown-mode tuareg avy flyspell-correct-ivy flycheck company ivy-yasnippet ac-capf auto-complete xclip ivy persp-mode puppet-mode tide typescript-mode yasnippet sql-indent company-tabnine git-gutter diff-hl yasnippet-snippets yaml-mode web-mode use-package swiper-helm skewer-mode scss-mode rvm ruby-tools ruby-electric rubocop rspec-mode robe react-snippets python-mode pos-tip neotree multiple-cursors markdown-toc markdown-preview-mode groovy-mode flycheck-elixir evil-nerd-commenter enh-ruby-mode emmet-mode elixir-mode diminish counsel company-web company-tern company-shell base16-theme avy-flycheck auto-package-update all-the-icons))))
+    (dockerfile-mode tern js2-mode markdown-mode tuareg avy flyspell-correct-ivy flycheck company ivy-yasnippet ac-capf auto-complete xclip ivy persp-mode puppet-mode tide typescript-mode yasnippet sql-indent company-tabnine git-gutter diff-hl yasnippet-snippets yaml-mode web-mode use-package swiper-helm skewer-mode scss-mode rvm ruby-tools ruby-electric rubocop rspec-mode robe react-snippets python-mode pos-tip neotree multiple-cursors markdown-toc markdown-preview-mode groovy-mode flycheck-elixir evil-nerd-commenter enh-ruby-mode emmet-mode elixir-mode diminish counsel company-web company-tern company-shell base16-theme avy-flycheck auto-package-update all-the-icons))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

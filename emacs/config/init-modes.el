@@ -41,6 +41,8 @@
   :bind (("C-c a" . puppet-align-block))
   )
 
+(use-package dockerfile-mode)
+
 (require 'persp)
 (require 'elixir)
 (require 'git)
