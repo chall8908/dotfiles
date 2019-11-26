@@ -2,15 +2,22 @@
 
 [[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
 
-# Get _absolute_ directory path to this file
-pushd . > /dev/null
-__SCRIPT_PATH="${BASH_SOURCE[0]}"
-while([ -h "${__SCRIPT_PATH}" ]); do
-    cd "`dirname "${__SCRIPT_PATH}"`" > /dev/null
-    __SCRIPT_PATH="$(readlink "`basename "${__SCRIPT_PATH}"`")"
-done
-export CONFIG_DIR="$(cd "$(dirname "${__SCRIPT_PATH}")" && pwd)"
-popd > /dev/null
+if [[ -s "$HOME/.config/.bash_setup_cache" ]]; then
+    # Load cached environment so we don't have to recalculate each time
+    source "$HOME/.config/.bash_setup_cache"
+else
+    # Get _absolute_ directory path to this file
+    pushd . > /dev/null
+    __SCRIPT_PATH="${BASH_SOURCE[0]}"
+    while([ -h "${__SCRIPT_PATH}" ]); do
+        cd "`dirname "${__SCRIPT_PATH}"`" > /dev/null
+        __SCRIPT_PATH="$(readlink "`basename "${__SCRIPT_PATH}"`")"
+    done
+    export CONFIG_DIR="$(cd "$(dirname "${__SCRIPT_PATH}")" && pwd)"
+    popd > /dev/null
+
+    echo "export CONFIG_DIR='$CONFIG_DIR'" > "$HOME/.config/.bash_setup_cache"
+fi
 
 [[ -s "$CONFIG_DIR/variables" ]] && source "$CONFIG_DIR/variables" # Source custom variables
 [[ -s "$CONFIG_DIR/local/variables" ]] && source "$CONFIG_DIR/local/variables"
