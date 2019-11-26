@@ -33,12 +33,7 @@ for f in "${file_array[@]}"; do
     source $f
 done
 
-# Grab the colors from git-bash-prompt
-source "$CONFIG_DIR/bash-git-prompt/prompt-colors.sh"
-
-PROMPT_COMMAND='set_last_command_status;update_prompt'
-# Make sure everything is set up properly before we source git
-eval $PROMPT_COMMAND
+source "$CONFIG_DIR/prompt"
 
 # Add bin in home directory to path
 prepend_to_path "$HOME/bin"
