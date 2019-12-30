@@ -96,15 +96,15 @@ ${PERSONAL_DIR}/emacs-26.3:
 	${MAKE} -C $^
 	sudo ${MAKE} -C $^ install
 
-${DESTDIR}/.rvm/bin/rvm:
+${HOME}/.rvm/bin/rvm:
 	gpg --keyserver 'hkp://keys.gnupg.net' --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 	curl -sSL 'https://get.rvm.io' | bash -s stable -- --ignore-dotfiles
-	ln -s "${DESTDIR}/.rvm/hooks/after_cd_nvm" "${srcdir}/rvm_hacks/after_cd_nvm"
+	ln -s "${HOME}/.rvm/hooks/after_cd_nvm" "${srcdir}/rvm_hacks/after_cd_nvm"
 
-${DESTDIR}/.nvm/nvm.sh:
+${HOME}/.nvm/nvm.sh:
 	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh' | bash
 
-${DESTDIR}/.pyenv/bin/pyenv:
+${HOME}/.pyenv/bin/pyenv:
 	curl -L 'https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer' | bash
 
 ${HOME}/.cargo/bin/rustup:
