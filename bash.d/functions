@@ -78,7 +78,7 @@ install-dependencies() {
 weather() {
     local locale="$(string_join '+' $@)"
     locale="${locale:-Chicago}"
-    curl "wttr.in/$locale"
+    curl "wttr.in/$locale?m"
 }
 
 crypto() {
