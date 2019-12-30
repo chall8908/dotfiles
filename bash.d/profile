@@ -53,6 +53,7 @@ source "$CONFIG_DIR/rvm"
 source "$CONFIG_DIR/nvm"
 source "$CONFIG_DIR/ocaml"
 source "$CONFIG_DIR/go"
+source "$CONFIG_DIR/rust"
 
 # Special configuration for when we're in a git repo
 source "$CONFIG_DIR/git"

@@ -21,11 +21,11 @@ TARGETS=${DESTDIR}/.emacs.d \
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install uninstall xrdb emacs init clean rvm nvm pyenv spotify spotifyd
+.PHONY: all install uninstall xrdb emacs init clean rvm nvm pyenv rustup spotify spotifyd
 
 all: $(TARGETS)
 
-install: all emacs rvm nvm pyenv spotify
+install: all emacs rvm nvm pyenv rustup spotify
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs
@@ -35,6 +35,9 @@ rvm: ${DESTDIR}/.rvm/bin/rvm
 nvm: ${DESTDIR}/.nvm/nvm.sh
 
 pyenv: ${DESTDIR}/.pyenv/bin/pyenv
+
+rustup: ${HOME}/.cargo/bin/rustup
+	${HOME}/.cargo/bin/rustup completions bash > ${HOME}/.local/share/bash-completion/completions/rustup
 
 spotify: spotifyd ${DESTDIR}/bin/spt
 
@@ -103,6 +106,9 @@ ${DESTDIR}/.nvm/nvm.sh:
 
 ${DESTDIR}/.pyenv/bin/pyenv:
 	curl -L 'https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer' | bash
+
+${HOME}/.cargo/bin/rustup:
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ${PERSONAL_DIR}/spotifyd-0.2.19:
 	curl -L 'https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz' | tar -C $PERSONAL_DIR -xa

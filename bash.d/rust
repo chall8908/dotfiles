@@ -1,0 +1,11 @@
+#-*- sh -*- Emacs mode
+
+# rustup and cargo are in here
+prepend_to_path "$HOME/.cargo/bin"
+
+# If we have a rust installed
+if which rustc &> /dev/null; then
+  # Source the completion for the current cargo
+  # FIXME: Hook when the toolchain changes?
+  source "$(rustc --print sysroot)/etc/bash_completion.d/cargo"
+fi
