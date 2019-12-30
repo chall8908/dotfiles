@@ -64,6 +64,9 @@
   excludesfile = ~/.gitignore_global
 [branch]
   autosetuprebase = always
+[pull]
+  rebase = true
+  autoStash = true
 [push]
   default = current
 [fetch]
