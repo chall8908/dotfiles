@@ -16,7 +16,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xdefaults \
 	${DESTDIR}/.rvmrc \
-	${DESTDIR}/.config/kitty/kitty.conf
+	${DESTDIR}/.config/kitty/kitty.conf \
+	${DESTDIR}/.bundle/config
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
@@ -75,6 +76,7 @@ ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 ${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
+${DESTDIR}/.bundle/config: ${srcdir}/bundler
 
 $(REMOTES): init
 
