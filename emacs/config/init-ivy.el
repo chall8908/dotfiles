@@ -3,7 +3,6 @@
 ;;; Code:
 
 (use-package ivy
-  :after persp-mode
   :pin melpa
   :diminish ivy-mode
   :demand t

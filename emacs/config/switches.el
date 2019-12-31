@@ -1,28 +1,27 @@
-;;;;;; switches.el --- Adds additional startup switches to Emacs -*- lexical-binding: t -*-
+;;; switches.el --- Adds additional startup switches to Emacs
 
 ;; Author: Chris Hall
 ;; Maintainer: Chris Hall
 
 ;;; Code:
 
-(add-to-list 'command-switch-alist
-             (cons "persp"
-                   #'(lambda (persp-name)
-                       (if persp-name
-                           (persp-switch persp-name)
-                         ((persp-switch "default"))))))
-
+(defvar config-switch-disable-persp-mode nil)
 (add-to-list 'command-switch-alist
              (cons "no-persp"
-                   #'(lambda (p)
-                       (setq persp-auto-resume-time -1
-                             persp-auto-save-opt 0))))
+                   #'(lambda (&rest _)
+                       (setq config-switch-disable-persp-mode t))))
 
+(defvar config-switch-disable-tabnine nil)
 (add-to-list 'command-switch-alist
              (cons "no-tabnine"
-                   #'(lambda (p)
-                       (setq company-tabnine--disable 1)
-                       (add-hook `company-tabnine--hooks-alist `company-tabnine-kill-process))))
+                   #'(lambda(&rest _)
+                       (setq config-switch-disable-tabnine t))))
+
+(defvar config-switch-disable-neotree nil)
+(add-to-list 'command-switch-alist
+             (cons "no-neotree"
+                   #'(lambda (&rest _)
+                       (setq config-switch-disable-neotree t))))
 
 (provide 'switches)
 

@@ -19,7 +19,7 @@
 (use-package neotree
   ;; :after (all-the-icons)
   :pin melpa
-  :config
+  :init
   (add-hook 'neo-after-create-hook (lambda (&rest _) (display-line-numbers-mode -1)))
   (setq neo-autorefresh t
         neo-show-hidden-files t
@@ -28,9 +28,12 @@
         neo-toggle-window-keep-p t
         neo-hide-cursor t
         neo-theme 'nerd)
-  (neo-global--open) ;; automatically open neotree on startup
-  (other-window 1)   ;; select the default window instead of the tree
   )
+
+(add-hook 'emacs-startup-hook
+          (lambda (&rest _)
+            (unless config-switch-disable-neotree
+              (neotree-show))))
 
 (provide 'init-neotree)
 ;;; init-neotree.el ends here

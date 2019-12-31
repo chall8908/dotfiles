@@ -6,8 +6,7 @@
 ;;; Code:
 
 (use-package persp-mode
-  :init
-  (persp-mode)
+  :commands (persp-mode)
   :config
   (setq persp-autokill-buffer-on-remove 'kill-weak)
   ;; perspective mode keybindings
@@ -16,6 +15,11 @@
 
   (global-unset-key (kbd "C-x b"))
   (global-set-key (kbd "C-x b") 'persp-switch-to-buffer))
+
+(add-hook 'emacs-startup-hook
+          (lambda (&rest _)
+            (unless config-switch-disable-persp-mode
+              (persp-mode))))
 
 (provide 'persp)
 
