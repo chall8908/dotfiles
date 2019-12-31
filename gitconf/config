@@ -60,7 +60,6 @@
 [color]
   ui = true
 [core]
-  editor = emacs -nw
   excludesfile = ~/.gitignore_global
 [branch]
   autosetuprebase = always
