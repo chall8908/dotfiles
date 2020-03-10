@@ -5,8 +5,10 @@
       '(
         electric-pair-delete-pair
         end-of-visual-line
+        evilnc-comment-or-uncomment-lines
         indent-for-tab-command
         ivy-next-line
+        keyboard-escape-quit
         kill-region
         markdown-enter-key
         markdown-outdent-or-delete
