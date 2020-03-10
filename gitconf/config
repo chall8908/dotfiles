@@ -13,7 +13,7 @@
 
   # Lists
   branches = branch -a
-  tags = tag
+  tags = tag --sort=version:refname
   stashes = stash list
   remotes = remote -v
 
