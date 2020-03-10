@@ -15,17 +15,32 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.gitconfig \
 	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xdefaults \
+	${DESTDIR}/.xprofile \
 	${DESTDIR}/.rvmrc \
 	${DESTDIR}/.config/kitty/kitty.conf \
+	${DESTDIR}/.config/i3/config \
+	${DESTDIR}/.config/i3/lock.sh \
+	${DESTDIR}/.config/i3/lock.png \
+	${DESTDIR}/.config/polybar/config \
+	${DESTDIR}/.config/polybar/start.sh \
 	${DESTDIR}/.bundle/config
+
+service_path = ${DESTDIR}/.config/systemd/user
+
+SERVICES=${service_path}/emacs.service \
+	${service_path}/ssh-agent.service
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install uninstall xrdb emacs init clean rvm nvm pyenv rustup spotify spotifyd
+.PHONY: all install uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd
 
-all: $(TARGETS)
+all: $(TARGETS) $(SERVICES)
 
-install: all emacs rvm nvm pyenv rustup spotify
+install: all i3 emacs rvm nvm pyenv rustup spotify
+
+i3:
+	sudo apt install i3
+	sudo apt install xss-lock
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs
@@ -77,8 +92,14 @@ ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
 ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
+${DESTDIR}/.xprofile: ${srcdir}/x/profile
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 ${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
+${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
+${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
+${DESTDIR}/.config/i3/lock.png: ${srcdir}/i3/lock.png
+${DESTDIR}/.config/polybar/config: ${srcdir}/polybar/config
+${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
 
 $(REMOTES): init
@@ -86,6 +107,12 @@ $(REMOTES): init
 $(TARGETS):
 	mkdir -p ${@D}
 	ln -s $< $@
+
+${service_path}/emacs.service: ${srcdir}/systemd/emacs.service
+${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
+
+$(SERVICES):
+	systemctl --user enable $<
 
 ${PERSONAL_DIR}/emacs-26.3:
 	curl -L 'https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz' | tar -C "${PERSONAL_DIR}" -xa

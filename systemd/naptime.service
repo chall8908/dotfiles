@@ -1,0 +1,11 @@
+[Unit]
+Description=Puts the computer to sleep the way I want
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/xss-lock --transfer-sleep-lock --session=${XDG_SESSION_ID} /home/chall/.config/i3/lock.sh
+
+[Install]
+WantedBy=graphical-session.target
