@@ -3,6 +3,7 @@
 # Initialize pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 prepend_to_path "$PYENV_ROOT/bin"
+
 # PyEnv is retarded and returns non-0 unless a 100% valid command is used
 if pyenv --help &> /dev/null; then
     eval "$(pyenv init -)"

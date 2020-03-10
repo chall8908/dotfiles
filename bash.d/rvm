@@ -10,4 +10,4 @@ append_to_path "$RVM_ROOT/bin"
 [[ -r "$RVM_ROOT/scripts/completion" ]] && source "$RVM_ROOT/scripts/completion"
 
 # Ensure that new shells created in a project directory have their ruby version set correctly
-__rvm_project_rvmrc;
+__rvm_project_rvmrc
