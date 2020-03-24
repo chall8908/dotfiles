@@ -23,6 +23,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/i3/lock.png \
 	${DESTDIR}/.config/polybar/config \
 	${DESTDIR}/.config/polybar/start.sh \
+	${DESTDIR}/.config/rofi/config \
+	${DESTDIR}/.config/rofi/slate.rasi \
 	${DESTDIR}/.bundle/config
 
 service_path = ${DESTDIR}/.config/systemd/user
@@ -41,6 +43,7 @@ install: all i3 emacs rvm nvm pyenv rustup spotify
 i3: splatmoji
 	sudo apt install i3
 	sudo apt install xss-lock
+	sudo apt install rofi
 
 splatmoji: /usr/local/src/splatmoji/splatmoji
 
@@ -110,6 +113,8 @@ ${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
 ${DESTDIR}/.config/i3/lock.png: ${srcdir}/i3/lock.png
 ${DESTDIR}/.config/polybar/config: ${srcdir}/polybar/config
 ${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
+${DESTDIR}/.config/rofi/config: ${srcdir}/rofi/config
+${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
 
 $(REMOTES): init
