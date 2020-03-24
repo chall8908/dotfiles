@@ -38,9 +38,19 @@ all: $(TARGETS) $(SERVICES)
 
 install: all i3 emacs rvm nvm pyenv rustup spotify
 
-i3:
+i3: splatmoji
 	sudo apt install i3
 	sudo apt install xss-lock
+
+splatmoji: /usr/local/src/splatmoji/splatmoji
+
+/usr/local/src/splatmoji/splatmoji:
+	sudo mkdir -p /usr/local/src/splatmoji
+	sudo chown root:chall /usr/local/src/splatmoji
+	sudo chmod g+w /usr/local/src/splatmoji
+	git clone git@github.com:cspeterson/splatmoji.git /usr/local/src/splatmoji/
+	sed -i'' -e 's/xsel_command.*/xsel_command=xclip -selection clipboard/' /usr/local/src/splatmoji/splatmoji.config
+	sudo ln -s /usr/local/src/splatmoji/splatmoji /usr/local/bin/splatmoji
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs

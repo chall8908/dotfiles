@@ -62,6 +62,10 @@ bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#005577' -sf '#E
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# Emoji selection 😀
+bindsym $mod+Ctrl+e exec splatmoji type
+bindsym $mod+Shift+e exec splatmoji copy
+
 # move workspace
 bindsym $mod+Ctrl+Left exec i3-grid left
 bindsym $mod+Ctrl+Down exec i3-grid down
