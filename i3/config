@@ -9,6 +9,25 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Start compton
+exec_always --no-startup-id "killall -q compton; compton --daemon --config ~/.config/compton.conf"
+
+# Ensure monitor configuration is properly setup
+exec_always --no-startup-id autorandr --change
+
+# Run hsetroot
+exec_always --no-startup-id hsetroot -solid '#111111'
+
+# configure XSS lock
+exec --no-startup-id xss-lock "$HOME/.config/i3/lock.sh" &
+
+# Start gesture manager
+exec --no-startup-id libinput-gestures-setup start
+
+# Start polybar
+exec_always --no-startup-id $HOME/.config/polybar/start.sh
+
+# Key to use as $mod.  In this case it's Win/Cmd
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -226,9 +245,4 @@ for_window [class="(?i)spotify"] move container to workspace $ws9
 for_window [class="(?i)cisco"] floating enable
 
 # Move to center workspace and start a terminal on startup
-exec --no-startup-id i3-msg "workspace 4; i3-sensible-terminal"
-
-exec --no-startup-id xss-lock "$HOME/.config/i3/lock.sh" &
-
-# Start polybar
-exec_always --no-startup-id $HOME/.config/polybar/start.sh
+exec --no-startup-id "i3-msg workspace 4; i3-sensible-terminal"
