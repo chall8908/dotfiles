@@ -220,7 +220,10 @@ focus_on_window_activation focus
 
 assign [class="(?i)evolution"] workspace $ws3
 assign [class="(?i)ripcord"] workspace $ws6
-assign [class="(?i)spotify"] workspace $ws9
+assign [class="(?i)hipchat"] workspace $ws8
+for_window [instance="(?i)app.chime.aws"] move container to workspace $ws8
+for_window [class="(?i)spotify"] move container to workspace $ws9
+for_window [class="(?i)cisco"] floating enable
 
 # Move to center workspace and start a terminal on startup
 exec --no-startup-id i3-msg "workspace 4; i3-sensible-terminal"
