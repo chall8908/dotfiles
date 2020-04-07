@@ -1,0 +1,30 @@
+#!/bin/bash
+
+power_menu_options() {
+  echo -e ""
+  echo -e ""
+  echo -e ""
+  echo -e ""
+}
+
+power_menu() {
+  local selection="$(power_menu_options | rofi -dmenu -theme power_menu)"
+
+  if [ -z "$selection" ] ; then
+    exit 0;
+  fi
+
+  case "$selection" in
+    "") loginctl lock-session ;;
+
+    "") i3-msg exit ;;
+
+    "") reboot ;;
+
+    "") shutdown now ;;
+
+    "*") i3-nagbar -m "Unknown selection: $selection"
+  esac
+}
+
+power_menu

@@ -13,6 +13,7 @@ srcdir = ${abspath .}
 TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
 	${DESTDIR}/.gitconfig \
+	${DESTDIR}/bin/power_menu \
 	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xdefaults \
 	${DESTDIR}/.xprofile \
@@ -26,6 +27,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/rofi/config \
 	${DESTDIR}/.config/rofi/slate.rasi \
 	${DESTDIR}/.bundle/config
+	${DESTDIR}/.config/rofi/power_menu.rasi
 
 service_path = ${DESTDIR}/.config/systemd/user
 
@@ -104,6 +106,7 @@ ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
 ${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
 ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
+${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.xprofile: ${srcdir}/x/profile
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
@@ -116,6 +119,7 @@ ${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
 ${DESTDIR}/.config/rofi/config: ${srcdir}/rofi/config
 ${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
+${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
 
 $(REMOTES): init
 
