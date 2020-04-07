@@ -51,6 +51,9 @@
   # Utilities
   exec = "!exec "
 
+[checkout]
+  defaultRemote = origin
+
 [diff]
   tool = icdiff
 [difftool]
