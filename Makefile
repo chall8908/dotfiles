@@ -165,7 +165,7 @@ $(TARGETS):
 	mkdir -p ${@D}
 	ln -s $< $@
 
-${service_path}/emacs.service: ${srcdir}/systemd/emacs.service
+${service_path}/emacs.service: ${srcdir}/systemd/emacs.service ${HOME}/.rvm/bin/rvm ${HOME}/.rvm/wrappers/emacs
 ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
 
 $(SERVICES):
@@ -180,6 +180,11 @@ ${PERSONAL_DIR}/emacs-26.3:
 	cd $^; ./configure
 	${MAKE} -C $^
 	sudo ${MAKE} -C $^ install
+
+${HOME}/.rvm/wrappers/emacs: ${HOME}/.rvm/bin/rvm
+	${HOME}/.rvm/bin/rvm install 2.6.0
+	${HOME}/.rvm/bin/rvm 2.6.0 gemset create emacs
+	${HOME}/.rvm/bin/rvm alias create --create emacs 2.6.0@emacs
 
 ${HOME}/.rvm/bin/rvm:
 	gpg --keyserver 'hkp://keys.gnupg.net' --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
