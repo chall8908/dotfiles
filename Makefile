@@ -170,7 +170,7 @@ ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
 
 $(SERVICES):
 	systemctl --user enable $<
-	systemctl --user start "$(basename $<)"
+	systemctl --user start "$(notdir $<)"
 
 ${PERSONAL_DIR}/emacs-26.3:
 	curl -L 'https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz' | tar -C "${PERSONAL_DIR}" -xa
