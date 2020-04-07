@@ -18,6 +18,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.Xdefaults \
 	${DESTDIR}/.xprofile \
 	${DESTDIR}/.rvmrc \
+	${DESTDIR}/.bundle/config \
 	${DESTDIR}/.config/kitty/kitty.conf \
 	${DESTDIR}/.config/i3/config \
 	${DESTDIR}/.config/i3/lock.sh \
@@ -27,8 +28,9 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/polybar/spotify-status \
 	${DESTDIR}/.config/rofi/config \
 	${DESTDIR}/.config/rofi/slate.rasi \
-	${DESTDIR}/.bundle/config
-	${DESTDIR}/.config/rofi/power_menu.rasi
+	${DESTDIR}/.config/rofi/power_menu.rasi \
+	${DESTDIR}/.config/libinput-gestures.conf \
+	${DESTDIR}/.config/compton.conf
 
 service_path = ${DESTDIR}/.config/systemd/user
 
@@ -43,12 +45,34 @@ all: $(TARGETS) $(SERVICES)
 
 install: all i3 emacs rvm nvm pyenv rustup spotify
 
-i3: splatmoji
-	sudo apt install i3
-	sudo apt install xss-lock
-	sudo apt install rofi
+i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot
 
-splatmoji: /usr/local/src/splatmoji/splatmoji
+/usr/bin/i3-msg:
+	sudo apt install --yes i3
+
+/usr/bin/hsetroot:
+	sudo apt install --yes hsetroot
+
+/usr/bin/xss-lock:
+	sudo apt install --yes xss-lock
+
+/usr/bin/rofi:
+	sudo apt install --yes rofi
+
+/usr/bin/compton: ${DESTDIR}/.config/compton.conf
+	sudo apt install --yes compton
+
+/usr/local/bin/i3-grid: /usr/local/src/i3-grid/i3-grid.py
+	ln -s ${srcdir}/bin/i3-grid $@
+
+/usr/local/src/i3-grid/i3-grid.py:
+	sudo mkdir -p /usr/local/src/i3-grid
+	sudo chown root:chall /usr/local/src/i3-grid
+	sudo chmod g+w /usr/local/src/i3-grid
+	git clone git@github.com:lukeshimanuki/i3-grid.git /usr/local/src/i3-grid
+
+/usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
+	sudo ln -s /usr/local/src/splatmoji/splatmoji $@
 
 /usr/local/src/splatmoji/splatmoji:
 	sudo mkdir -p /usr/local/src/splatmoji
@@ -56,7 +80,17 @@ splatmoji: /usr/local/src/splatmoji/splatmoji
 	sudo chmod g+w /usr/local/src/splatmoji
 	git clone git@github.com:cspeterson/splatmoji.git /usr/local/src/splatmoji/
 	sed -i'' -e 's/xsel_command.*/xsel_command=xclip -selection clipboard/' /usr/local/src/splatmoji/splatmoji.config
-	sudo ln -s /usr/local/src/splatmoji/splatmoji /usr/local/bin/splatmoji
+
+/usr/bin/libinput-gestures: /usr/local/src/libinput-gestures/Makefile
+	sudo gpasswd -a $USER input
+	sudo apt install libinput-tools
+	$(MAKE) -C /usr/local/src/libinput-gestures
+
+/usr/local/src/libinput-gestures/Makefile:
+	sudo mkdir -p /usr/local/src/libinput-gestures
+	sudo chown root:chall /usr/local/src/libinput-gestures
+	sudo chmod g+w /usr/local/src/libinput-gestures
+	git clone https://github.com/bulletmark/libinput-gestures.git /usr/local/src/libinput-gestures
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs
@@ -111,6 +145,7 @@ ${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.xprofile: ${srcdir}/x/profile
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
+${DESTDIR}/.bundle/config: ${srcdir}/bundler
 ${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
 ${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
 ${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
@@ -120,8 +155,9 @@ ${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
 ${DESTDIR}/.config/polybar/spotify-status: ${srcdir}/polybar/spotify-status
 ${DESTDIR}/.config/rofi/config: ${srcdir}/rofi/config
 ${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
-${DESTDIR}/.bundle/config: ${srcdir}/bundler
 ${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
+${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
+${DESTDIR}/.config/compton.conf: ${srcdir}/i3/compton.conf
 
 $(REMOTES): init
 
@@ -134,6 +170,7 @@ ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
 
 $(SERVICES):
 	systemctl --user enable $<
+	systemctl --user start "$(basename $<)"
 
 ${PERSONAL_DIR}/emacs-26.3:
 	curl -L 'https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz' | tar -C "${PERSONAL_DIR}" -xa
