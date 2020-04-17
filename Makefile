@@ -192,7 +192,7 @@ ${HOME}/.rvm/bin/rvm:
 	ln -s "${HOME}/.rvm/hooks/after_cd_nvm" "${srcdir}/rvm_hacks/after_cd_nvm"
 
 ${HOME}/.nvm/nvm.sh:
-	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh' | bash
+	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
 
 ${HOME}/.pyenv/bin/pyenv:
 	curl -L 'https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer' | bash
