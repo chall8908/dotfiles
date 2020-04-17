@@ -17,10 +17,10 @@
 ;==========================================================
 
 [colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #888
+background = #000516
+background-alt = #16202b
+foreground = #d9d8db
+foreground-alt = #bcbcc4
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -40,18 +40,18 @@ foreground = ${colors.foreground}
 line-size = 2
 line-color = #f00
 
-border-size = 0
-border-color = #00000000
+border-size = 1
+border-color = ${colors.background-alt}
 
 padding = 2
 
 module-margin = 1
 
-font-0 = "Fira Code:size=10"
-font-1 = "Noto Color Emoji:scale=15"
-font-2 = "Noto Sans Symbols2:size=10"
-font-3 = unifont:fontformat=truetype:size=8:antialias=false
-font-4 = siji:pixelsize=10
+font-0 = Fira Code:size=10;2
+font-1 = Noto Color Emoji:scale=15;2
+font-2 = Noto Sans Symbols2:size=10;2
+font-3 = unifont:fontformat=truetype:size=8:antialias=false;2
+font-4 = siji:pixelsize=10;2
 
 modules-left = power i3 xwindow
 modules-center = date
@@ -277,7 +277,7 @@ bar-volume-foreground-3 = #55aa55
 bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
+bar-volume-gradient = true
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
