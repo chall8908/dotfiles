@@ -195,7 +195,7 @@ ${HOME}/.nvm/nvm.sh:
 	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
 
 ${HOME}/.pyenv/bin/pyenv:
-	curl -L 'https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer' | bash
+	curl -L 'https://raw.githubusercontent.com/pyenv/pyenv-installer/dd3f7d0914c5b4a416ca71ffabdf2954f2021596/bin/pyenv-installer' | bash
 
 ${HOME}/.cargo/bin/rustup:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
