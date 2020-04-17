@@ -104,7 +104,7 @@ pyenv: ${DESTDIR}/.pyenv/bin/pyenv
 rustup: ${HOME}/.cargo/bin/rustup
 	${HOME}/.cargo/bin/rustup completions bash > ${HOME}/.local/share/bash-completion/completions/rustup
 
-spotify: spotifyd ${DESTDIR}/bin/spt
+spotify: spotifyd ${DESTDIR}/bin/spotify-tui
 
 spotifyd: ${DESTDIR}/bin/spotifyd ${DESTDIR}/.config/systemd/user/spotifyd.service
 	sudo apt install -y libsecret-tools
@@ -211,5 +211,6 @@ ${DESTDIR}/.config/systemd/user/spotifyd.service: ${PERSONAL_DIR}/spotifyd-0.2.1
 	mkdir -p ${@D}
 	sed -e "s|/usr/bin/spotifyd|${DESTDIR}/bin/spotifyd|" $</contrib/spotifyd.service > $@
 
-${DESTDIR}/bin/spt:
+${DESTDIR}/bin/spotify-tui:
 	curl -L https://github.com/Rigellute/spotify-tui/releases/download/v0.7.5/spotify-tui-linux.tar.gz | tar -C ${@D} -xa
+	mv ${@D}/spt $<
