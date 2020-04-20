@@ -53,7 +53,7 @@ font-2 = Noto Sans Symbols2:size=10;2
 
 modules-left = power i3 xwindow
 modules-center = date
-modules-right = spotify filesystem xbacklight pulseaudio memory cpu wlan eth battery temperature
+modules-right = spotify weather pulseaudio memory cpu wlan eth battery temperature
 
 tray-position = right
 tray-padding = 2
@@ -84,6 +84,13 @@ format-prefix = "🎵 "
 format = <label>
 exec = ~/.config/polybar/spotify-status
 format-underline = #1db954
+
+[module/weather]
+type = custom/script
+interval = 120
+exec = curl -s --compressed 'https://wttr.in/?format="%c+%t+%w"&m' | tr -d '"'
+format = <label>
+format-underline = #87ceeb
 
 [module/xwindow]
 type = internal/xwindow
