@@ -40,11 +40,11 @@ SERVICES=${service_path}/emacs.service \
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd
+.PHONY: all install uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu
 
 all: $(TARGETS) $(SERVICES)
 
-install: all i3 emacs rvm nvm pyenv rustup spotify /usr/bin/byobu
+install: all i3 emacs rvm nvm pyenv rustup spotify byobu
 
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot
 
@@ -92,6 +92,8 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 	sudo chown root:chall /usr/local/src/libinput-gestures
 	sudo chmod g+w /usr/local/src/libinput-gestures
 	git clone https://github.com/bulletmark/libinput-gestures.git /usr/local/src/libinput-gestures
+
+byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf
 
 /usr/bin/byobu:
 	sudo apt install byobu
@@ -150,6 +152,7 @@ ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.xprofile: ${srcdir}/x/profile
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
+${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
 ${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
 ${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
 ${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
