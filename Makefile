@@ -44,7 +44,7 @@ REMOTES=${srcdir}/bash.d/bash-git-prompt
 
 all: $(TARGETS) $(SERVICES)
 
-install: all i3 emacs rvm nvm pyenv rustup spotify byobu
+install: all i3 emacs rvm nvm pyenv rustup spotify byobu /usr/bin/delta
 
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot
 
@@ -97,6 +97,11 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf
 
 /usr/bin/byobu:
 	sudo apt install byobu
+
+/usr/bin/delta:
+	curl -L https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb > /tmp/git-delta_0.1.1_amd64.deb
+	sudo dpkg -i /tmp/git-delta_0.1.1_amd64.deb
+	rm /tmp/git-delta_0.1.1_amd64.deb
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs

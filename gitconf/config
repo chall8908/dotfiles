@@ -1,6 +1,7 @@
 [user]
   name = Chris Hall
   email = chall8908@gmail.com
+
 [alias]
   # Logging, Timeline, and Statistics
   lg = log --oneline --graph --decorate
@@ -54,29 +55,35 @@
 [checkout]
   defaultRemote = origin
 
-[diff]
-  tool = icdiff
-[difftool]
-  prompt = false
-[difftool "icdiff"]
-  cmd = icdiff --line-numbers $LOCAL $REMOTE
 [color]
   ui = true
+
 [core]
   excludesfile = ~/.gitignore_global
+  pager = delta --dark --theme='base16' "--plus-color='#003500'"
+
 [branch]
   autosetuprebase = always
+
 [pull]
   rebase = true
   autoStash = true
+
 [push]
   default = current
+
 [fetch]
   prune = 1
   pruneTags = 1
+
 [help]
   autocorrect = 25
+
+[interactive]
+  diffFilter = delta --color-only
+
 [rebase]
   autosquash = true
+
 [merge]
   conflictStyle = diff3
