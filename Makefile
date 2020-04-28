@@ -30,7 +30,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/rofi/slate.rasi \
 	${DESTDIR}/.config/rofi/power_menu.rasi \
 	${DESTDIR}/.config/libinput-gestures.conf \
-	${DESTDIR}/.config/compton.conf
+	${DESTDIR}/.config/compton.conf \
+	${DESTDIR}/.rvm/hooks/after_cd_nvm
 
 service_path = ${DESTDIR}/.config/systemd/user
 
@@ -161,6 +162,7 @@ ${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
 ${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
 ${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
 ${DESTDIR}/.config/compton.conf: ${srcdir}/i3/compton.conf
+${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
 
 $(REMOTES): init
 
@@ -192,7 +194,6 @@ ${HOME}/.rvm/wrappers/emacs: ${HOME}/.rvm/bin/rvm
 ${HOME}/.rvm/bin/rvm:
 	gpg --keyserver 'hkp://keys.gnupg.net' --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 	curl -sSL 'https://get.rvm.io' | bash -s stable -- --ignore-dotfiles
-	ln -s "${HOME}/.rvm/hooks/after_cd_nvm" "${srcdir}/rvm_hacks/after_cd_nvm"
 
 ${HOME}/.nvm/nvm.sh:
 	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
