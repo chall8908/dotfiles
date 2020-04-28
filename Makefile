@@ -138,8 +138,8 @@ uninstall: clean
 # Cleans up installation artifacts
 # NOTE: This will trigger a recompile of spotifyd if make is run again!!!
 clean:
-	rm -r ${PERSONAL_DIR}/emacs-26.3
-	rm -r ${PERSONAL_DIR}/spotifyd-0.2.19
+	rm -r /tmp/emacs-26.3
+	rm -r /tmp/spotifyd-0.2.19
 
 # Utility targets
 xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
@@ -185,10 +185,10 @@ $(SERVICES):
 	systemctl --user enable $<
 	systemctl --user start "$(notdir $<)"
 
-${PERSONAL_DIR}/emacs-26.3:
-	curl -L 'https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz' | tar -C "${PERSONAL_DIR}" -xa
+/tmp/emacs-26.3:
+	curl -L 'https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz' | tar -C '/tmp' -xa
 
-/usr/local/bin/emacs: ${PERSONAL_DIR}/emacs-26.3
+/usr/local/bin/emacs: /tmp/emacs-26.3
 	sudo apt build-dep -y emacs
 	cd $^; ./configure
 	${MAKE} -C $^
@@ -212,14 +212,14 @@ ${HOME}/.pyenv/bin/pyenv:
 ${HOME}/.cargo/bin/rustup:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-${PERSONAL_DIR}/spotifyd-0.2.19:
-	curl -L 'https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz' | tar -C $PERSONAL_DIR -xa
+/tmp/spotifyd-0.2.19:
+	curl -L 'https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz' | tar -C '/tmp' -xa
 
-${DESTDIR}/bin/spotifyd: ${PERSONAL_DIR}/spotifyd-0.2.19
+${DESTDIR}/bin/spotifyd: /tmp/spotifyd-0.2.19
 	cd $<; cargo build --release --features pulseaudio_backend,dbus_keyring,dbus_mpris
 	cp $</target/release/spotifyd $@
 
-${DESTDIR}/.config/systemd/user/spotifyd.service: ${PERSONAL_DIR}/spotifyd-0.2.19
+${DESTDIR}/.config/systemd/user/spotifyd.service: /tmp/spotifyd-0.2.19
 	mkdir -p ${@D}
 	sed -e "s|/usr/bin/spotifyd|${DESTDIR}/bin/spotifyd|" $</contrib/spotifyd.service > $@
 
