@@ -27,6 +27,9 @@ exec --no-startup-id libinput-gestures-setup start
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/start.sh
 
+# Start redshift
+# exec_always --no-startup-id "killall redshift; redshift -b 1.0:0.8 -t 6500K:4000K &"
+
 # Key to use as $mod.  In this case it's Win/Cmd
 set $mod Mod4
 

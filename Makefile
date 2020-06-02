@@ -46,7 +46,7 @@ all: $(TARGETS) $(SERVICES)
 
 install: all i3 emacs rvm nvm pyenv rustup spotify byobu /usr/bin/delta
 
-i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot
+i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift
 
 /usr/bin/i3-msg:
 	sudo apt install --yes i3
@@ -102,6 +102,9 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf
 	curl -L https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb > /tmp/git-delta_0.1.1_amd64.deb
 	sudo dpkg -i /tmp/git-delta_0.1.1_amd64.deb
 	rm /tmp/git-delta_0.1.1_amd64.deb
+
+/usr/bin/redshift:
+	sudo apt install redshift
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs
