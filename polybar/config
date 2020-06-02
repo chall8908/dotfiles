@@ -18,6 +18,7 @@
 
 [colors]
 background = #000516
+background-tp = #33FFFFFF
 background-alt = #16202b
 foreground = #d9d8db
 foreground-alt = #bcbcc4
@@ -34,7 +35,7 @@ height = 25
 radius = 0.0
 fixed-center = true
 
-background = ${colors.background}
+background = ${colors.background-tp}
 foreground = ${colors.foreground}
 
 line-size = 2
@@ -43,17 +44,18 @@ line-color = #f00
 border-size = 1
 border-color = ${colors.background-alt}
 
-padding = 2
+padding = 0
 
-module-margin = 1
+module-margin = 0
 
 font-0 = Fira Code:size=10;2
 font-1 = Noto Color Emoji:scale=15;2
 font-2 = Noto Sans Symbols2:size=10;2
+font-3 = Powerline Extra Symbols:size=17;3
 
-modules-left = power i3 xwindow
-modules-center = date
-modules-right = spotify weather pulseaudio memory cpu wlan eth battery temperature
+modules-left = power i3 separator-lower-left separator-upper-right xwindow separator-lower-left
+modules-center = separator-upper-right date separator-upper-left
+modules-right = separator-lower-right spotify weather pulseaudio memory cpu wlan battery temperature separator-upper-left
 
 tray-position = right
 tray-padding = 2
@@ -72,29 +74,37 @@ cursor-scroll = ns-resize
 [module/power]
 type = custom/text
 
+content-background = ${colors.background}
+
 content = ⏻
-content-padding = 0
+content-padding = 1
 
 click-left = power_menu
 
 [module/spotify]
 type = custom/script
 interval = 1
-format-prefix = "🎵 "
 format = <label>
-exec = ~/.config/polybar/spotify-status
+format-prefix = "🎵 "
+format-background = ${colors.background}
+format-padding = 1
 format-underline = #1db954
+exec = ~/.config/polybar/spotify-status
 
 [module/weather]
 type = custom/script
 interval = 120
 exec = curl -s --compressed 'https://wttr.in/?format="%c+%t+%w"&m' | tr -d '"'
 format = <label>
+format-background = ${colors.background}
+format-padding = 1
 format-underline = #87ceeb
 
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
+format-background = ${colors.background}
+format-padding = 1
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -125,6 +135,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
+format-background = ${colors.background}
 index-sort = true
 wrapping-scroll = false
 
@@ -144,6 +155,7 @@ label-focused-padding = 1
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 1
+label-unfocused-background = ${colors.background}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -158,6 +170,7 @@ label-urgent-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
+label-separator-padding = 0
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -187,6 +200,8 @@ interval = 2
 format-underline = #f90000
 label = %percentage:2%%
 format = <label> <ramp-coreload>
+format-background = ${colors.background}
+format-padding = 1
 
 ramp-coreload-spacing = 1
 ramp-coreload-0 = ▁
@@ -204,6 +219,8 @@ interval = 2
 format-underline = #4bffdc
 label = %percentage_used%%
 format = <label> <ramp-used>
+format-background = ${colors.background}
+format-padding = 1
 
 ramp-used-0 = ▁
 ramp-used-1 = ▂
@@ -219,6 +236,8 @@ type = internal/network
 interface = wlp3s0
 interval = 3.0
 
+format-connected-background = ${colors.background}
+format-connected-padding = 1
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 label-connected = %essid%
@@ -236,17 +255,18 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
 
-[module/eth]
-type = internal/network
-interface = docker0
-interval = 3.0
+;[module/eth]
+;type = internal/network
+;interface = docker0
+;interval = 3.0
 
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+;format-background = ${colors.background}
+;format-padding = 1
+;format-connected-underline = #55aa55
+;format-connected-prefix = " "
+;format-connected-prefix-foreground = ${colors.foreground-alt}
+;label-connected = %local_ip%
 
-format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -261,18 +281,29 @@ date = "%a %b %d"
 time = "%T %z"
 
 format-underline = #0a6cf5
+format-background = ${colors.background}
+format-padding = 1
 
 label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
+format-background = ${colors.background}
+format-padding = 1
+
 format-volume = <ramp-volume> <label-volume> <bar-volume>
+format-volume-background = ${self.format-background}
+format-volume-padding = ${self.format-padding}
+
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
+format-muted-background = ${self.format-background}
+format-muted-padding = ${self.format-padding}
+
 label-muted = 🔇 muted
-label-muted-foreground = #666
+label-muted-foreground = ${colors.foreground-alt}
 
 ramp-volume-0 = 🔈
 ramp-volume-1 = 🔉
@@ -298,6 +329,8 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/alsa]
 type = internal/alsa
 
+format-background = ${colors.background}
+format-padding = 1
 format-volume = <label-volume> <bar-volume>
 label-volume = VOL
 label-volume-foreground = ${root.foreground}
@@ -329,15 +362,24 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
+format-background = ${colors.background}
+format-padding = 1
+
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
+format-charging-background = ${self.format-background}
+format-charging-padding = ${self.format-padding}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
+format-discharging-background = ${self.format-background}
+format-discharging-padding = ${self.format-padding}
 
 format-full-prefix = "🔋"
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
+format-full-background = ${self.format-background}
+format-full-padding = ${self.format-padding}
 
 ramp-capacity-0 = ""
 ramp-capacity-1 = ""
@@ -372,9 +414,12 @@ thermal-zone = 0
 warn-temperature = 70
 
 format = <ramp> <label>
+format-background = ${colors.background}
+format-padding = 1
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
+format-warn-background = ${colors.background}
 
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -394,5 +439,30 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+
+[module/separator]
+type = custom/text
+content-background = ${colors.background-tp}
+content-foreground = ${colors.background}
+
+[module/separator-lower-left]
+inherit = module/separator
+; content = "%{T3}%{T-} "
+content = "  "
+
+[module/separator-upper-right]
+inherit = module/separator
+; content = " %{T3}%{T-}"
+content = "  "
+
+[module/separator-upper-left]
+inherit = module/separator
+; content = "%{T3}%{T-} "
+content = " "
+
+[module/separator-lower-right]
+inherit = module/separator
+; content = " %{T3}%{T-}"
+content = "  "
 
 ; vim:ft=dosini
