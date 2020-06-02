@@ -2,9 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package projectile
+  :demand t
+  :diminish
+  ;; :bind-keymap ("C-c p" . projectile-command-map)
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ;; (projectile-mode +1)
+  )
+
 (use-package ivy
-  :pin melpa
-  :diminish ivy-mode
+  ;; :pin melpa
+  :diminish
   :demand t
   :bind (:map ivy-minibuffer-map
               ("RET" . ivy-alt-done)
@@ -34,10 +43,23 @@
   )
 
 (use-package counsel
-  :after ivy
+  :demand t
+  :after (ivy)
   :diminish
+  :bind (:map counsel-find-file-map
+              ("RET" . ivy-alt-done)
+              ("M-RET" . ivy-immediate-done))
+
   :config
   (counsel-mode 1)
+  )
+
+(use-package counsel-projectile
+  :demand t
+  :after (counsel projectile)
+  :diminish
+  :config
+  (counsel-projectile-mode 1)
   )
 
 (use-package swiper
