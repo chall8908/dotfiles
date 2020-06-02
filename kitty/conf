@@ -2,6 +2,7 @@ shell /bin/bash --login
 
 font_family Fira Code
 font_size 10
+adjust_line_height 1
 
 # Lower refresh rate a bit.  We don't need our terminal to run at 100 FPS
 repaint_delay 15
