@@ -1,0 +1,2 @@
+# Ignore projectile bookmarks, they'll be different on every machine
+emacs/projectile-bookmarks.eld
