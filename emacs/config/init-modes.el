@@ -53,6 +53,9 @@
 (require 'web)
 (require 'emmet)
 
+;; Change default indentation in shell scripts to 2
+(setq sh-basic-offset 2)
+
 (provide 'init-modes)
 
 ;;; init-modes.el ends here
