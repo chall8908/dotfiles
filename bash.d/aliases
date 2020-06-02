@@ -16,6 +16,6 @@ alias lint="git grep -lz ://standardjs.com | xargs -0 standard --parser babel-es
 
 # Use bat over cat if it's installed
 # https://github.com/sharkdp/bat
-if which bat > /dev/null; then
-    alias cat='bat'
+if command -v batcat > /dev/null; then
+    alias cat='batcat'
 fi
