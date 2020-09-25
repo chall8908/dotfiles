@@ -18,6 +18,44 @@
 (global-unset-key (kbd "C-a"))
 (global-set-key (kbd "C-q") 'beginning-of-line)
 
+;; Line movement
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(defun transpose-character-left ()
+  "Move current character to the left."
+  (interactive)
+  (forward-char)
+  (transpose-chars -1)
+  (backward-char))
+
+(defun transpose-character-right ()
+  "Move current character to the left."
+  (interactive)
+  (forward-char)
+  (transpose-chars 1)
+  (backward-char))
+
+(global-unset-key (kbd "C-t"))
+
+(global-set-key (kbd "C-t C-<up>") 'move-line-up)
+(global-set-key (kbd "C-t C-<down>") 'move-line-down)
+(global-set-key (kbd "C-t C-<left>") 'transpose-character-left)
+(global-set-key (kbd "C-t C-<right>") 'transpose-character-right)
+(global-set-key (kbd "C-t C-t") 'transpose-chars)
+
 ;; window managment
 (global-unset-key (kbd "C-x <right>"))
 (global-unset-key (kbd "C-x <left>"))
