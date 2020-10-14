@@ -1,6 +1,6 @@
 * {
   background-color: transparent;
-  border-color: #2e343f;
+  border-color: hsl(224, 45%, 20%);
   text-color: #8ca0aa;
   spacing: 0;
 }
@@ -36,9 +36,9 @@ element {
   border: 1px;
   padding: 5% 2%;
   margin: 1%;
-  background-color: hsl(218, 12%, 18%);
+  background-color: hsl(224, 45%, 15%);
 }
 
 element selected {
-  background-color: hsl(218, 12%, 25%);
+  background-color: hsl(224, 45%, 20%);
 }
