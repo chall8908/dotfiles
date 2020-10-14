@@ -9,8 +9,7 @@
   history = ! git-pretty-history
   stats = ! git-quick-stats
   contributors = shortlog -s -n --no-merges
-  changes-in = "!f() { git diff \"$1^\" \"$1\"; }; f"
-  last-change = changes-in HEAD
+  raw-diff = "!f() { git --no-pager diff --color $@ | less -R; }; f"
 
   # Lists
   branches = branch -a
@@ -60,7 +59,7 @@
 
 [core]
   excludesfile = ~/.gitignore_global
-  pager = delta --dark --theme='base16' "--plus-color='#003500'"
+  pager = delta
 
 [branch]
   autosetuprebase = always
@@ -87,3 +86,17 @@
 
 [merge]
   conflictStyle = diff3
+
+[delta]
+  features = line-numbers
+  side-by-side = true
+  plus-color = "#003500"
+  syntax-theme = base16
+
+[delta "line-numbers"]
+  line-numbers = true
+  line-numbers-minus-style = "#BB0000"
+  line-numbers-plus-style = "#008800"
+  line-numbers-zero-style = "#666666"
+  line-numbers-left-style = "#444444"
+  line-numbers-right-style = "#444444"
