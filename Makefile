@@ -197,7 +197,7 @@ $(SERVICES):
 	${MAKE} -C $^
 	sudo ${MAKE} -C $^ install
 
-${HOME}/.rvm/wrappers/emacs: ${HOME}/.rvm/bin/rvm
+${HOME}/.rvm/wrappers/emacs/: ${HOME}/.rvm/bin/rvm
 	${HOME}/.rvm/bin/rvm install 2.6.0
 	${HOME}/.rvm/bin/rvm 2.6.0 gemset create emacs
 	${HOME}/.rvm/bin/rvm alias create --create emacs 2.6.0@emacs
