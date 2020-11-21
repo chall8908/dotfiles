@@ -18,4 +18,9 @@ alias lint="git grep -lz ://standardjs.com | xargs -0 standard --parser babel-es
 # https://github.com/sharkdp/bat
 if command -v batcat > /dev/null; then
     alias cat='batcat'
+elif command -v bat > /dev/null; then
+    alias cat='bat'
+else
+    echo 'unable to find bat'
 fi
+
