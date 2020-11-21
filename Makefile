@@ -19,6 +19,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.xprofile \
 	${DESTDIR}/.rvmrc \
 	${DESTDIR}/.bundle/config \
+	${DESTDIR}/.byobu/.tmux.conf \
 	${DESTDIR}/.byobu/keybindings.tmux \
 	${DESTDIR}/.config/kitty/kitty.conf \
 	${DESTDIR}/.config/i3/config \
