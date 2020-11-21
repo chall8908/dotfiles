@@ -19,6 +19,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.xprofile \
 	${DESTDIR}/.rvmrc \
 	${DESTDIR}/.bundle/config \
+	${DESTDIR}/.byobu/keybindings.tmux \
 	${DESTDIR}/.config/kitty/kitty.conf \
 	${DESTDIR}/.config/i3/config \
 	${DESTDIR}/.config/i3/lock.sh \
@@ -93,7 +94,7 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 	sudo chmod g+w /usr/local/src/libinput-gestures
 	git clone https://github.com/bulletmark/libinput-gestures.git /usr/local/src/libinput-gestures
 
-byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf
+byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings.tmux
 
 /usr/bin/byobu:
 	sudo apt install byobu
@@ -161,6 +162,7 @@ ${DESTDIR}/.xprofile: ${srcdir}/x/profile
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
 ${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
+${DESTDIR}/.byobu/keybindings.tmux: ${srcdir}/byobu/keybindings.tmux
 ${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
 ${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
 ${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
