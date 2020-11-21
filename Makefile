@@ -183,7 +183,7 @@ $(TARGETS):
 	mkdir -p ${@D}
 	ln -s $< $@
 
-${service_path}/emacs.service: ${srcdir}/systemd/emacs.service ${HOME}/.rvm/bin/rvm ${HOME}/.rvm/wrappers/emacs
+${service_path}/emacs.service: ${srcdir}/systemd/emacs.service ${HOME}/.rvm/bin/rvm ${HOME}/.rvm/wrappers/emacs/
 ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
 
 $(SERVICES):
