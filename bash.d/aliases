@@ -1,7 +1,7 @@
 # -*- sh -*-
 
 # Open emacs in the terminal
-emacs() {
+function emacs() {
     local file="${1:-$(pwd)}"
     file="$(readlink -f $file)" # Cannonicalize file name
     local perspective="$(basename $(git exec pwd) || 'default')"
