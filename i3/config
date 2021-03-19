@@ -236,9 +236,10 @@ bindsym $mod+r mode "resize"
 # Switch to windows that request focus
 focus_on_window_activation focus
 
-assign [class="(?i)evolution"] workspace $ws3
+assign [class="(?i)thunderbird"] workspace $ws3
 assign [class="(?i)ripcord"] workspace $ws6
 assign [class="(?i)hipchat"] workspace $ws8
+for_window [class="(?i)brave-browser" title="(?i)outlook"] move container to workspace $ws3
 for_window [instance="(?i)app.chime.aws"] move container to workspace $ws8
 for_window [class="(?i)spotify"] move container to workspace $ws9
 for_window [class="(?i)cisco"] floating enable
