@@ -51,6 +51,9 @@
   # Utilities
   exec = "!exec "
 
+[init]
+  defaultBranch = master
+
 [checkout]
   defaultRemote = origin
 
@@ -65,7 +68,7 @@
   autosetuprebase = always
 
 [pull]
-  rebase = true
+  rebase = preserve
   autoStash = true
 
 [push]
