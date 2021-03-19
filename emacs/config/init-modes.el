@@ -28,6 +28,9 @@
   :ensure tuareg
   :mode "\\.ml[ilyp]?$")
 
+(use-package mustache-mode
+  :mode "\\.mustache$")
+
 ;; Sql Mode
 (use-package sql-indent
   :pin gnu
