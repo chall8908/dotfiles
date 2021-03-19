@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        counsel-M-x
         electric-pair-delete-pair
         end-of-visual-line
         evilnc-comment-or-uncomment-lines
@@ -33,4 +34,5 @@
 (setq mc/cmds-to-run-once
       '(
         overwrite-mode
+        save-buffers-kill-terminal
         ))
