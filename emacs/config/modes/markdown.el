@@ -3,7 +3,9 @@
 ;;; Code:
 
 (use-package markdown-mode
-  :mode "\\.md\\'"
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
   :config
   (add-hook 'markdown-mode-hook 'visual-line-mode)
   )
