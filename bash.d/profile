@@ -61,4 +61,6 @@ source "$CONFIG_DIR/rust"
 # Special configuration for when we're in a git repo
 source "$CONFIG_DIR/git"
 
+source "$CONFIG_DIR/kubectl"
+
 [[ -s "$CONFIG_DIR/aliases" ]] && source "$CONFIG_DIR/aliases" # Source custom aliases

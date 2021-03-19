@@ -1,0 +1,6 @@
+# -*- sh -*-
+
+# Load kubectl autocomplete if kubectl is installed
+if command -v kubectl > /dev/null; then
+  source <(kubectl completion bash)
+fi
