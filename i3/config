@@ -10,19 +10,19 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Start compton
-exec_always --no-startup-id "killall -q compton; compton --daemon --config ~/.config/compton.conf"
+exec_always --no-startup-id "killall -q compton; /usr/bin/compton --daemon --config ~/.config/compton.conf"
 
 # Ensure monitor configuration is properly setup
-exec_always --no-startup-id autorandr --change
+exec_always --no-startup-id /usr/bin/autorandr --change
 
 # Run hsetroot
-exec_always --no-startup-id hsetroot -solid '#000516'
+exec_always --no-startup-id /usr/bin/hsetroot -solid '#000516'
 
 # configure XSS lock
-exec --no-startup-id xss-lock "$HOME/.config/i3/lock.sh" &
+exec --no-startup-id /usr/bin/xss-lock "$HOME/.config/i3/lock.sh" &
 
 # Start gesture manager
-exec --no-startup-id libinput-gestures-setup start
+exec --no-startup-id /usr/bin/libinput-gestures-setup start
 
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/start.sh
