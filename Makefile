@@ -42,9 +42,13 @@ SERVICES=${service_path}/emacs.service \
 
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu
+.PHONY: all install uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services
 
-all: $(TARGETS) $(SERVICES)
+all: targets services
+
+targets: $(TARGETS)
+
+services: $(SERVICES)
 
 install: all i3 emacs rvm nvm pyenv rustup spotify byobu /usr/bin/delta
 
