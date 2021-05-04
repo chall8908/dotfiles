@@ -50,7 +50,7 @@ targets: $(TARGETS)
 
 services: $(SERVICES)
 
-install: all emacs rvm nvm pyenv rustup spotify byobu /usr/bin/delta /usr/bin/fzf
+install: all emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf
 
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift
 
