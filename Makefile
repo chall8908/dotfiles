@@ -50,7 +50,7 @@ targets: $(TARGETS)
 
 services: $(SERVICES)
 
-install: all i3 emacs rvm nvm pyenv rustup spotify byobu /usr/bin/delta
+install: all emacs rvm nvm pyenv rustup spotify byobu /usr/bin/delta /usr/bin/fzf
 
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift
 
@@ -103,6 +103,9 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 
 /usr/bin/byobu:
 	sudo apt install byobu
+
+/usr/bin/fzf:
+	sudo apt install -y fzf
 
 /usr/bin/delta:
 	curl -L https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb > /tmp/git-delta_0.1.1_amd64.deb

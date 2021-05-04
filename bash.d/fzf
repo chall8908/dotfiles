@@ -13,4 +13,8 @@ if [ -d "$PERSONAL_DIR/fzf/bin" ]; then
     # Key bindings
     # ------------
     source "$PERSONAL_DIR/fzf/shell/key-bindings.bash"
+elif [ -d '/usr/share/doc/fzf' ]; then
+  # Probably installed from package manager
+  source /usr/share/doc/fzf/examples/completion.bash
+  source /usr/share/doc/fzf/examples/key-bindings.bash
 fi
