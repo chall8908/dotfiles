@@ -90,7 +90,7 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 
 /usr/bin/libinput-gestures: /usr/local/src/libinput-gestures/Makefile
 	sudo gpasswd -a $USER input
-	sudo apt install libinput-tools
+	sudo apt install --yes libinput-tools
 	$(MAKE) -C /usr/local/src/libinput-gestures
 
 /usr/local/src/libinput-gestures/Makefile:
@@ -102,10 +102,10 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings.tmux
 
 /usr/bin/byobu:
-	sudo apt install byobu
+	sudo apt install --yes byobu
 
 /usr/bin/fzf:
-	sudo apt install -y fzf
+	sudo apt install --yes fzf
 
 /usr/bin/delta:
 	curl -L https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb > /tmp/git-delta_0.1.1_amd64.deb
@@ -113,7 +113,7 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 	rm /tmp/git-delta_0.1.1_amd64.deb
 
 /usr/bin/redshift:
-	sudo apt install redshift
+	sudo apt install --yes redshift
 
 # TODO: Unistall for emacs
 emacs: /usr/local/bin/emacs
@@ -130,7 +130,7 @@ rustup: ${HOME}/.cargo/bin/rustup
 spotify: spotifyd ${DESTDIR}/bin/spotify-tui
 
 spotifyd: ${DESTDIR}/bin/spotifyd ${DESTDIR}/.config/systemd/user/spotifyd.service
-	sudo apt install -y libsecret-tools
+	sudo apt install --yes libsecret-tools
 	systemctl --user enable spotifyd.service
 
 # Cleanup
@@ -214,7 +214,7 @@ $(SERVICES):
 
 /usr/share/rvm/bin/rvm:
 	sudo apt-add-repository -y ppa:rael-gc/rvm
-	sudo apt-get install -y rvm
+	sudo apt-get install --yes rvm
 
 ${HOME}/.nvm/nvm.sh:
 	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
