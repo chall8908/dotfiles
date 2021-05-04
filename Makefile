@@ -234,7 +234,7 @@ ${DESTDIR}/bin/spotifyd: /tmp/spotifyd-0.2.19
 	cd $<; cargo build --release --features pulseaudio_backend,dbus_keyring,dbus_mpris
 	cp $</target/release/spotifyd $@
 
-${DESTDIR}/.config/systemd/user/spotifyd.service: /tmp/spotifyd-0.2.19
+${service_path}/spotifyd.service: /tmp/spotifyd-0.2.19
 	mkdir -p ${@D}
 	sed -e "s|/usr/bin/spotifyd|${DESTDIR}/bin/spotifyd|" $</contrib/spotifyd.service > $@
 
