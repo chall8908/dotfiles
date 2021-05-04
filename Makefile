@@ -110,9 +110,9 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 	sudo apt install --yes fzf
 
 /usr/bin/delta:
-	curl -L https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb > /tmp/git-delta_0.1.1_amd64.deb
-	sudo dpkg -i /tmp/git-delta_0.1.1_amd64.deb
-	rm /tmp/git-delta_0.1.1_amd64.deb
+	curl -L https://github.com/dandavison/delta/releases/download/0.7.1/git-delta_0.7.1_amd64.deb > /tmp/git-delta_0.7.1_amd64.deb
+	sudo dpkg -i /tmp/git-delta_0.7.1_amd64.deb
+	rm /tmp/git-delta_0.7.1_amd64.deb
 
 /usr/bin/redshift:
 	sudo apt install --yes redshift
