@@ -7,6 +7,8 @@ DESTDIR = ${HOME}
 # Set srcdir based on our config dir
 srcdir = ${abspath .}
 
+uname_m = $(shell uname -m)
+
 # clear out suffixes; we don't need them anyway
 .SUFFIXES:
 
@@ -109,10 +111,15 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 /usr/bin/fzf:
 	sudo apt install --yes fzf
 
-/usr/bin/delta:
-	curl -L https://github.com/dandavison/delta/releases/download/0.7.1/git-delta_0.7.1_amd64.deb > /tmp/git-delta_0.7.1_amd64.deb
-	sudo dpkg -i /tmp/git-delta_0.7.1_amd64.deb
-	rm /tmp/git-delta_0.7.1_amd64.deb
+DELTA_ARCH.x86_64 = amd64
+DELTA_ARCH.aarch64 = arm64
+
+/tmp/git-delta-0.7.1.deb:
+	curl -L https://github.com/dandavison/delta/releases/download/0.7.1/git-delta_0.7.1_$(DELTA_ARCH.$(uname_m)).deb > $@
+
+/usr/bin/delta: /tmp/git-delta-0.7.1.deb
+	sudo dpkg -i /tmp/git-delta_0.7.1.deb
+	rm /tmp/git-delta_0.7.1.deb
 
 /usr/bin/redshift:
 	sudo apt install --yes redshift
