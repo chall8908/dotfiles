@@ -201,7 +201,7 @@ $(SERVICES):
 	systemctl --user start "$(notdir $<)"
 
 /tmp/emacs-26.3:
-	curl -L 'https://mirror.clarkson.edu/gnu/emacs/emacs-26.3.tar.xz' | tar -C '/tmp' -xa
+	curl -L 'https://ftpmirror.gnu.org/emacs/emacs-26.3.tar.xz' | tar -C '/tmp' -xJ
 
 /usr/local/bin/emacs: /tmp/emacs-26.3
 	sudo apt build-dep -y emacs
