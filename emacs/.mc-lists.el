@@ -33,6 +33,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        ivy-backward-delete-char
         overwrite-mode
         save-buffers-kill-terminal
         ))
