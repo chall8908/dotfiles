@@ -19,6 +19,7 @@
   (setq persp-kill-foreign-buffer-behaviour persp-kill-foreign-buffer-behaviour-was))
 
 (use-package midnight
+  :after (persp-mode)
   :config
   (midnight-delay-set 'midnight-delay "1:00am")
 
