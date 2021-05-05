@@ -5,6 +5,14 @@
 ;; This has to be here - commented out, since it's called elsewhere - or package bitches and adds it back
 ;; (package-initialize)
 
+(setq debug-on-error t)
+
+;; These are useful for a few things.  Primarily differences between systems.
+(defconst IS-MAC     (eq system-type 'darwin))
+(defconst IS-LINUX   (eq system-type 'gnu/linux))
+(defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
+(defconst IS-WSL     (string-match "-[Mm]icrosoft" operating-system-release))
+
 (defun expand-directory-name (name &optional root)
   "Expand direcory NAME to an absolute system path.
 ROOT is the path to start in if NAME is relative."

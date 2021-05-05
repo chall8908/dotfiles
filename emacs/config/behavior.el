@@ -68,8 +68,10 @@
 (add-hook 'isearch-mode-end-hook 'custom-goto-match-beginning)
 
 (cond
- ((string-equal system-type "darwin")    (require 'mac-behavior))
- ((string-equal system-type "gnu/linux") (require 'linux-behavior))
+ (IS-MAC     (require 'mac-behavior))
+ (IS-WINDOWS (require 'windows-behavior))
+ (IS-WSL     (require 'wsl-behavior))
+ (IS-LINUX   (require 'linux-behavior))
  )
 
 (provide 'behavior)
