@@ -198,7 +198,7 @@ $(REMOTES): init
 
 $(TARGETS):
 	mkdir -p ${@D}
-	ln -s $< $@
+	ln -sf $< $@
 
 ${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs
 ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
