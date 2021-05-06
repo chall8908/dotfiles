@@ -211,7 +211,10 @@ $(SERVICES):
 	curl -L 'https://ftpmirror.gnu.org/emacs/emacs-26.3.tar.xz' | tar -C '/tmp' -xJ
 
 /usr/local/bin/emacs: /tmp/emacs-26.3
-	sudo apt build-dep -y emacs
+	sudo sed -i'' 's/# deb-src/deb-src/' /etc/apt/sources.list
+	sudo apt update
+	sudo apt build-dep --yes emacs
+	sudo apt install --yes libgnutls28-dev
 	cd $^; ./configure
 	${MAKE} -C $^
 	sudo ${MAKE} -C $^ install
