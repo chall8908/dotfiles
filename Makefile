@@ -224,6 +224,7 @@ $(SERVICES):
 /usr/share/rvm/bin/rvm:
 	sudo apt-add-repository -y ppa:rael-gc/rvm
 	sudo apt-get install --yes rvm
+	sudo useradd ${USER} rvm
 
 ${HOME}/.nvm/nvm.sh:
 	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
