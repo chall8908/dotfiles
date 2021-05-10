@@ -176,7 +176,11 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 	sudo apt install --yes byobu
 
 /usr/bin/fzf:
+ifeq ($(shell apt-cache show fzf; $?), 0)
 	sudo apt install --yes fzf
+else
+	curl -L https://github.com/junegunn/fzf/releases/download/0.27.0/fzf-0.27.0-${uname_s}_$(COMMON_ARCH.$(uname_m)).tar.gz | sudo tar -C /usr/bin  -xz
+endif
 
 DELTA_VERSION = 0.7.1
 
