@@ -69,8 +69,6 @@ REMOTES=${srcdir}/bash.d/bash-git-prompt
 
 .PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services
 
-all: targets services
-
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile ${srcdir}/bash.d/bash-git-prompt
@@ -118,7 +116,8 @@ targets: $(TARGETS)
 
 services: $(SERVICES)
 
-install: all emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf
+# Install things used by terminal-only applications
+install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf
 
 # Install additional GUI applications for the DE
 install-desktop: install spotify i3
