@@ -1,3 +1,14 @@
+######################################
+#    General installation Makefile   #
+######################################
+# After working on this for a while, I begin to understand just how easy these
+# things can become so dense that they're basically impossible for all but the
+# original author (or those _very_ well versed in Makefiles) to understand.
+#
+# I've done my best to document this file, but some things here stretch my own
+# understanding to the point where it's difficult for me to describe them.
+######################################
+
 # Ensure a consistent shell
 SHELL = /bin/sh
 
@@ -19,6 +30,7 @@ COMMON_ARCH.aarch64 = arm64
 # clear out suffixes; we don't need them anyway
 .SUFFIXES:
 
+# Locations of symlinks.  Their source files are below
 TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
 	${DESTDIR}/.gitconfig \
@@ -44,16 +56,63 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/compton.conf \
 	${DESTDIR}/.rvm/hooks/after_cd_nvm
 
+# User service path for systemd
+# Probably not super portable
 service_path = ${DESTDIR}/.config/systemd/user
 
+# User services that we want to launch
 SERVICES=${service_path}/emacs.service \
 	${service_path}/ssh-agent.service
 
+# These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
 .PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services
 
 all: targets services
+
+# Source files for our symlinks
+${DESTDIR}/.emacs.d: ${srcdir}/emacs
+${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile ${srcdir}/bash.d/bash-git-prompt
+${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
+${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
+${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
+${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
+${DESTDIR}/.xprofile: ${srcdir}/x/profile
+${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
+${DESTDIR}/.bundle/config: ${srcdir}/bundler
+${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
+${DESTDIR}/.byobu/keybindings.tmux: ${srcdir}/byobu/keybindings.tmux
+${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
+${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
+${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
+${DESTDIR}/.config/i3/lock.png: ${srcdir}/i3/lock.png
+${DESTDIR}/.config/polybar/config: ${srcdir}/polybar/config
+${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
+${DESTDIR}/.config/polybar/spotify-status: ${srcdir}/polybar/spotify-status
+${DESTDIR}/.config/rofi/config: ${srcdir}/rofi/config
+${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
+${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
+${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
+${DESTDIR}/.config/compton.conf: ${srcdir}/i3/compton.conf
+${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
+
+# Service links and their dependencies
+${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs /usr/local/bin/emacs
+${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
+
+$(REMOTES): init
+
+$(TARGETS):
+	mkdir -p ${@D}
+	ln -sf $< $@
+
+$(SERVICES):
+	systemctl --user enable $<
+	systemctl --user start "$(notdir $<)"
+
+init:
+	git submodule update --init --recursive
 
 targets: $(TARGETS)
 
@@ -61,8 +120,10 @@ services: $(SERVICES)
 
 install: all emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf
 
+# Install additional GUI applications for the DE
 install-desktop: install spotify i3
 
+# Stuff used by i3 and my extensions to it
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift
 
 /usr/bin/i3-msg:
@@ -179,47 +240,6 @@ clean:
 # Utility targets
 xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
 	xrdb -merge -I${HOME} $^
-
-init:
-	git submodule update --init --recursive
-
-${DESTDIR}/.emacs.d: ${srcdir}/emacs
-${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile
-${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
-${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
-${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
-${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
-${DESTDIR}/.xprofile: ${srcdir}/x/profile
-${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
-${DESTDIR}/.bundle/config: ${srcdir}/bundler
-${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
-${DESTDIR}/.byobu/keybindings.tmux: ${srcdir}/byobu/keybindings.tmux
-${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
-${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
-${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
-${DESTDIR}/.config/i3/lock.png: ${srcdir}/i3/lock.png
-${DESTDIR}/.config/polybar/config: ${srcdir}/polybar/config
-${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
-${DESTDIR}/.config/polybar/spotify-status: ${srcdir}/polybar/spotify-status
-${DESTDIR}/.config/rofi/config: ${srcdir}/rofi/config
-${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
-${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
-${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
-${DESTDIR}/.config/compton.conf: ${srcdir}/i3/compton.conf
-${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
-
-$(REMOTES): init
-
-$(TARGETS):
-	mkdir -p ${@D}
-	ln -sf $< $@
-
-${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs
-${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
-
-$(SERVICES):
-	systemctl --user enable $<
-	systemctl --user start "$(notdir $<)"
 
 /tmp/emacs-26.3:
 	curl -L 'https://ftpmirror.gnu.org/emacs/emacs-26.3.tar.xz' | tar -C '/tmp' -xJ
