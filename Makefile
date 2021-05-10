@@ -216,6 +216,7 @@ nvm: ${DESTDIR}/.nvm/nvm.sh
 pyenv: ${DESTDIR}/.pyenv/bin/pyenv
 
 rustup: ${HOME}/.cargo/bin/rustup
+	mkdir -p ${HOME}/.local/share/bash-completion/completions/
 	${HOME}/.cargo/bin/rustup completions bash > ${HOME}/.local/share/bash-completion/completions/rustup
 
 spotify: spotifyd ${DESTDIR}/bin/spotify-tui
