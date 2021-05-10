@@ -117,7 +117,7 @@ targets: $(TARGETS)
 services: $(SERVICES)
 
 # Install things used by terminal-only applications
-install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf
+install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
 # Install additional GUI applications for the DE
 install-desktop: install spotify i3
@@ -174,6 +174,10 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 
 /usr/bin/byobu:
 	sudo apt install --yes byobu
+
+/usr/bin/bat:
+	curl -L https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_$(COMMON_ARCH.$(uname_m)).deb > /tmp/bat_0.18.0.deb
+	sudo dpkg -i /tmp/bat_0.18.0.deb
 
 /usr/bin/fzf:
 ifeq ($(shell apt-cache show fzf; $?), 0)
