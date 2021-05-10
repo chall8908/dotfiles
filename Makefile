@@ -7,7 +7,14 @@ DESTDIR = ${HOME}
 # Set srcdir based on our config dir
 srcdir = ${abspath .}
 
+# Grab some architecture information for use elsewhere.
+# Mostly used when installing stuff from source for some multi-arch support
+uname_s = $(shell uname -s | tr '[:upper:]' '[:lower:]')
 uname_m = $(shell uname -m)
+
+# Converts the uname versions of these things to their "common" names
+COMMON_ARCH.x86_64 = amd64
+COMMON_ARCH.aarch64 = arm64
 
 # clear out suffixes; we don't need them anyway
 .SUFFIXES:
@@ -111,15 +118,22 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 /usr/bin/fzf:
 	sudo apt install --yes fzf
 
-DELTA_ARCH.x86_64 = amd64
-DELTA_ARCH.aarch64 = arm64
+DELTA_VERSION = 0.7.1
 
-/tmp/git-delta-0.7.1.deb:
-	curl -L https://github.com/dandavison/delta/releases/download/0.7.1/git-delta_0.7.1_$(DELTA_ARCH.$(uname_m)).deb > $@
+/usr/bin/delta:
+ifneq ($(shell apt-cache show libgcc-s1), 0)
+# These dependencies aren't in the repos for Ubuntu's < 19.10
+	curl -L http://ftp.us.debian.org/debian/pool/main/g/gcc-10/gcc-10-base_10.2.1-6_amd64.deb > /tmp/gcc-10-base_10.2.1-6_amd64.deb
+	curl -L http://ftp.us.debian.org/debian/pool/main/g/gcc-10/libgcc-s1_10.2.1-6_amd64.deb > /tmp/libgcc-s1_10.2.1-6_amd64.deb
+	sudo dpkg -i /tmp/gcc-10-base_10.2.1-6_amd64.deb
+	sudo dpkg -i /tmp/libgcc-s1_10.2.1-6_amd64.deb
+	rm /tmp/gcc-10-base_10.2.1-6_amd64.deb /tmp/libgcc-s1_10.2.1-6_amd64.deb
+endif
 
-/usr/bin/delta: /tmp/git-delta-0.7.1.deb
-	sudo dpkg -i /tmp/git-delta_0.7.1.deb
-	rm /tmp/git-delta_0.7.1.deb
+	curl -L curl -L https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta_${DELTA_VERSION}_$(COMMON_ARCH.$(uname_m)).deb > /tmp/git-delta-${DELTA_VERSION}.deb
+	sudo dpkg -i /tmp/git-delta-${DELTA_VERSION}.deb
+
+	rm /tmp/git-delta-${DELTA_VERSION}.deb
 
 /usr/bin/redshift:
 	sudo apt install --yes redshift
