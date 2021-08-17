@@ -79,7 +79,7 @@ content-background = ${colors.background}
 content = ⏻
 content-padding = 1
 
-click-left = power_menu
+click-left = ~/bin/power_menu
 
 [module/spotify]
 type = custom/script

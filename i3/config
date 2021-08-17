@@ -203,8 +203,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # show power menu
-bindsym $mod+Ctrl+F12 exec --no-startup-id power_menu
-bindsym XF86PowerOff exec --no-startup-id power_menu
+bindsym $mod+Ctrl+F12 exec --no-startup-id ~/bin/power_menu
+bindsym XF86PowerOff exec --no-startup-id ~/bin/power_menu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
