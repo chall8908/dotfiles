@@ -1,5 +1,6 @@
 ! Non-shit font
 *font: xft:firacode:size=9
+rofi.font: Fira Code 12
 
 ! Start as a login shell
 *loginShell: true
