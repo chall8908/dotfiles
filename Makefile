@@ -123,7 +123,7 @@ install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/b
 install-desktop: install i3
 
 # Stuff used by i3 and my extensions to it
-i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift
+i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr
 
 /usr/bin/i3-msg:
 	sudo apt install --yes i3
@@ -136,6 +136,12 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 
 /usr/bin/rofi:
 	sudo apt install --yes rofi
+
+/usr/bin/kitty:
+	sudo apt install --yes kitty
+
+/usr/bin/autorandr:
+	sudo apt install --yes autorandr
 
 /usr/bin/compton: ${DESTDIR}/.config/compton.conf
 	sudo apt install --yes compton
@@ -151,6 +157,15 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 
 /usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
 	sudo ln -s /usr/local/src/splatmoji/splatmoji $@
+
+/usr/bin/scrot:
+	sudo apt install --yes scrot
+
+/usr/bin/polybar:
+	sudo mkdir /var/log/polybar
+	sudo chown root:${USER} /var/log/polybar
+	sudo chmod g+w /var/log/polybar
+	sudo apt instlal --yes polybar
 
 /usr/local/src/splatmoji/splatmoji:
 	sudo mkdir -p /usr/local/src/splatmoji
