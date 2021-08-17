@@ -147,13 +147,14 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 	sudo apt install --yes compton
 
 /usr/local/bin/i3-grid: /usr/local/src/i3-grid/i3-grid.py
-	ln -s ${srcdir}/bin/i3-grid $@
+	chmod +x ${srcdir}/bin/i3-grid
+	sudo ln -fs ${srcdir}/bin/i3-grid $@
 
 /usr/local/src/i3-grid/i3-grid.py:
 	sudo mkdir -p /usr/local/src/i3-grid
 	sudo chown root:chall /usr/local/src/i3-grid
 	sudo chmod g+w /usr/local/src/i3-grid
-	git clone git@github.com:lukeshimanuki/i3-grid.git /usr/local/src/i3-grid
+	git clone https://github.com/lukeshimanuki/i3-grid.git /usr/local/src/i3-grid
 
 /usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
 	sudo ln -s /usr/local/src/splatmoji/splatmoji $@
@@ -171,11 +172,11 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 	sudo mkdir -p /usr/local/src/splatmoji
 	sudo chown root:chall /usr/local/src/splatmoji
 	sudo chmod g+w /usr/local/src/splatmoji
-	git clone git@github.com:cspeterson/splatmoji.git /usr/local/src/splatmoji/
+	git clone https://github.com/cspeterson/splatmoji.git /usr/local/src/splatmoji/
 	sed -i'' -e 's/xsel_command.*/xsel_command=xclip -selection clipboard/' /usr/local/src/splatmoji/splatmoji.config
 
 /usr/bin/libinput-gestures: /usr/local/src/libinput-gestures/Makefile
-	sudo gpasswd -a $USER input
+	sudo gpasswd -a ${USER} input
 	sudo apt install --yes libinput-tools
 	$(MAKE) -C /usr/local/src/libinput-gestures
 
@@ -284,7 +285,7 @@ xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
 /usr/share/rvm/bin/rvm:
 	sudo apt-add-repository -y ppa:rael-gc/rvm
 	sudo apt-get install --yes rvm
-	sudo useradd ${USER} rvm
+	sudo adduser ${USER} rvm
 
 ${HOME}/.nvm/nvm.sh:
 	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
@@ -296,7 +297,7 @@ ${HOME}/.cargo/bin/rustup:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 /tmp/spotifyd-0.2.19:
-	curl -L 'https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz' | tar -C '/tmp' -xa
+	curl -L 'https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz' | tar -C '/tmp' -xz
 
 ${DESTDIR}/bin/spotifyd: /tmp/spotifyd-0.2.19
 	cd $<; cargo build --release --features pulseaudio_backend,dbus_keyring,dbus_mpris
