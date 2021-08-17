@@ -1,1 +1,2 @@
 setxkbmap -option ctrl:nocaps
+xset s noblank s 600 600 -dpms

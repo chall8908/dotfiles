@@ -21,6 +21,9 @@ exec_always --no-startup-id /usr/bin/hsetroot -solid '#000516'
 # configure XSS lock
 exec --no-startup-id /usr/bin/xss-lock "$HOME/.config/i3/lock.sh" &
 
+# Source xprofile just in case
+exec --no-startup-id ~/.xprofile
+
 # Start gesture manager
 exec --no-startup-id /usr/bin/libinput-gestures-setup start
 
