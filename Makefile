@@ -205,19 +205,7 @@ endif
 DELTA_VERSION = 0.7.1
 
 /usr/bin/delta:
-ifneq ($(shell apt-cache show libgcc-s1), 0)
-# These dependencies aren't in the repos for Ubuntu's < 19.10
-	curl -L http://ftp.us.debian.org/debian/pool/main/g/gcc-10/gcc-10-base_10.2.1-6_amd64.deb > /tmp/gcc-10-base_10.2.1-6_amd64.deb
-	curl -L http://ftp.us.debian.org/debian/pool/main/g/gcc-10/libgcc-s1_10.2.1-6_amd64.deb > /tmp/libgcc-s1_10.2.1-6_amd64.deb
-	sudo dpkg -i /tmp/gcc-10-base_10.2.1-6_amd64.deb
-	sudo dpkg -i /tmp/libgcc-s1_10.2.1-6_amd64.deb
-	rm /tmp/gcc-10-base_10.2.1-6_amd64.deb /tmp/libgcc-s1_10.2.1-6_amd64.deb
-endif
-
-	curl -L curl -L https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta_${DELTA_VERSION}_$(COMMON_ARCH.$(uname_m)).deb > /tmp/git-delta-${DELTA_VERSION}.deb
-	sudo dpkg -i /tmp/git-delta-${DELTA_VERSION}.deb
-
-	rm /tmp/git-delta-${DELTA_VERSION}.deb
+	sudo apt install --yes delta
 
 /usr/bin/redshift:
 	sudo apt install --yes redshift
