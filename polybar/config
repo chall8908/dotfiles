@@ -55,7 +55,7 @@ font-3 = Powerline Extra Symbols:size=17;3
 
 modules-left = power i3 separator-lower-left separator-upper-right xwindow separator-lower-left
 modules-center = separator-upper-right date separator-upper-left
-modules-right = separator-lower-right spotify weather pulseaudio memory cpu wlan battery temperature separator-upper-left
+modules-right = separator-lower-right spotify weather pulseaudio memory cpu wlan mouse-battery battery temperature separator-upper-left
 
 tray-position = right
 tray-padding = 2
@@ -359,6 +359,16 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/mouse-battery]
+type = custom/script
+interval = 600
+format = <label>%
+format-prefix = "🖱️ "
+format-padding = 1
+format-background = ${colors.background}
+format-underline = #ffb52a
+exec = cat /sys/class/power_supply/hid-d0:a6:37:f3:1c:01-battery/capacity
 
 [module/battery]
 type = internal/battery
