@@ -162,11 +162,17 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 /usr/bin/scrot:
 	sudo apt install --yes scrot
 
-/usr/bin/polybar:
+/usr/bin/polybar: ${HOME}/.local/share/fonts/PowerlineExtraSymbols.otf /var/log/polybar
+	sudo apt install --yes polybar
+
+/var/log/polybar:
 	sudo mkdir /var/log/polybar
 	sudo chown root:${USER} /var/log/polybar
 	sudo chmod g+w /var/log/polybar
-	sudo apt instlal --yes polybar
+
+${HOME}/.local/share/fonts/PowerlineExtraSymbols.otf:
+	mkdir -p ${@D}
+	curl -fLo $@ https://github.com/ryanoasis/powerline-extra-symbols/blob/master/PowerlineExtraSymbols.otf?raw=true
 
 /usr/local/src/splatmoji/splatmoji:
 	sudo mkdir -p /usr/local/src/splatmoji
