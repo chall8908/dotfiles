@@ -4,6 +4,6 @@
 killall polybar
 
 # Launch example bar
-polybar example &>> /var/log/polybar/example.log &
+polybar example &>> /var/log/polybar/example.log & disown
 
 echo "Bars launched..."
