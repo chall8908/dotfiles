@@ -25,7 +25,7 @@ exec --no-startup-id /usr/bin/xss-lock "$HOME/.config/i3/lock.sh" &
 exec --no-startup-id ~/.xprofile
 
 # Start gesture manager
-exec --no-startup-id /usr/bin/libinput-gestures-setup start
+# exec --no-startup-id /usr/bin/libinput-gestures-setup start
 
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/start.sh
