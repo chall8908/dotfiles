@@ -51,6 +51,8 @@ clipboard_control write-primary write-clipboard read-clipboard
 
 map kitty_mod+c copy_to_clipboard
 map kitty_mod+v paste_from_clipboard
+map super+c copy_to_clipboard
+map super+v paste_from_clipboard
 
 map kitty_mod+equal change_font_size current +2.0
 map kitty_mod+minus change_font_size current -2.0
