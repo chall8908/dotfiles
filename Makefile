@@ -120,7 +120,7 @@ services: $(SERVICES)
 install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
 # Install additional GUI applications for the DE
-install-desktop: install spotify i3
+install-desktop: install i3
 
 # Stuff used by i3 and my extensions to it
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift
