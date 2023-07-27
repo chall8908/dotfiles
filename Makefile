@@ -56,6 +56,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/compton.conf \
 	${DESTDIR}/.rvm/hooks/after_cd_nvm
 
+SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf
+
 # User service path for systemd
 # Probably not super portable
 service_path = ${DESTDIR}/.config/systemd/user
@@ -95,6 +97,9 @@ ${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-
 ${DESTDIR}/.config/compton.conf: ${srcdir}/i3/compton.conf
 ${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
 
+# System level symlinks
+/etc/X11/xorg.conf.d/touchpad.conf: ${srcdir}/x/touchpad.conf
+
 # Service links and their dependencies
 ${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs /usr/local/bin/emacs
 ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
@@ -105,6 +110,10 @@ $(TARGETS):
 	mkdir -p ${@D}
 	ln -sf $< $@
 
+$(SYSTEM_TARGETS):
+	sudo mkdir -p ${@D}
+	sudo ln -sf $< $@
+
 $(SERVICES):
 	systemctl --user enable $<
 	systemctl --user start "$(notdir $<)"
@@ -112,7 +121,7 @@ $(SERVICES):
 init:
 	git submodule update --init --recursive
 
-targets: $(TARGETS)
+targets: $(TARGETS) $(SYSTEM_TARGETS)
 
 services: $(SERVICES)
 
