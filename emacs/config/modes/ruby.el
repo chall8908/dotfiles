@@ -26,7 +26,6 @@
 (use-package rspec-mode
   :config
   (setq rspec-use-rvm t)
-  (rspec-install-snippets)
   )
 
 (provide 'ruby)

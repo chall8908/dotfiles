@@ -49,8 +49,6 @@ ROOT is the path to start in if NAME is relative."
 (use-package evil-nerd-commenter)
 
 (require 'init-git)
-(require 'init-ac)
-(require 'init-yasnippet)
 (require 'init-company)
 (require 'init-flycheck)
 (require 'init-ivy)
