@@ -8,7 +8,7 @@
   (global-company-mode 1)
 
   (setq company-echo-delay 0
-        company-idle-delay 0.2
+        company-idle-delay 0
         company-show-numbers t
         company-minimum-prefix-length 2
         company-tooltip-align-annotations t
@@ -35,12 +35,8 @@
   :pin melpa
   :after company
   :init
-  (setq company-tabnine-no-continue t))
-
-(add-hook 'emacs-startup-hook
-          (lambda (&rest _)
-            (unless config-switch-disable-tabnine
-              (add-to-list 'company-backends #'company-tabnine))))
+  (setq company-tabnine-no-continue t)
+  (add-to-list 'company-backends #'company-tabnine))
 
 (provide 'init-company)
 
