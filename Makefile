@@ -18,14 +18,8 @@ DESTDIR = ${HOME}
 # Set srcdir based on our config dir
 srcdir = ${abspath .}
 
-# Grab some architecture information for use elsewhere.
-# Mostly used when installing stuff from source for some multi-arch support
-uname_s = $(shell uname -s | tr '[:upper:]' '[:lower:]')
-uname_m = $(shell uname -m)
-
-# Converts the uname versions of these things to their "common" names
-COMMON_ARCH.x86_64 = amd64
-COMMON_ARCH.aarch64 = arm64
+ARCH = $(shell dpkg --print-architecture)
+CODENAME = $(shell lsb_release -c | awk '{ print $$2 }')
 
 # clear out suffixes; we don't need them anyway
 .SUFFIXES:
