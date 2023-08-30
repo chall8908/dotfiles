@@ -228,7 +228,7 @@ DELTA_VERSION = 0.7.1
 	sudo apt install --yes redshift
 
 # TODO: Unistall for emacs
-emacs: /usr/local/bin/emacs
+emacs: /usr/bin/emacs /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs
 
 rvm: /usr/share/rvm/bin/rvm
 
@@ -260,32 +260,20 @@ uninstall: clean
 	sudo apt remove -y libsecret-tools
 	sudo apt autoremove -y
 
-# Cleans up installation artifacts
-# NOTE: This will trigger a recompile of spotifyd if make is run again!!!
-clean:
-	rm -r /tmp/emacs-26.3
-	rm -r /tmp/spotifyd-0.2.19
-
 # Utility targets
 xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
 	xrdb -merge -I${HOME} $^
 
-/tmp/emacs-26.3:
-	curl -L 'https://ftpmirror.gnu.org/emacs/emacs-26.3.tar.xz' | tar -C '/tmp' -xJ
-
-/usr/local/bin/emacs: /tmp/emacs-26.3
-	sudo sed -i'' 's/# deb-src/deb-src/' /etc/apt/sources.list
-	sudo apt update
-	sudo apt build-dep --yes emacs
-	sudo apt install --yes libgnutls28-dev
-	cd $^; ./configure
-	${MAKE} -C $^
-	sudo ${MAKE} -C $^ install
+/usr/bin/emacs:
+	sudo apt install emacs
 
 /usr/share/rvm/wrappers/emacs: /usr/share/rvm/bin/rvm
-	rvm install 2.6.0
-	rvm 2.6.0 gemset create emacs
-	rvm alias create --create emacs 2.6.0@emacs
+	rvm install 3.2.2
+	rvm 3.2.2 gemset create emacs
+	rvm alias create --create emacs 3.2.2@emacs
+
+${HOME}/.nvm/alias/emacs: ${HOME}/.nvm/nvm.sh
+  /bin/bash -lc "source ~/.nvm/nvm.sh; nvm install lts/hydrogen; nvm alias emacs lts/hydrogen"
 
 /usr/share/rvm/bin/rvm:
 	sudo apt-add-repository -y ppa:rael-gc/rvm
