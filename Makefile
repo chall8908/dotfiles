@@ -288,18 +288,3 @@ ${HOME}/.pyenv/bin/pyenv:
 
 ${HOME}/.cargo/bin/rustup:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-/tmp/spotifyd-0.2.19:
-	curl -L 'https://github.com/Spotifyd/spotifyd/archive/v0.2.19.tar.gz' | tar -C '/tmp' -xz
-
-${DESTDIR}/bin/spotifyd: /tmp/spotifyd-0.2.19
-	cd $<; cargo build --release --features pulseaudio_backend,dbus_keyring,dbus_mpris
-	cp $</target/release/spotifyd $@
-
-${service_path}/spotifyd.service: /tmp/spotifyd-0.2.19
-	mkdir -p ${@D}
-	sed -e "s|/usr/bin/spotifyd|${DESTDIR}/bin/spotifyd|" $</contrib/spotifyd.service > $@
-
-${DESTDIR}/bin/spotify-tui:
-	curl -L https://github.com/Rigellute/spotify-tui/releases/download/v0.7.5/spotify-tui-linux.tar.gz | tar -C ${@D} -xa
-	mv ${@D}/spt $<
