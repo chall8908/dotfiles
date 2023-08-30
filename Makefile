@@ -54,7 +54,6 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/rofi/slate.rasi \
 	${DESTDIR}/.config/rofi/power_menu.rasi \
 	${DESTDIR}/.config/libinput-gestures.conf \
-	${DESTDIR}/.config/compton.conf \
 	${DESTDIR}/.rvm/hooks/after_cd_nvm
 
 SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf
@@ -96,7 +95,6 @@ ${DESTDIR}/.config/rofi/config.rasi: ${srcdir}/rofi/config
 ${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
 ${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
 ${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
-${DESTDIR}/.config/compton.conf: ${srcdir}/i3/compton.conf
 ${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
 
 # System level symlinks
@@ -134,7 +132,7 @@ install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/b
 install-desktop: install i3
 
 # Stuff used by i3 and my extensions to it
-i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr
+i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr
 
 /usr/bin/i3-msg:
 	sudo apt install --yes i3
@@ -154,8 +152,6 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/bin/compton /u
 /usr/bin/autorandr:
 	sudo apt install --yes autorandr
 
-/usr/bin/compton: ${DESTDIR}/.config/compton.conf
-	sudo apt install --yes compton
 
 /usr/local/bin/i3-grid: /usr/local/src/i3-grid/i3-grid.py
 	chmod +x ${srcdir}/bin/i3-grid

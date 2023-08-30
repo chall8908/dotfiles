@@ -9,9 +9,6 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-# Start compton
-exec_always --no-startup-id "killall -q compton; /usr/bin/compton --daemon --config ~/.config/compton.conf"
-
 # Ensure monitor configuration is properly setup
 exec_always --no-startup-id /usr/bin/autorandr --change
 
