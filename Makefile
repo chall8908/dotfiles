@@ -201,6 +201,7 @@ i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /us
 
 /usr/bin/kitty:
 	sudo apt install --yes kitty
+	sudo update-alternatives --set x-terminal-emulator $@
 
 /usr/bin/autorandr:
 	sudo apt install --yes autorandr
