@@ -5,8 +5,6 @@
 ;; This has to be here - commented out, since it's called elsewhere - or package bitches and adds it back
 ;; (package-initialize)
 
-(setq debug-on-error t)
-
 ;; These are useful for a few things.  Primarily differences between systems.
 (defconst IS-MAC     (eq system-type 'darwin))
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
