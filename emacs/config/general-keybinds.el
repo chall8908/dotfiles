@@ -11,6 +11,8 @@
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
 (global-set-key (kbd "C-d") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-d") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c e l") 'mc/edit-lines)
+
 (global-set-key (kbd "s-[") 'hs-hide-block)
 (global-set-key (kbd "s-]") 'hs-show-block)
 (global-set-key (kbd "C-j") 'emmet-expand-line)
@@ -83,6 +85,12 @@
   (find-file user-init-file)
   )
 (global-set-key (kbd "C-b i") 'open-init)
+
+(defun open-scratch ()
+  "Open the scratch buffer"
+  (interactive)
+  (switch-to-buffer "*scratch*"))
+(global-set-key (kbd "C-b s") 'open-scratch)
 
 (provide 'general-keybinds)
 ;;; general-keybinds.el ends here
