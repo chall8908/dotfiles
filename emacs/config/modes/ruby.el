@@ -15,9 +15,6 @@
   (remove-hook 'enh-ruby-mode-hook 'erm-define-faces)
   )
 
-;; (add-to-list 'auto-mode-alist
-;;              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|plan\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode))
-
 (use-package ruby-electric
   :diminish
   :hook (enh-ruby-mode . ruby-electric-mode)
@@ -27,6 +24,8 @@
   :config
   (setq rspec-use-rvm t)
   )
+
+(use-package rbs-mode)
 
 (provide 'ruby)
 ;;; ruby.el ends here
