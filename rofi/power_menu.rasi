@@ -1,3 +1,4 @@
+/*-*- mode: css; -*-*/
 * {
   background-color: transparent;
   border-color: hsl(224, 45%, 20%);
@@ -6,20 +7,21 @@
 }
 
 window {
+  location: center;
+  anchor: center;
+  fullscreen: true;
   font: "Font Awesome 5 Pro 30";
-  height: 100%;
-  width: 100%;
   background-color: rgba(0,0,0,0.5);
 
   children: [ horibox ];
 }
 
 horibox {
- width: 512px;
- height: 200px;
- margin: 35%;
+  width: 30%;
+  height: 200px;
+  margin: 35%;
 
- children: [ listview ];
+  children: [ listview ];
 }
 
 entry {
@@ -30,12 +32,15 @@ listview {
   cycle: false;
   scrollbar: false;
   layout: horizontal;
+  columns: 4;
+  fixed-height: 1;
+  lines: 4;
+  spacing: 1%;
 }
 
 element {
   border: 1px;
   padding: 5% 2%;
-  margin: 1%;
   background-color: hsl(224, 45%, 15%);
 }
 

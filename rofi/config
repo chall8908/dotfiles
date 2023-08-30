@@ -1,1 +1,1 @@
-rofi.theme: ~/.config/rofi/slate.rasi
+@theme "slate"
