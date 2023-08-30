@@ -153,12 +153,12 @@ i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /us
 	sudo apt install --yes /tmp/session-manager-plugin.deb
 	rm /tmp/session-manager-plugin.deb
 
+/etc/apt/keyrings/kubernetes-apt-keyring.gpg:
+	curl -fsSL 'https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key' | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
 /etc/apt/sources.list.d/kubernetes.list: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 	sudo apt update
-
-/etc/apt/keyrings/kubernetes-apt-keyring.gpg:
-	curl -fsSL 'https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key' | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
 /usr/bin/kubectl: /etc/apt/sources.list.d/kubernetes.list
 	sudo apt install --yes kubectl
