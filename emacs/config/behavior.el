@@ -44,7 +44,7 @@
 (delete-selection-mode t)
 (show-paren-mode t)
 
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Everything in UTF-8
 (     prefer-coding-system          'utf-8)
