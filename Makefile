@@ -127,7 +127,7 @@ targets: $(TARGETS) $(SYSTEM_TARGETS)
 
 services: $(SERVICES)
 
-work: /usr/local/bin/aws /usr/bin/kubectl
+work: /usr/local/bin/aws /usr/bin/kubectl /usr/bin/docker
 
 fonts: /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf /usr/share/fonts/truetype/noto/NotoSansSymbols2-Regular.ttf /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf ${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
 
@@ -162,6 +162,18 @@ i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /us
 
 /usr/bin/kubectl: /etc/apt/sources.list.d/kubernetes.list
 	sudo apt install --yes kubectl
+
+/etc/apt/keyrings/docker.gpg:
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+	sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+/etc/apt/sources.list.d/docker.list: /etc/apt/keyrings/docker.gpg
+	echo "deb [arch="${ARCH}" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "${CODENAME}" stable" | sudo tee /etc/apt/sources.list.d/docker.list
+	sudo apt update
+
+/usr/bin/docker: /etc/apt/sources.list.d/docker.list
+	sudo apt-get install --yes docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo adduser ${USER} docker
 
 /usr/bin/xdg-open:
 	sudo apt install --yes xdg-utils
