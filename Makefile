@@ -52,7 +52,9 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf \
 	${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
 
-SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf
+SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf \
+  /usr/local/bin/i3-grid \
+  /usr/local/bin/splatmoji
 
 # User service path for systemd
 # Probably not super portable
@@ -97,6 +99,8 @@ ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fon
 
 # System level symlinks
 /etc/X11/xorg.conf.d/touchpad.conf: ${srcdir}/x/touchpad.conf
+/usr/local/bin/i3-grid: ${srcdir}/bin/i3-grid /usr/local/src/i3-grid/i3-grid.py
+/usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
 
 # Service links and their dependencies
 ${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs /usr/bin/emacs
@@ -198,18 +202,11 @@ i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /us
 /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf:
 	sudo apt install --yes fonts-noto-color-emoji
 
-/usr/local/bin/i3-grid: /usr/local/src/i3-grid/i3-grid.py
-	chmod +x ${srcdir}/bin/i3-grid
-	sudo ln -fs ${srcdir}/bin/i3-grid $@
-
 /usr/local/src/i3-grid/i3-grid.py:
 	sudo mkdir -p /usr/local/src/i3-grid
 	sudo chown root:chall /usr/local/src/i3-grid
 	sudo chmod g+w /usr/local/src/i3-grid
 	git clone https://github.com/lukeshimanuki/i3-grid.git /usr/local/src/i3-grid
-
-/usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
-	sudo ln -s /usr/local/src/splatmoji/splatmoji $@
 
 /usr/bin/scrot:
 	sudo apt install --yes scrot
