@@ -7,6 +7,7 @@
   (setq base16-theme-256-color-source "colors")
   (setq base16-distinct-fringe-background nil)
   (load-theme 'base16-brewer t)
+  (set-face-foreground 'italic "#bbb")
   )
 
 (global-font-lock-mode t)
