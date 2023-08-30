@@ -24,6 +24,9 @@ exec --no-startup-id /usr/bin/xss-lock "$HOME/.config/i3/lock.sh" &
 # Source xprofile just in case
 exec --no-startup-id ~/.xprofile
 
+# Start battery watcher
+exec --no-startup-id $HOME/.config/i3/i3-battery-popup
+
 # Start gesture manager
 # exec --no-startup-id /usr/bin/libinput-gestures-setup start
 

@@ -44,6 +44,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.byobu/keybindings.tmux \
 	${DESTDIR}/.config/kitty/kitty.conf \
 	${DESTDIR}/.config/i3/config \
+	${DESTDIR}/.config/i3/i3-battery-popup \
 	${DESTDIR}/.config/i3/lock.sh \
 	${DESTDIR}/.config/i3/lock.png \
 	${DESTDIR}/.config/polybar/config \
@@ -85,6 +86,7 @@ ${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
 ${DESTDIR}/.byobu/keybindings.tmux: ${srcdir}/byobu/keybindings.tmux
 ${DESTDIR}/.config/kitty/kitty.conf: ${srcdir}/kitty/conf
 ${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
+${DESTDIR}/.config/i3/i3-battery-popup: ${srcdir}/i3/i3-battery-popup
 ${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
 ${DESTDIR}/.config/i3/lock.png: ${srcdir}/i3/lock.png
 ${DESTDIR}/.config/polybar/config: ${srcdir}/polybar/config
