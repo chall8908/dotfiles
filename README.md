@@ -1,12 +1,12 @@
 # Dotfiles
 
-This repo is designed for automated setup via `make`.  Simply clone this repo,
-run `make`, and you should have everything set up the way the various sub-components
-expect.
+This repo is designed for automated setup via `make`.  Because some pieces require
+your user to have specific groups after certain things are installed, a `user` target
+is provided to make this simpler.  In short:
+
+1. `make user`
+2. log out and back in
+3. `make install` or `make install-desktop`
 
 In all cases, the various files are symlinked to their final locations, so any
 changes should reflect as soon as is possible.
-
-TODO:
-* System detection for automatic install of prerequisits (e.g. emacs, rvm)
-* Add Makefile target for rvm after_cd_nvm hack
