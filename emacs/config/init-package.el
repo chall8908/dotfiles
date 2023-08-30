@@ -67,7 +67,7 @@
         auto-package-update-hide-results t)
   ;; Check for updates at noon daily
   (auto-package-update-at-time "12:00")
-  (auto-package-update-maybe)
+  ;; (auto-package-update-maybe)
   )
 
 (use-package diminish)
