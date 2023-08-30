@@ -25,16 +25,8 @@ fi
 [[ -s "$CONFIG_DIR/utilities" ]] && source "$CONFIG_DIR/utilities" # Source custom 'utilities
 
 [[ -s "$CONFIG_DIR/variables" ]] && source "$CONFIG_DIR/variables" # Source custom variables
-[[ -s "$CONFIG_DIR/local/variables" ]] && source "$CONFIG_DIR/local/variables"
 
 [[ -s "$CONFIG_DIR/functions" ]] && source "$CONFIG_DIR/functions" # Source custom functions
-
-# source everyting else in the local folder
-file_string="$(find "$CONFIG_DIR/local" -type f -not \( -name 'variables' -or -name '.gitkeep' \))"
-file_array=( $file_string )
-for f in "${file_array[@]}"; do
-    source $f
-done
 
 source "$CONFIG_DIR/prompt"
 
@@ -62,5 +54,8 @@ source "$CONFIG_DIR/rust"
 source "$CONFIG_DIR/git"
 
 source "$CONFIG_DIR/kubectl"
+
+# Source local profile for machine specific setup
+[[ -s "$CONFIG_DIR/local/profile" ]] && source "$CONFIG_DIR/local/profile"
 
 [[ -s "$CONFIG_DIR/aliases" ]] && source "$CONFIG_DIR/aliases" # Source custom aliases
