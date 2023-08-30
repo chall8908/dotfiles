@@ -8,11 +8,14 @@
         end-of-visual-line
         evilnc-comment-or-uncomment-lines
         indent-for-tab-command
+        ivy-alt-done
         ivy-next-line
         keyboard-escape-quit
         kill-region
+        markdown-electric-backquote
         markdown-enter-key
         markdown-outdent-or-delete
+        org-self-insert-command
         puppet-align-block
         puppet-apply
         puppet-interpolate
