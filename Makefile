@@ -255,7 +255,7 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 	sudo apt install --yes fzf
 
 /usr/bin/delta:
-	sudo dpgk -i ${srcdir}/gitconf/git-delta_0.16.5_amd64.deb
+	sudo dpkg -i ${srcdir}/gitconf/git-delta_0.16.5_amd64.deb
 
 /usr/bin/redshift:
 	sudo apt install --yes redshift
