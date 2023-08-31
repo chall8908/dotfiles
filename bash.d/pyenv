@@ -5,8 +5,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 prepend_to_path "$PYENV_ROOT/shims"
 prepend_to_path "$PYENV_ROOT/bin"
 
-# PyEnv is retarded and returns non-0 unless a 100% valid command is used
-if pyenv --help &> /dev/null; then
+if command -v pyenv > /dev/null; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
