@@ -136,11 +136,11 @@ fonts: /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf /usr/share/fonts/
 # Install things used by terminal-only applications
 install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
-# Install additional GUI applications for the DE
-install-desktop: install i3
+# Install everything needed for a working DE
+install-desktop: install i3 /snap/bin/firefox /snap/bin/thunderbird /usr/bin/xdg-open
 
 # Stuff used by i3 and my extensions to it
-i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr fonts
+i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr /usr/bin/mogrify fonts
 
 /usr/local/bin/aws: /usr/local/bin/session-manager-plugin
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
@@ -162,6 +162,18 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/spla
 
 /usr/bin/kubectl: /etc/apt/sources.list.d/kubernetes.list
 	sudo apt install --yes kubectl
+
+/usr/bin/xdg-open:
+	sudo apt install --yes xdg-utils
+
+/snap/bin/firefox:
+	sudo snap install firefox
+
+/snap/bin/thunderbird:
+	sudo snap install thunderbird
+
+/usr/bin/startx:
+	sudo apt install --yes xorg
 
 /usr/bin/i3-msg:
 	sudo apt install --yes i3
@@ -205,6 +217,12 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/spla
 
 /usr/bin/scrot:
 	sudo apt install --yes scrot
+
+/usr/bin/mogrify:
+	sudo apt install --yes imagemagick
+
+/usr/bin/unzip:
+	sudo apt install --yes unzip
 
 /usr/bin/polybar: fonts /var/log/polybar
 	sudo apt install --yes polybar
