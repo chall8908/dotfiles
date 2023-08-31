@@ -105,7 +105,7 @@ ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fon
 /etc/X11/xorg.conf.d/touchpad.conf: ${srcdir}/x/touchpad.conf
 
 # Service links and their dependencies
-${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs /usr/local/bin/emacs
+${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs /usr/bin/emacs
 ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
 
 $(REMOTES): init
@@ -293,16 +293,19 @@ uninstall: clean
 xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
 	xrdb -merge -I${HOME} $^
 
-/usr/bin/emacs:
+/usr/bin/emacs: ${DESTDIR}/.emacs.d /usr/bin/xclip
 	sudo apt install emacs
 
+/usr/bin/xclip:
+	sudo apt install --yes xclip
+
 /usr/share/rvm/wrappers/emacs: /usr/share/rvm/bin/rvm
-	rvm install 3.2.2
-	rvm 3.2.2 gemset create emacs
-	rvm alias create --create emacs 3.2.2@emacs
+	/usr/share/rvm/bin/rvm install 3.2.2
+	/usr/share/rvm/bin/rvm 3.2.2 gemset create emacs
+	/usr/share/rvm/bin/rvm alias create --create emacs 3.2.2@emacs
 
 ${HOME}/.nvm/alias/emacs: ${HOME}/.nvm/nvm.sh
-  /bin/bash -lc "source ~/.nvm/nvm.sh; nvm install lts/hydrogen; nvm alias emacs lts/hydrogen"
+	/bin/bash -lc "source ~/.nvm/nvm.sh; nvm install lts/hydrogen; nvm alias emacs lts/hydrogen"
 
 /usr/share/rvm/bin/rvm:
 	sudo apt-add-repository -y ppa:rael-gc/rvm
