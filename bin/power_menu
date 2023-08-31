@@ -1,10 +1,10 @@
 #!/bin/bash
 
 power_menu_options() {
-  echo -e ""
-  echo -e ""
-  echo -e ""
-  echo -e ""
+  echo -e "lock"
+  echo -e "user-slash"
+  echo -e "arrow-rotate-right"
+  echo -e "power-off"
 }
 
 power_menu() {
@@ -15,13 +15,13 @@ power_menu() {
   fi
 
   case "$selection" in
-    "") loginctl lock-session ;;
+    "lock") loginctl lock-session ;;
 
-    "") i3-msg exit ;;
+    "user-slash") i3-msg exit ;;
 
-    "") reboot ;;
+    "arrow-rotate-right") reboot ;;
 
-    "") shutdown now ;;
+    "power-off") shutdown now ;;
 
     "*") i3-nagbar -m "Unknown selection: $selection"
   esac

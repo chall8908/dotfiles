@@ -1,4 +1,8 @@
 /*-*- mode: css; -*-*/
+configuration {
+  font: "Font Awesome 6 Free 12";
+}
+
 * {
   background-color: transparent;
   border-color: hsl(224, 45%, 20%);
@@ -10,7 +14,6 @@ window {
   location: center;
   anchor: center;
   fullscreen: true;
-  font: "Font Awesome 5 Pro 30";
   background-color: rgba(0,0,0,0.5);
 
   children: [ horibox ];
