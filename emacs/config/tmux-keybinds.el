@@ -1,4 +1,4 @@
-;;; tmux-keybinds --- Fix emacs keybingins for "proper" xterm keycodes
+;;; tmux-keybinds --- Fix emacs keybindings for "proper" xterm keycodes
 ;;; Commentary:
 ;;; Code:
 

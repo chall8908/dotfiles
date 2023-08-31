@@ -30,10 +30,5 @@
         neo-theme 'nerd)
   )
 
-(add-hook 'emacs-startup-hook
-          (lambda (&rest _)
-            (unless config-switch-disable-neotree
-              (neotree-show))))
-
 (provide 'init-neotree)
 ;;; init-neotree.el ends here

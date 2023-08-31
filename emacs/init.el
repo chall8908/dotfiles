@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; This has to be here - commented out, since it's called elsewhere - or package bitches and adds it back
-;; (package-initialize)
-
 ;; These are useful for a few things.  Primarily differences between systems.
 (defconst IS-MAC     (eq system-type 'darwin))
 (defconst IS-LINUX   (eq system-type 'gnu/linux))
@@ -20,9 +17,6 @@ ROOT is the path to start in if NAME is relative."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actual configuration starts here ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Fix https://debbugs.gnu.org/34341
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (defvar config-dir (expand-directory-name "config" user-emacs-directory)
   "Directory containing user configuration files."
