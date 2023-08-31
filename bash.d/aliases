@@ -27,4 +27,3 @@ elif command -v bat > /dev/null; then
 else
     echo 'unable to find bat'
 fi
-

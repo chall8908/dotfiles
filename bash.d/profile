@@ -22,11 +22,9 @@ else
   echo "export CONFIG_DIR='$CONFIG_DIR'" > "$HOME/.config/.bash_setup_cache"
 fi
 
-[[ -s "$CONFIG_DIR/utilities" ]] && source "$CONFIG_DIR/utilities" # Source custom 'utilities
-
-[[ -s "$CONFIG_DIR/variables" ]] && source "$CONFIG_DIR/variables" # Source custom variables
-
-[[ -s "$CONFIG_DIR/functions" ]] && source "$CONFIG_DIR/functions" # Source custom functions
+source "$CONFIG_DIR/utilities" # Source custom 'utilities
+source "$CONFIG_DIR/variables" # Source custom variables
+source "$CONFIG_DIR/functions" # Source custom functions
 
 source "$CONFIG_DIR/prompt"
 
