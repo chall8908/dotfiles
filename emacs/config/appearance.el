@@ -18,9 +18,6 @@
 ;; disable menu bar
 (menu-bar-mode 0)
 
-;; Display time
-(display-time)
-
 ;; Display Line Numbers
 (global-display-line-numbers-mode t)
 
