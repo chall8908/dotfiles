@@ -237,12 +237,9 @@ bindsym $mod+r mode "resize"
 focus_on_window_activation focus
 
 assign [class="(?i)thunderbird"] workspace $ws3
-assign [class="(?i)ripcord"] workspace $ws6
-assign [class="(?i)hipchat"] workspace $ws8
-for_window [class="(?i)brave-browser" title="(?i)outlook"] move container to workspace $ws3
-for_window [instance="(?i)app.chime.aws"] move container to workspace $ws8
-for_window [class="(?i)spotify"] move container to workspace $ws9
-for_window [class="(?i)cisco"] floating enable
+assign [class="(?i)slack"] workspace $ws8
+assign [class="(?i)spotify"] workspace $ws9
+for_window [class="(?i)thunar"] floating enable
 
 # Move to center workspace and start a terminal on startup
 exec --no-startup-id "i3-msg workspace 4; i3-sensible-terminal"
