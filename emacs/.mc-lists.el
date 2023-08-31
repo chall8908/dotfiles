@@ -29,6 +29,7 @@
         sh-assignment
         suspend-frame
         web-mode-element-insert
+        xterm-paste
         yaml-electric-backspace
         yaml-electric-bar-and-angle
         yaml-electric-dash-and-dot
