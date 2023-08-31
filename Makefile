@@ -54,7 +54,9 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/rofi/slate.rasi \
 	${DESTDIR}/.config/rofi/power_menu.rasi \
 	${DESTDIR}/.config/libinput-gestures.conf \
-	${DESTDIR}/.rvm/hooks/after_cd_nvm
+	${DESTDIR}/.rvm/hooks/after_cd_nvm \
+	${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf \
+	${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
 
 SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf
 
@@ -69,7 +71,7 @@ SERVICES=${service_path}/emacs.service \
 # These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work
+.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts
 
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -96,6 +98,8 @@ ${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
 ${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
 ${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
 ${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
+${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf: ${srcdir}/fonts/PowerlineExtraSymbols.otf
+${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fonts/Font-Awesome-6-Free-Regular-400.otf
 
 # System level symlinks
 /etc/X11/xorg.conf.d/touchpad.conf: ${srcdir}/x/touchpad.conf
@@ -127,6 +131,8 @@ services: $(SERVICES)
 
 work: /usr/local/bin/aws /usr/bin/kubectl
 
+fonts: /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf /usr/share/fonts/truetype/noto/NotoSansSymbols2-Regular.ttf /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf ${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
+
 # Install things used by terminal-only applications
 install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
@@ -134,7 +140,7 @@ install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/b
 install-desktop: install i3
 
 # Stuff used by i3 and my extensions to it
-i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr
+i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr fonts
 
 /usr/local/bin/aws: /usr/local/bin/session-manager-plugin
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
@@ -175,6 +181,14 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/spla
 /usr/bin/autorandr:
 	sudo apt install --yes autorandr
 
+/usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf:
+	sudo apt install --yes fonts-firacode
+
+/usr/share/fonts/truetype/noto/NotoSansSymbols2-Regular.ttf:
+	sudo apt install --yes fonts-noto-core
+
+/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf:
+	sudo apt install --yes fonts-noto-color-emoji
 
 /usr/local/bin/i3-grid: /usr/local/src/i3-grid/i3-grid.py
 	chmod +x ${srcdir}/bin/i3-grid
@@ -192,17 +206,13 @@ i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/spla
 /usr/bin/scrot:
 	sudo apt install --yes scrot
 
-/usr/bin/polybar: ${HOME}/.local/share/fonts/PowerlineExtraSymbols.otf /var/log/polybar
+/usr/bin/polybar: fonts /var/log/polybar
 	sudo apt install --yes polybar
 
 /var/log/polybar:
 	sudo mkdir /var/log/polybar
 	sudo chown root:${USER} /var/log/polybar
 	sudo chmod g+w /var/log/polybar
-
-${HOME}/.local/share/fonts/PowerlineExtraSymbols.otf:
-	mkdir -p ${@D}
-	curl -fLo $@ https://github.com/ryanoasis/powerline-extra-symbols/blob/master/PowerlineExtraSymbols.otf?raw=true
 
 /usr/local/src/splatmoji/splatmoji:
 	sudo mkdir -p /usr/local/src/splatmoji
