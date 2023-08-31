@@ -1,0 +1,23 @@
+#-*- sh -*- Emacs mode
+
+if command -v aws > /dev/null; then
+  complete -C "$(which aws_completer)" aws
+
+  switch-aws-profile() {
+    export AWS_PROFILE=$1
+    if ! aws sts get-caller-identity > /dev/null; then
+      aws sso login
+    fi
+  }
+
+  _switch_aws_profile() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local profiles="$(awk "BEGIN { print \"default\"} /\[profile/ { sub(/]/, \"\", \$2); print \$2 }" ~/.aws/config)"
+
+    COMPREPLY=( $( compgen -S ' ' -W "$profiles" -- $cur ) )
+
+    return 0
+  }
+
+  complete -F _switch_aws_profile -o nospace switch-aws-profile
+fi

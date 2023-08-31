@@ -53,6 +53,7 @@ source "$CONFIG_DIR/rust"
 # Special configuration for when we're in a git repo
 source "$CONFIG_DIR/git"
 
+source "$CONFIG_DIR/aws"
 source "$CONFIG_DIR/kubectl"
 
 # Source local profile for machine specific setup
