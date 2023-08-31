@@ -4,8 +4,3 @@
 if [ -z "$(ps -o pid= -p $SSH_AGENT_PID 2>/dev/null)" ]; then
     eval "$(ssh-agent -s)" > /dev/null
 fi
-
-# Add my SSH key to the ring if it's not already
-if [[ -s "$HOME/.ssh/add_ssh.exp" ]] && [[ -z `ssh-add -l | grep id_rsa` ]]; then
-   $HOME/.ssh/add_ssh.exp > /dev/null
-fi
