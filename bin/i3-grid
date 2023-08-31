@@ -1,2 +1,2 @@
 #!/bin/sh
-IFS=' ' python /usr/local/src/i3-grid/i3-grid.py $*
+IFS=' ' python3 /usr/local/src/i3-grid/i3-grid.py $*
