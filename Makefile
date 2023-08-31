@@ -69,7 +69,7 @@ SERVICES=${service_path}/emacs.service \
 # These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services
+.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work
 
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -125,6 +125,8 @@ targets: $(TARGETS) $(SYSTEM_TARGETS)
 
 services: $(SERVICES)
 
+work: /usr/local/bin/aws /usr/bin/kubectl
+
 # Install things used by terminal-only applications
 install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
@@ -133,6 +135,27 @@ install-desktop: install i3
 
 # Stuff used by i3 and my extensions to it
 i3: /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr
+
+/usr/local/bin/aws: /usr/local/bin/session-manager-plugin
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
+	unzip -d /tmp /tmp/awscliv2.zip
+	sudo /tmp/aws/install
+	rm -r /tmp/aws /tmp/awscliv2.zip
+
+/usr/local/bin/session-manager-plugin:
+	curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "/tmp/session-manager-plugin.deb"
+	sudo apt install --yes /tmp/session-manager-plugin.deb
+	rm /tmp/session-manager-plugin.deb
+
+/etc/apt/sources.list.d/kubernetes.list: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+	sudo apt update
+
+/etc/apt/keyrings/kubernetes-apt-keyring.gpg:
+	curl -fsSL 'https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key' | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+/usr/bin/kubectl: /etc/apt/sources.list.d/kubernetes.list
+	sudo apt install --yes kubectl
 
 /usr/bin/i3-msg:
 	sudo apt install --yes i3
