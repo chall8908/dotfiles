@@ -3,6 +3,6 @@
 # Grab the colors from git-bash-prompt
 source "$CONFIG_DIR/bash-git-prompt/prompt-colors.sh"
 
-PROMPT_COMMAND='set_last_command_status;update_prompt'
+PROMPT_COMMAND='set_last_command_status;update_prompt;history -a'
 # Make sure everything is set up properly before we source git
 eval $PROMPT_COMMAND
