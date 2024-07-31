@@ -55,7 +55,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 
 SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf \
   /usr/local/bin/i3-grid \
-  /usr/local/bin/splatmoji
+  /usr/local/bin/splatmoji \
+  /etc/udev/rules.d/50-zsa.rules
 
 # User service path for systemd
 # Probably not super portable
@@ -68,7 +69,7 @@ SERVICES=${service_path}/emacs.service \
 # These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user
+.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user keyboard
 
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -103,6 +104,7 @@ ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fon
 /etc/X11/xorg.conf.d/touchpad.conf: ${srcdir}/x/touchpad.conf
 /usr/local/bin/i3-grid: ${srcdir}/bin/i3-grid /usr/local/src/i3-grid/i3-grid.py
 /usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
+/etc/udev/rules.d/50-zsa.rules: ${srcdir}/udev/50-zsa.rules
 
 # Service links and their dependencies
 ${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs /usr/bin/emacs
@@ -143,6 +145,13 @@ install-desktop: install i3 /snap/bin/firefox /snap/bin/thunderbird /usr/bin/xdg
 
 # Stuff used by i3 and my extensions to it
 i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr /usr/bin/mogrify fonts
+
+keyboard: ${DESTDIR}/bin/wally
+
+${DESTDIR}/bin/wally:
+	sudo apt install libusb-1.0-0-dev
+	curl -L "https://configure.ergodox-ez.com/wally/linux" -o $@
+	chmod +x $@
 
 /usr/local/bin/aws: /usr/local/bin/session-manager-plugin
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
