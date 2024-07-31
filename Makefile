@@ -285,7 +285,7 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 	sudo apt install --yes redshift
 
 # TODO: Unistall for emacs
-emacs: /usr/bin/emacs /usr/bin/emacsclient /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs
+emacs: /usr/bin/emacs /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs
 
 rvm: /usr/share/rvm/bin/rvm
 
@@ -321,14 +321,8 @@ uninstall: clean
 xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
 	xrdb -merge -I${HOME} $^
 
-/usr/bin/emacs: ${DESTDIR}/.emacs.d /usr/bin/xclip /snap/bin/emacs
-	sudo update-alternatives --install /usr/bin/emacs emacs /snap/bin/emacs 30
-
-/usr/bin/emacsclient:
-	sudo update-alternatives --install /usr/bin/emacsclient emacs /snap/bin/emacsclient 30
-
-/snap/bin/emacs:
-	sudo snap install emacs
+/usr/bin/emacs: ${DESTDIR}/.emacs.d /usr/bin/xclip
+	sudo apt install emacs-lucid
 
 /usr/bin/xclip:
 	sudo apt install --yes xclip
