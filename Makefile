@@ -41,6 +41,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/i3/i3-battery-popup \
 	${DESTDIR}/.config/i3/lock.sh \
 	${DESTDIR}/.config/i3/lock.png \
+	${DESTDIR}/.irbrc \
 	${DESTDIR}/.config/polybar/config \
 	${DESTDIR}/.config/polybar/start.sh \
 	${DESTDIR}/.config/polybar/spotify-status \
@@ -78,6 +79,7 @@ ${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.xprofile: ${srcdir}/x/profile
 ${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
+${DESTDIR}/.irbrc: ${srcdir}/irbrc
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
 ${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
 ${DESTDIR}/.byobu/keybindings.tmux: ${srcdir}/byobu/keybindings.tmux
