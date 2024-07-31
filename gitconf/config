@@ -68,11 +68,11 @@
   autosetuprebase = always
 
 [pull]
-  rebase = preserve
-  autoStash = true
+  rebase = merges
 
 [push]
   default = current
+  followTags = true
 
 [fetch]
   prune = 1
@@ -85,10 +85,12 @@
   diffFilter = delta --color-only
 
 [rebase]
-  autosquash = true
+  autoSquash = true
+  autoStash = true
 
 [merge]
   conflictStyle = diff3
+	autoStash = true
 
 [delta]
   features = line-numbers
