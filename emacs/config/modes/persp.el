@@ -18,7 +18,7 @@
 
 (add-hook 'emacs-startup-hook
           (lambda (&rest _)
-            (unless config-switch-disable-persp-mode
+            (if (daemonp)
               (persp-mode))))
 
 (provide 'persp)

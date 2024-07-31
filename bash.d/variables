@@ -1,4 +1,4 @@
 #-*- sh -*- Emacs mode
 
-export EDITOR="emacs -nw -no-persp -no-tabnine -no-neotree"
+export EDITOR="emacs -nw -no-tabnine -no-neotree"
 export TERM='xterm-256color'
