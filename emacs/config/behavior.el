@@ -44,7 +44,14 @@
 (delete-selection-mode t)
 (show-paren-mode t)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(defun safe-delete-trailing-whitespace ()
+  "Delete trailing whitespace but not in buffers where trailing whitespace is
+   required"
+  (when (not (eq major-mode 'diff-mode))
+    delete-trailing-whitespace)
+  )
+
+(add-hook 'before-save-hook 'safe-delete-trailing-whitespace)
 
 ;; Everything in UTF-8
 (     prefer-coding-system          'utf-8)
