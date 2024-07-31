@@ -1,14 +1,14 @@
 # -*- sh -*-
 
 # Open emacs in the terminal
-if [[ -v NO_EMACS_OVERRIDE ]]; then
+if [ ! -z ${NO_EMACS_OVERRIDE+x} ]; then
     unset NO_EMACS_OVERRIDE
 else
     function emacs() {
         local file="${1:-$(pwd)}"
         file="$(readlink -f $file)" # Cannonicalize file name
         local perspective="$(basename $(git exec pwd) || 'default')"
-        emacsclient -t --eval "(progn (persp-switch \"${perspective}\") (find-file \"${file}\"))"
+        emacsclient -t -a "$(which emacs)" --eval "(progn (persp-switch \"${perspective}\") (find-file \"${file}\"))"
     }
 fi
 
