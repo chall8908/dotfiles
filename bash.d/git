@@ -18,3 +18,7 @@ GIT_PROMPT_SHOW_UNTRACKED_FILES=normal
 GIT_PROMPT_THEME="Solarized"
 
 source "$CONFIG_DIR/bash-git-prompt/gitprompt.sh"
+
+if command -v brew > /dev/null; then
+  source "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash"
+fi
