@@ -5,23 +5,24 @@
 (use-package web-mode
   ;; :after (yasnippet flycheck)
   :after (yasnippet)
-  :mode ("\.erb$"    ; embedded Ruby
-         "\.js[x]?$" ; JS + JSX
-         "\.eex$"    ; embedded Elixir
+  :mode ("\.erb$"     ; embedded Ruby
+         "\.[jt]sx?$" ; JS + JSX, TS + TSX
+         "\.eex$"     ; embedded Elixir
          "\.html$"
          )
 
   :config
   ;; for better jsx syntax-highlighting in web-mode
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
-    (if (equal web-mode-content-type "jsx")
+    (if (or (equal web-mode-content-type "jsx") (equal web-mode-content-type "tsx"))
         (let ((web-mode-enable-part-face nil))
           ad-do-it)
       ad-do-it))
 
   ;; set web-mode-content-type to jsx for js and jsx files
   (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'")))
+        '(("jsx" . "\\.jsx?\\'")
+          ("tsx" . "\\.tsx?\\'")))
 
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
@@ -46,6 +47,9 @@
                    (if (string= web-mode-cur-language "html")
                        (yas-activate-extra-mode 'html-mode)
                      (yas-deactivate-extra-mode 'html-mode))
+                   (if (string= web-mode-cur-language "tsx")
+                       (yas-activate-extra-mode 'typescript-mode)
+                     (yas-deactivate-extra-mode 'typescript-mode))
                    (if (string= web-mode-cur-language "jsx")
                        (yas-activate-extra-mode 'js2-mode)
                      (yas-deactivate-extra-mode 'js2-mode))
