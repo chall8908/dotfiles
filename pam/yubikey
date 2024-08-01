@@ -1,0 +1,6 @@
+Name: Minimal PKCS authentication for Yubikeys
+Default: no
+Priority: 257
+Auth-Type: Primary
+Auth:
+  [success=end default=ignore] pam_p11.so /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so

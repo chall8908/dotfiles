@@ -19,6 +19,7 @@ DESTDIR = ${HOME}
 srcdir = ${abspath .}
 
 ARCH = $(shell dpkg --print-architecture)
+PLATFORM = $(shell uname --machine)
 CODENAME = $(shell lsb_release -c | awk '{ print $$2 }')
 
 # clear out suffixes; we don't need them anyway
@@ -56,7 +57,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf \
   /usr/local/bin/i3-grid \
   /usr/local/bin/splatmoji \
-  /etc/udev/rules.d/50-zsa.rules
+  /etc/udev/rules.d/50-zsa.rules \
+	/usr/share/pam-configs/yubikey
 
 # User service path for systemd
 # Probably not super portable
@@ -69,7 +71,7 @@ SERVICES=${service_path}/emacs.service \
 # These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user keyboard
+.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user keyboard pam
 
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -105,6 +107,7 @@ ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fon
 /usr/local/bin/i3-grid: ${srcdir}/bin/i3-grid /usr/local/src/i3-grid/i3-grid.py
 /usr/local/bin/splatmoji: /usr/local/src/splatmoji/splatmoji
 /etc/udev/rules.d/50-zsa.rules: ${srcdir}/udev/50-zsa.rules
+/usr/share/pam-configs/yubikey: ${srcdir}/pam/yubikey
 
 # Service links and their dependencies
 ${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs /usr/bin/emacs
@@ -131,6 +134,7 @@ targets: $(TARGETS) $(SYSTEM_TARGETS)
 
 services: $(SERVICES)
 
+# TODO: Install jq
 work: /usr/local/bin/aws /usr/bin/kubectl /usr/bin/docker
 
 fonts: /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf /usr/share/fonts/truetype/noto/NotoSansSymbols2-Regular.ttf /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf ${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
@@ -138,7 +142,7 @@ fonts: /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf /usr/share/fonts/
 user: rvm nvm pyenv
 
 # Install things used by terminal-only applications
-install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/bin/fzf /usr/bin/bat
+install: targets services emacs rvm nvm pyenv rustup byobu pam /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
 # Install everything needed for a working DE
 install-desktop: install i3 /snap/bin/firefox /snap/bin/thunderbird /usr/bin/xdg-open
@@ -295,6 +299,18 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 
 /usr/bin/redshift:
 	sudo apt install --yes redshift
+
+$HOME/.ssh/authorized_keys: /usr/bin/pkcs11-tool
+	ssh-keygen -D /usr/lib/${PLATFORM}-linux-gnu/opensc-pkcs11.so >> $@
+
+/usr/lib/${PLATFORM}-linux-gnu/security/libpam-p11.so:
+	sudo apt install --yes libpam-p11
+
+/usr/bin/pkcs11-tool:
+	sudo apt install --yes opensc
+
+pam: $HOME/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11-tool
+	sudo pam-auth-update --enable yubikey
 
 # TODO: Unistall for emacs
 emacs: /usr/bin/emacs /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs
