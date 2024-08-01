@@ -108,3 +108,5 @@
 [safe]
 	directory = /usr/local/src/i3-grid
 	directory = /usr/local/src/i3lock-color
+[include]
+  path = ~/.gitconfig.local
