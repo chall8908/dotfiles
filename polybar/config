@@ -55,7 +55,7 @@ font-3 = Powerline Extra Symbols:size=17;3
 
 modules-left = power i3 separator-lower-left separator-upper-right xwindow separator-lower-left
 modules-center = separator-upper-right date separator-upper-left
-modules-right = separator-lower-right spotify weather pulseaudio memory cpu wlan battery temperature separator-upper-left
+modules-right = separator-lower-right weather pulseaudio memory cpu wlan battery temperature separator-upper-left
 
 tray-position = right
 tray-padding = 2
