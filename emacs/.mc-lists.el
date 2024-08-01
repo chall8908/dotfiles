@@ -28,6 +28,7 @@
         ruby-electric-space/return
         sh-assignment
         suspend-frame
+        tabnine-accept-completion
         web-mode-element-insert
         xterm-paste
         yaml-electric-backspace
@@ -37,7 +38,9 @@
 
 (setq mc/cmds-to-run-once
       '(
+        delete-window
         ivy-backward-delete-char
         overwrite-mode
         save-buffers-kill-terminal
+        swiper
         ))
