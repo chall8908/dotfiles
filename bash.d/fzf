@@ -4,7 +4,13 @@
 # https://github.com/junegunn/fzf
 # ---------
 if command -v fzf > /dev/null; then
-  eval "$(fzf --bash)"
+  # Check if this fzf will output the keybinds directly
+  if fzf --bash &> /dev/null; then
+    eval "$(fzf --bash)"
+  elif [ -d '/usr/share/doc/fzf' ]; then
+    # Probably installed from package manager
+    source /usr/share/doc/fzf/examples/key-bindings.bash
+  fi
 elif [ -d "$PERSONAL_DIR/fzf/bin" ]; then
     append_to_path "$PERSONAL_DIR/fzf/bin"
 
@@ -15,9 +21,6 @@ elif [ -d "$PERSONAL_DIR/fzf/bin" ]; then
     # Key bindings
     # ------------
     source "$PERSONAL_DIR/fzf/shell/key-bindings.bash"
-elif [ -d '/usr/share/doc/fzf' ]; then
-  # Probably installed from package manager
-  source /usr/share/doc/fzf/examples/key-bindings.bash
 elif command -v brew > /dev/null; then
   if brew --prefix fzf > /dev/null; then
     source "$(brew --prefix fzf)/shell/key-bindings.bash"
