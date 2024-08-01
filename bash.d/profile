@@ -53,6 +53,7 @@ source "$CONFIG_DIR/git"
 
 source "$CONFIG_DIR/aws"
 source "$CONFIG_DIR/kubectl"
+source "$CONFIG_DIR/terraform"
 
 # Source local profile for machine specific setup
 [[ -s "$CONFIG_DIR/local/profile" ]] && source "$CONFIG_DIR/local/profile"
