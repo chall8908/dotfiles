@@ -144,7 +144,7 @@ install: targets services emacs rvm nvm pyenv rustup byobu /usr/bin/delta /usr/b
 install-desktop: install i3 /snap/bin/firefox /snap/bin/thunderbird /usr/bin/xdg-open
 
 # Stuff used by i3 and my extensions to it
-i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr /usr/bin/mogrify fonts
+i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/i3lock /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr /usr/bin/mogrify fonts
 
 keyboard: ${DESTDIR}/bin/wally
 
@@ -200,6 +200,7 @@ ${DESTDIR}/bin/wally:
 
 /usr/bin/i3-msg:
 	sudo apt install --yes i3
+	sudo apt remove --yes i3lock
 
 /usr/bin/hsetroot:
 	sudo apt install --yes hsetroot
@@ -227,10 +228,21 @@ ${DESTDIR}/bin/wally:
 	sudo apt install --yes fonts-noto-color-emoji
 
 /usr/local/src/i3-grid/i3-grid.py:
-	sudo mkdir -p /usr/local/src/i3-grid
-	sudo chown root:chall /usr/local/src/i3-grid
-	sudo chmod g+w /usr/local/src/i3-grid
-	git clone https://github.com/lukeshimanuki/i3-grid.git /usr/local/src/i3-grid
+	sudo mkdir -p "$(@D)"
+	sudo chown root:chall "$(@D)"
+	sudo chmod g+w "$(@D)"
+	git clone https://github.com/lukeshimanuki/i3-grid.git "$(@D)"
+
+/usr/bin/i3lock: /usr/local/src/i3lock-color/README.md
+	sudo apt install --yes autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev
+	cd "$(<D)"; ./install-i3lock-color.sh
+
+/usr/local/src/i3lock-color/README.md:
+	sudo mkdir -p "$(@D)"
+	sudo chown root:chall "$(@D)"
+	sudo chmod g+w "$(@D)"
+	git clone --sparse --no-checkout https://github.com/Raymo111/i3lock-color.git "$(@D)"
+	cd "$(@D)"; git checkout 46aa0b37196994433addddd60bb735dd4a388e6b
 
 /usr/bin/scrot:
 	sudo apt install --yes scrot

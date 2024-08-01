@@ -105,3 +105,6 @@
   line-numbers-zero-style = "#666666"
   line-numbers-left-style = "#444444"
   line-numbers-right-style = "#444444"
+[safe]
+	directory = /usr/local/src/i3-grid
+	directory = /usr/local/src/i3lock-color

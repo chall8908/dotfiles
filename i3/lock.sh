@@ -1,21 +1,38 @@
 #!/bin/bash
 
-tempbg="/tmp/tmpbg.png"
-lock_icon=${1:-$HOME/.config/i3/lock.png}
-
 # Pause Spotify
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop &
-# Take screenshot
-scrot "$tempbg"
-# Immediately lock with the raw screenshot
-i3lock --image "$tempbg" --no-unlock-indicator
-# pixilize
-mogrify -define jpeg:fancy-upsampling=off -scale 12.5% -scale 800% "$tempbg"
-# Add overlay
-convert "$tempbg" $lock_icon -gravity center -composite "$tempbg"
-# kill previous lock so we can use the proper image
-killall i3lock
-# Lock Screen using the now modified screenshot
-i3lock --image "$tempbg" --nofork --no-unlock-indicator
-# Remove temporary file
-rm "$tempbg"
+
+# Requires the i3lock-color fork of i3lock
+i3lock \
+  --ignore-empty-password \
+  --blur 5 \
+  --image "${1:-$HOME/.config/i3/lock.png}" \
+  --centered \
+  --force-clock \
+  --indicator \
+  --radius 255 \
+  --no-modkey-text \
+  --ring-width 5 \
+  --{ring,inside}-color="#00000000" \
+  --{ring,inside}ver-color="#00000088" \
+  --{ring,inside}wrong-color="#00000088" \
+  --keyhl-color "#ffffffff" \
+  --bshl-color "#000000ff" \
+  --{verif,wrong,time,date}-font=firacode \
+  --{verif,wrong,time,date}-color="#ffffffff" \
+  --{verif,wrong,time,date}outline-color="#000000ff" \
+  --{verif,wrong}-size=40 \
+  --{time,date}-size=20 \
+  --{verif,wrong,time,date}outline-width=0.5 \
+  --date-str "%a %b %d" \
+  --time-align 1 \
+  --date-align 2 \
+  --time-pos "x+(w/2)+7:y+20" \
+  --date-pos "x+(w/2)-7:y+20" \
+  --pass-{media,screen,volume}-keys
+
+# If we have a sleep lock, close it now
+if [[ -e "$XSS_SLEEP_LOCK_FD" ]]; then
+  exec $XSS_SLEEP_LOCK_FD<&-
+fi
