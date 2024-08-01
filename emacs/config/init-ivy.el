@@ -12,7 +12,6 @@
   )
 
 (use-package ivy
-  ;; :pin melpa
   :diminish
   :demand t
   :bind (:map ivy-minibuffer-map

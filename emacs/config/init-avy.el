@@ -7,7 +7,6 @@
   )
 
 (use-package avy-flycheck
-  :pin melpa
   :after avy
   )
 

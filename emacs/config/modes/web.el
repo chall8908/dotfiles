@@ -19,7 +19,7 @@
           ad-do-it)
       ad-do-it))
 
-  ;; set web-mode-content-type to jsx for js and jsx files
+  ;; set web-mode-content-type to jsx for js/jsx files
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.jsx?\\'")
           ("tsx" . "\\.tsx?\\'")))
@@ -30,33 +30,6 @@
         web-mode-code-indent-offset 2
         web-mode-enable-current-element-highlight t
         web-mode-enable-current-column-highlight t)
-
-  (defadvice yas-expand-from-trigger-key (before web-mode-before-yas-expand activate)
-    "Ensures the correct snippets are used for the current web-mode language."
-    (run-hooks 'web-mode-cur-language-mode-hook))
-
-  ;; Use proper snippets depending on where my cursor is
-  (add-hook 'web-mode-cur-language-mode-hook
-            '(lambda ()
-               (ignore-errors
-                 (let ((web-mode-cur-language
-                        (web-mode-language-at-pos)))
-                   (if (string= web-mode-cur-language "php")
-                       (yas-activate-extra-mode 'php-mode)
-                     (yas-deactivate-extra-mode 'php-mode))
-                   (if (string= web-mode-cur-language "html")
-                       (yas-activate-extra-mode 'html-mode)
-                     (yas-deactivate-extra-mode 'html-mode))
-                   (if (string= web-mode-cur-language "tsx")
-                       (yas-activate-extra-mode 'typescript-mode)
-                     (yas-deactivate-extra-mode 'typescript-mode))
-                   (if (string= web-mode-cur-language "jsx")
-                       (yas-activate-extra-mode 'js2-mode)
-                     (yas-deactivate-extra-mode 'js2-mode))
-                   (if (string= web-mode-cur-language "elixir")
-                       (yas-activate-extra-mode 'elixir-mode)
-                     (yas-deactivate-extra-mode 'elixir-mode))
-                   ))))
   )
 
 (use-package company-web

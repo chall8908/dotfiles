@@ -2,45 +2,28 @@
 ;;; Commentary:
 ;;; Code:
 
-;; configure elpa directory
-(setq package-user-dir (expand-directory-name "elpa" user-emacs-directory))
-
-;; ensure package directory exists
-(make-directory package-user-dir t)
-
-;; TODO: Switch to straight.el
-;; see https://github.com/raxod502/straight.el#bootstrapping-straightel
-(setq package-archives '()      ; unset package archives
-      byte-compile-warnings nil ; don't show compile warnings
+(setq byte-compile-warnings nil     ; don't show compile warnings
       )
 
-;; Require package
-(require 'package)
-(add-to-list 'package-archives (cons "melpa"        "https://melpa.org/packages/") t)
-(add-to-list 'package-archives (cons "melpa-stable" "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives (cons "gnu"          "https://elpa.gnu.org/packages/") t)
+;; straight.el bootstrap code
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package)
-  )
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 (eval-when-compile
   (require 'use-package))
-
-;; IMPORTANT: Packages only on melpa need to be manually `:pin'd to `melpa'
-(setq use-package-always-pin "melpa-stable")
-; tell use-package to install all packages automatically
-(setq use-package-always-ensure t)
-
-(use-package auto-package-update
-  :config
-  (setq auto-package-update-delete-old-versions t
-        auto-package-update-hide-results t)
-  ;; Check for updates at noon daily
-  (auto-package-update-at-time "12:00")
-  ;; (auto-package-update-maybe)
-  )
 
 (use-package diminish)
 

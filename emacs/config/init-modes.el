@@ -4,6 +4,18 @@
 
 (add-to-list 'load-path (expand-directory-name "modes" config-dir))
 
+(use-package string-inflection)
+
+(use-package tree-sitter
+  :demand t
+  :config
+  (global-tree-sitter-mode)
+  )
+
+(use-package tree-sitter-langs
+  :after (tree-sitter)
+  )
+
 (use-package python-mode
   :mode "\\.py$")
 
@@ -33,7 +45,6 @@
 
 ;; Sql Mode
 (use-package sql-indent
-  :pin gnu
   :after (sql-mode)
   )
 (add-hook 'sql-mode-hook 'sql-highlight-postgres-keywords)
@@ -46,20 +57,28 @@
 
 ;; CSV mode
 (use-package csv-mode
-  :pin gnu
   :mode "\\.csv")
 
 (use-package dockerfile-mode)
 
-(use-package powershell
-  :pin melpa)
+(use-package powershell)
+
+(use-package nginx-mode)
+
+(use-package caddyfile-mode
+  :ensure t
+  :mode (("Caddyfile\\'" . caddyfile-mode)
+         ("caddy\\.conf\\'" . caddyfile-mode))
+  :init
+  (defun caddyfile-tab-override ()
+    (setq-local tab-width 2
+                indent-tabs-mode nil))
+  :hook (caddyfile-mode . caddyfile-tab-override))
 
 (require 'persp)
 (require 'elixir)
 (require 'git)
 (require 'markdown)
-(require 'js2)
-(require 'typescript)
 (require 'ruby)
 (require 'web)
 (require 'emmet)

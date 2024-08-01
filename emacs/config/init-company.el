@@ -2,6 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package corfu
+  :init
+  (global-corfu-mode))
+
+(use-package corfu-terminal
+  :after corfu
+  :straight '(corfu-terminal
+              :type git
+              :repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
+  :unless (display-graphic-p)
+  :init
+  (corfu-terminal-mode +1))
+
 (use-package company
   :diminish
   :config
@@ -18,11 +31,7 @@
         company-dabbrev-downcase nil
         company-require-match nil
         company-begin-commands '(self-insert-command)
-        ;; company-frontends '(company-pseudo-tooltip-frontend
-        ;;                     company-echo-metadata-frontend)
         )
-
-  (add-to-list 'company-backends 'company-ispell)
   )
 
 (use-package company-shell
@@ -32,11 +41,12 @@
 (use-package pos-tip)
 
 (use-package company-tabnine
-  :pin melpa
+  :demand
   :after company
-  :init
-  (setq company-tabnine-no-continue t)
-  (add-to-list 'company-backends #'company-tabnine))
+  :hook (kill-emacs . 'company-tabnine-kill-process)
+  :config
+  (add-to-list 'company-backends #'company-tabnine)
+  )
 
 (provide 'init-company)
 

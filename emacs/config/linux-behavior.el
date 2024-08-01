@@ -4,7 +4,6 @@
 
 ;; use xclip from GNU's ELPA to ensure that copy-paste works correctly in xterm
 (use-package xclip
-  :pin gnu
   :config
   (xclip-mode 1)
   )

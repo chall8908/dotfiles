@@ -8,7 +8,6 @@
 
 (use-package flycheck-elixir
   :after (flycheck)
-  :pin melpa
   )
 
 (provide 'elixir)

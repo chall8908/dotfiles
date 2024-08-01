@@ -5,7 +5,6 @@ Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 [Service]
 Type=simple
 ExecStart=%h/.nvm/nvm-exec /usr/share/rvm/bin/rvm emacs do /usr/bin/emacs --fg-daemon
-ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
 Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 Environment=NODE_VERSION=emacs
 Restart=on-failure
