@@ -33,8 +33,6 @@ ROOT is the path to start in if NAME is relative."
 (require 'customize-settings) ; loads custom-set stuff
 (require 'behavior)           ; configure general behavior
 (require 'appearance)         ; configure general appearance
-(require 'tmux-keybinds)      ; fix keybinds in tmux
-(require 'init-neotree)
 
 (require 'init-midnight)      ; setup midnight to clean unused buffers
 
