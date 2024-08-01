@@ -72,11 +72,11 @@ title_align center
 bindsym $mod+l exec --no-startup-id loginctl lock-session
 
 # Print screen commands
-bindsym --release Print exec scrot --exec 'mv $f ~/Pictures/'
-bindsym --release Shift+Print exec scrot --select --freeze --exec 'mv $f ~/Pictures/'
+bindsym --release Print exec scrot --exec 'xclip -t image/png -sel clipboard < $f && mv $f ~/Pictures/'
+bindsym --release Shift+Print exec scrot --select --freeze --exec 'xclip -t image/png -sel clipboard < $f && mv $f ~/Pictures/'
 # And for shit keyboards with no printscreen
-bindsym --release $mod+F4 exec scrot --exec 'mv $f ~/Pictures/'
-bindsym --release $mod+Shift+F4 exec scrot --select --freeze --exec 'mv $f ~/Pictures/'
+bindsym --release $mod+F4 exec scrot --exec 'xclip -t image/png -sel clipboard < $f && mv $f ~/Pictures/'
+bindsym --release $mod+Shift+F4 exec scrot --select --freeze --exec 'xclip -t image/png -sel clipboard < $f && mv $f ~/Pictures/'
 
 # start a terminal
 bindsym $mod+Ctrl+t exec i3-sensible-terminal
