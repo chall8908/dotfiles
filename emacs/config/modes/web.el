@@ -25,9 +25,10 @@
           ("tsx" . "\\.tsx?\\'")))
 
   (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-js-indent-offset 2
+        web-mode-markup-comment-indent-offset 2
         web-mode-code-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-sql-indent-offset 2
         web-mode-enable-current-element-highlight t
         web-mode-enable-current-column-highlight t)
   )
