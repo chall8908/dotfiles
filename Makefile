@@ -42,6 +42,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/i3/i3-battery-popup \
 	${DESTDIR}/.config/i3/lock.sh \
 	${DESTDIR}/.config/i3/lock.png \
+	${DESTDIR}/.config/picom.conf \
 	${DESTDIR}/.irbrc \
 	${DESTDIR}/.config/polybar/config \
 	${DESTDIR}/.config/polybar/start.sh \
@@ -91,6 +92,7 @@ ${DESTDIR}/.config/i3/config: ${srcdir}/i3/config
 ${DESTDIR}/.config/i3/i3-battery-popup: ${srcdir}/i3/i3-battery-popup
 ${DESTDIR}/.config/i3/lock.sh: ${srcdir}/i3/lock.sh
 ${DESTDIR}/.config/i3/lock.png: ${srcdir}/i3/lock.png
+${DESTDIR}/.config/picom.conf: ${srcdir}/i3/picom.conf
 ${DESTDIR}/.config/polybar/config: ${srcdir}/polybar/config
 ${DESTDIR}/.config/polybar/start.sh: ${srcdir}/polybar/start.sh
 ${DESTDIR}/.config/polybar/spotify-status: ${srcdir}/polybar/spotify-status
@@ -148,7 +150,7 @@ install: targets services emacs rvm nvm pyenv rustup byobu pam /usr/bin/delta /u
 install-desktop: install i3 /snap/bin/firefox /snap/bin/thunderbird /usr/bin/xdg-open
 
 # Stuff used by i3 and my extensions to it
-i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/i3lock /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr /usr/bin/mogrify fonts
+i3: /usr/bin/startx /usr/bin/i3-msg /usr/local/bin/i3-grid /usr/bin/i3lock /usr/bin/xss-lock /usr/local/bin/splatmoji /usr/bin/libinput-gestures /usr/bin/rofi /usr/bin/hsetroot /usr/bin/redshift /usr/bin/scrot /usr/bin/polybar /usr/bin/kitty /usr/bin/autorandr /usr/bin/mogrify /usr/bin/picom fonts
 
 keyboard: ${DESTDIR}/bin/wally
 
@@ -308,6 +310,9 @@ $HOME/.ssh/authorized_keys: /usr/bin/pkcs11-tool
 
 /usr/bin/pkcs11-tool:
 	sudo apt install --yes opensc
+
+/usr/bin/picom: ${DESTDIR}/.config/picom.conf
+	sudo apt install --yes picom
 
 pam: $HOME/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11-tool
 	sudo pam-auth-update --enable yubikey

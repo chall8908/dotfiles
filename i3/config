@@ -15,6 +15,9 @@ exec_always --no-startup-id /usr/bin/autorandr --change
 # Run hsetroot
 exec_always --no-startup-id /usr/bin/hsetroot -solid '#000516'
 
+# Run picom
+exec --no-startup-id picom --daemon --backend glx
+
 # configure XSS lock
 exec --no-startup-id /usr/bin/xss-lock --transfer-sleep-lock "$HOME/.config/i3/lock.sh" &
 
