@@ -24,7 +24,7 @@ i3lock \
   --{verif,wrong,time,date}outline-color="#000000ff" \
   --{verif,wrong}-size=40 \
   --{time,date}-size=20 \
-  --{verif,wrong,time,date}outline-width=0.5 \
+  --{verif,wrong,time,date}outline-width=0.25 \
   --date-str "%a %b %d" \
   --time-align 1 \
   --date-align 2 \
