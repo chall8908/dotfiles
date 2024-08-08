@@ -54,6 +54,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/dunst/dunstrc \
 	${DESTDIR}/.rvm/hooks/after_cd_nvm \
 	${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf \
+	${DESTDIR}/.local/share/fonts/FiraCodeNerdFont-Regular.ttf \
+	${DESTDIR}/.local/share/fonts/FiraCodeNerdFontMono-Regular.ttf \
 	${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
 
 SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf \
@@ -104,6 +106,8 @@ ${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-
 ${DESTDIR}/.config/dunst/dunstrc: ${srcdir}/i3/dunst.conf
 ${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
 ${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf: ${srcdir}/fonts/PowerlineExtraSymbols.otf
+${DESTDIR}/.local/share/fonts/FiraCodeNerdFont-Regular.ttf: ${srcdir}/fonts/FiraCodeNerdFont-Regular.ttf
+${DESTDIR}/.local/share/fonts/FiraCodeNerdFontMono-Regular.ttf: ${srcdir}/fonts/FiraCodeNerdFontMono-Regular.ttf
 ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fonts/Font-Awesome-6-Free-Regular-400.otf
 
 # System level symlinks

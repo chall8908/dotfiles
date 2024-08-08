@@ -1,6 +1,6 @@
 shell /bin/bash --login
 
-font_family Fira Code
+font_family Fira Code Nerd Font Mono
 font_size 10
 adjust_line_height 1
 

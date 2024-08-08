@@ -48,10 +48,10 @@ padding = 0
 
 module-margin = 0
 
-font-0 = Fira Code:size=10;2
+font-0 = Fira Code Nerd Font Mono:size=9;2
 font-1 = Noto Color Emoji:scale=15;2
 font-2 = Noto Sans Symbols2:size=10;2
-font-3 = Powerline Extra Symbols:size=17;3
+font-3 = Fira Code Nerd Font Mono:size=17;2
 
 modules-left = power i3 separator-lower-left separator-upper-right xwindow separator-lower-left
 modules-center = separator-upper-right date separator-upper-left
@@ -461,22 +461,22 @@ content-foreground = ${colors.background}
 
 [module/separator-lower-left]
 inherit = module/separator
-; content = "%{T3}%{T-} "
-content = "  "
+content = "%{T4}%{T-} "
+; content = "  "
 
 [module/separator-upper-right]
 inherit = module/separator
-; content = " %{T3}%{T-}"
-content = "  "
+content = " %{T4}%{T-}"
+; content = "  "
 
 [module/separator-upper-left]
 inherit = module/separator
-; content = "%{T3}%{T-} "
-content = " "
+content = "%{T4}%{T-} "
+; content = " "
 
 [module/separator-lower-right]
 inherit = module/separator
-; content = " %{T3}%{T-}"
-content = "  "
+content = " %{T4}%{T-}"
+; content = "  "
 
 ; vim:ft=dosini

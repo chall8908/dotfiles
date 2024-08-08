@@ -1,6 +1,6 @@
 /*-*- mode: css; -*-*/
 configuration {
-  font: "Font Awesome 6 Free 12";
+  font: "FiraCode Nerd Font Mono 30";
 }
 
 * {
