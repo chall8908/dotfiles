@@ -15,6 +15,9 @@ exec_always --no-startup-id /usr/bin/autorandr --change
 # Run hsetroot
 exec_always --no-startup-id /usr/bin/hsetroot -solid '#000516'
 
+# Reload picom if it's running
+exec_always --no-startup-id sh -c "pgrep picom && kill --signal USR1 $(pgrep picom)"
+
 # Run picom
 exec --no-startup-id picom --daemon --backend glx
 
