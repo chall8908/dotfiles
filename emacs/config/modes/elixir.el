@@ -2,9 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package elixir-mode
-  :mode "\.exs$"
-  )
+(use-package elixir-mode)
 
 (use-package flycheck-elixir
   :after (flycheck)

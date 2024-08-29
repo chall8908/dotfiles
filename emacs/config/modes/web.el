@@ -3,12 +3,10 @@
 ;;; Code:
 
 (use-package web-mode
-  ;; :after (yasnippet flycheck)
-  :after (yasnippet)
-  :mode ("\.erb$"     ; embedded Ruby
-         "\.[jt]sx?$" ; JS + JSX, TS + TSX
-         "\.eex$"     ; embedded Elixir
-         "\.html$"
+  :mode (("\.erb$" . web-mode) ; embedded Ruby
+         ("\.[cm]?[jt]sx?$" . web-mode) ; JS + JSX, TS + TSX
+         ("\.eex$" . web-mode) ; embedded Elixir
+         ("\.html$" . web-mode) ; HTML
          )
 
   :config
@@ -21,8 +19,7 @@
 
   ;; set web-mode-content-type to jsx for js/jsx files
   (setq web-mode-content-types-alist
-        '(("jsx" . "\\.jsx?\\'")
-          ("tsx" . "\\.tsx?\\'")))
+        '(("jsx" . "\\.[cm]?[jt]sx?\\'")))
 
   (setq web-mode-markup-indent-offset 2
         web-mode-markup-comment-indent-offset 2

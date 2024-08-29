@@ -24,6 +24,12 @@
  ;; don't generate lockfiles
  create-lockfiles nil)
 
+;; Increase GC threshold to 100mb
+(setq gc-cons-threshold 100000000)
+
+;; Increase read process buffer size for LSP servers
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 ;; TODO: docs
 (setq resize-minibuffer-mode t)
 

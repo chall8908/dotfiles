@@ -76,6 +76,7 @@
   :hook (caddyfile-mode . caddyfile-tab-override))
 
 (require 'persp)
+(require 'lsp)
 (require 'elixir)
 (require 'git)
 (require 'markdown)
