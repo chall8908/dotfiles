@@ -36,9 +36,9 @@
   # Remote commands
   ps = push
   pl = pull
-  psf = "!f() { git push --force-with-lease \"${1:-origin}\" HEAD; }; f"
+  psf = "!f() { : git push --force-with-lease \"${1:-origin}\" \"${2:-HEAD}\"; }; f"
   overwrite = psf
-  psto = "!f() { git push -u \"${1:-origin}\" \"${2:-HEAD}\"; }; f"
+  psto = "!f() { : git push -u \"${1:-origin}\" \"${2:-HEAD}\"; }; f"
   publish = psto
   delete = push origin --delete --
   repush = "!f() { git delete $1 && git psto $2; }; f"
@@ -65,7 +65,7 @@
   pager = delta
 
 [branch]
-  autosetuprebase = always
+  autosetupRebase = always
 
 [pull]
   rebase = merges
