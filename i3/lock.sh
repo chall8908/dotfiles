@@ -6,7 +6,7 @@ dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPl
 # Requires the i3lock-color fork of i3lock
 i3lock \
   --ignore-empty-password \
-  --blur 5 \
+  --blur=4 \
   --image "${1:-$HOME/.config/i3/lock.png}" \
   --centered \
   --force-clock \
@@ -31,8 +31,3 @@ i3lock \
   --time-pos "x+(w/2)+7:y+20" \
   --date-pos "x+(w/2)-7:y+20" \
   --pass-{media,screen,volume}-keys
-
-# If we have a sleep lock, close it now
-if [[ -e "$XSS_SLEEP_LOCK_FD" ]]; then
-  exec $XSS_SLEEP_LOCK_FD<&-
-fi
