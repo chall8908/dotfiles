@@ -61,7 +61,7 @@
   ui = true
 
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesFile = ~/.config/git/ignore
   pager = delta
 
 [branch]

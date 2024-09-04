@@ -28,7 +28,8 @@ CODENAME = $(shell lsb_release -c | awk '{ print $$2 }')
 # Locations of symlinks.  Their source files are below
 TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.bash_profile \
-	${DESTDIR}/.gitconfig \
+	${DESTDIR}/.config/git/config \
+	${DESTDIR}/.config/git/ignore \
 	${DESTDIR}/bin/power_menu \
 	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xdefaults \
@@ -81,7 +82,8 @@ REMOTES=${srcdir}/bash.d/bash-git-prompt
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
 ${DESTDIR}/.bash_profile: ${srcdir}/bash.d/profile ${srcdir}/bash.d/bash-git-prompt
-${DESTDIR}/.gitconfig: ${srcdir}/gitconf/config
+${DESTDIR}/.config/git/config: ${srcdir}/gitconf/config
+${DESTDIR}/.config/git/ignore: ${srcdir}/gitconf/ignore
 ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
 ${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
