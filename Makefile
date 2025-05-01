@@ -312,7 +312,7 @@ byobu: /usr/bin/byobu ${DESTDIR}/.byobu/.tmux.conf ${DESTDIR}/.byobu/keybindings
 /usr/bin/redshift:
 	sudo apt install --yes redshift
 
-$HOME/.ssh/authorized_keys: /usr/bin/pkcs11-tool
+${HOME}/.ssh/authorized_keys: /usr/bin/pkcs11-tool
 	ssh-keygen -D /usr/lib/${PLATFORM}-linux-gnu/opensc-pkcs11.so >> $@
 
 /usr/lib/${PLATFORM}-linux-gnu/security/libpam-p11.so:
@@ -327,7 +327,7 @@ $HOME/.ssh/authorized_keys: /usr/bin/pkcs11-tool
 /usr/bin/dunst: ${DESTDIR}/.config/dunst/dunstrc
 	sudo apt install --yes dunst
 
-pam: $HOME/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11-tool
+pam: ${HOME}/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11-tool
 	sudo pam-auth-update --enable yubikey
 
 # TODO: Unistall for emacs
