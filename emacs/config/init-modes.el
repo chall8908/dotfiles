@@ -49,13 +49,11 @@
   )
 (add-hook 'sql-mode-hook 'sql-highlight-postgres-keywords)
 
-;; Puppet mode
 (use-package puppet-mode
   :mode "\\.e?pp$"
   :bind (("C-c a" . puppet-align-block))
   )
 
-;; CSV mode
 (use-package csv-mode
   :mode "\\.csv")
 
@@ -75,14 +73,16 @@
                 indent-tabs-mode nil))
   :hook (caddyfile-mode . caddyfile-tab-override))
 
+(use-package auctex)
+
 (require 'persp)
-(require 'lsp)
 (require 'elixir)
 (require 'git)
 (require 'markdown)
 (require 'ruby)
 (require 'web)
 (require 'emmet)
+(require 'r)
 ;; (require 'lsp)
 
 ;; Change default indentation in shell scripts to 2

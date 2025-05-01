@@ -14,6 +14,8 @@
   :hook ((web-mode . lsp-deferred)
          (ruby-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
+  :config
+  (setq lsp-enable-indentation nil)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui)

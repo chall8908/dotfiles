@@ -6,6 +6,10 @@
 
 (use-package rvm)
 
+(use-package ruby-mode
+  :config
+  (setq ruby-block-indent nil))
+
 (use-package ruby-electric
   :diminish
   :hook (ruby-mode . ruby-electric-mode)
