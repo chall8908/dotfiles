@@ -93,7 +93,7 @@ exec = ~/.config/polybar/spotify-status
 
 [module/weather]
 type = custom/script
-interval = 900
+interval = 3600
 exec = curl -s --compressed 'https://wttr.in/?format="%c+%t+%w"&m' | tr -d '"'
 format = <label>
 format-background = ${colors.background}
