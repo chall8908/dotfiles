@@ -39,7 +39,7 @@ ROOT is the path to start in if NAME is relative."
 (use-package evil-nerd-commenter)
 
 (require 'init-git)
-(require 'init-company)
+(require 'init-autocomplete)
 (require 'init-flycheck)
 (require 'init-ivy)
 (require 'init-avy)
