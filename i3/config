@@ -249,5 +249,10 @@ assign [class="(?i)spotify"] workspace $ws9
 for_window [class="(?i)thunar"] floating enable
 for_window [class="(?i)pavucontrol"] floating enable
 
+# Zoom window autofloat
+for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
+for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+
 # Move to center workspace and start a terminal on startup
 exec --no-startup-id "i3-msg workspace 4; i3-sensible-terminal"
