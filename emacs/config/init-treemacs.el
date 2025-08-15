@@ -27,7 +27,7 @@
        (treemacs-git-mode 'simple)))
 
     (treemacs-hide-gitignored-files-mode nil))
-  :hooks (emacs-startup . treemacs)
+  :hook (emacs-startup . treemacs)
   :bind
   (:map global-map
         ("M-0"       . treemacs-select-window)
