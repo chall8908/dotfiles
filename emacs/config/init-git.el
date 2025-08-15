@@ -27,6 +27,10 @@
   (("C-x g" . magit-status)
    (:map magit-status-mode-map
          ("M-RET" . magit-diff-visit-file-other-window)))
+  :init
+  ;; Don't use magit for interactive rebase
+  ;; (has own entire key-map, doesn't allow text-file editing).
+  (setq auto-mode-alist (rassq-delete-all 'git-rebase-mode auto-mode-alist))
   :config
   (defun magit-log-follow-current-file ()
     "A wrapper around `magit-log-buffer-file' with `--follow' argument."
