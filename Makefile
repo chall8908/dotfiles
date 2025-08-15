@@ -77,7 +77,7 @@ SERVICES=${service_path}/emacs.service \
 # These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user keyboard pam
+.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user keyboard pam  yubikey-setup yubikey-reset
 
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -321,13 +321,28 @@ ${HOME}/.ssh/authorized_keys: /usr/bin/pkcs11-tool
 /usr/bin/pkcs11-tool:
 	sudo apt install --yes opensc
 
+/usr/bin/yubico-piv-tool:
+	sudo atp install --yes ykcs11
+
 /usr/bin/picom: ${DESTDIR}/.config/picom.conf
 	sudo apt install --yes picom
 
 /usr/bin/dunst: ${DESTDIR}/.config/dunst/dunstrc
 	sudo apt install --yes dunst
 
-pam: ${HOME}/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11-tool
+yubikey-setup: /usr/bin/pkcs11-tool /usr/bin/yubico-piv-tool
+# Create Authentication Key
+	pkcs11-tool --module /usr/lib/x86_64-linux-gnu/libykcs11.so -k --key-type rsa:2048 --usage-sign --usage-decrypt --login --id 01 --login-type so --so-pin 010203040506070801020304050607080102030405060708 --label defaultkey
+# Create Key Management Key
+	pkcs11-tool --module /usr/lib/x86_64-linux-gnu/libykcs11.so -k --key-type EC:prime256v1 --usage-sign --usage-decrypt --login --id 03 --login-type so --so-pin 010203040506070801020304050607080102030405060708 --label defaultkey
+
+yubikey-reset: /usr/bin/yubico-piv-tool
+	yubico-piv-tool --action reset
+	$(MAKE) yubikey-setup
+	rm ${HOME}/.ssh/authorized_keys
+	$(MAKE) ${HOME}/.ssh/authorized_keys
+
+pam: ${HOME}/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11-tool /usr/bin/yubico-piv-tool
 	sudo pam-auth-update --enable yubikey
 
 # TODO: Unistall for emacs

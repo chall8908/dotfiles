@@ -17,14 +17,17 @@ These steps are only needed to perform first-time setup.  After that, the Makefi
 should handle the rest.
 
 ```
-# The following must be installed
-sudo apt install opensc ykcs11
+make yubikey-setup
+```
 
-# Create Authentication Key
-pkcs11-tool --module /usr/lib/x86_64-linux-gnu/libykcs11.so -k --key-type rsa:2048 --usage-sign --usage-decrypt --login --id 01 --login-type so --so-pin 010203040506070801020304050607080102030405060708 --label defaultkey
+This must be run _before_ `make install` or `make install-desktop`
 
-# Create Key Management Key
-pkcs11-tool --module /usr/lib/x86_64-linux-gnu/libykcs11.so -k --key-type EC:prime256v1 --usage-sign --usage-decrypt --login --id 03 --login-type so --so-pin 010203040506070801020304050607080102030405060708 --label defaultkey
+### Yubikey reset
+
+In the event the PUK gets locked out - or you forget it - do the following:
+
+```
+make yubikey-reset
 ```
 
 ## See Also
