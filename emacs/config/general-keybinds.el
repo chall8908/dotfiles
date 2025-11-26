@@ -75,9 +75,8 @@
 (global-set-key (kbd "C-x M-b") 'previous-buffer)
 (global-set-key (kbd "C-x M-f") 'next-buffer)
 
-;; neotree bindings
+;; file tree navigation - currently unset
 (global-unset-key (kbd "C-x f"))
-(global-set-key (kbd "C-x f") 'neotree-toggle)
 
 (defun open-init ()
   "Open the init.el file in a buffer."

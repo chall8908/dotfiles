@@ -6,6 +6,8 @@
         counsel-M-x
         electric-pair-delete-pair
         end-of-visual-line
+        ess-smart-comma
+        ess-yank
         evilnc-comment-or-uncomment-lines
         indent-for-tab-command
         ivy-alt-done
@@ -13,8 +15,12 @@
         keyboard-escape-quit
         kill-region
         markdown-electric-backquote
+        markdown-end-of-line
         markdown-enter-key
         markdown-outdent-or-delete
+        move-line-down
+        org-end-of-line
+        org-metaright
         org-self-insert-command
         puppet-align-block
         puppet-apply
@@ -27,8 +33,13 @@
         ruby-electric-matching-char
         ruby-electric-space/return
         sh-assignment
+        skeleton-pair-insert-maybe
         suspend-frame
         tabnine-accept-completion
+        tabnine-clear-overlay
+        transpose-character-left
+        web-mode-comment-or-uncomment
+        web-mode-element-close
         web-mode-element-insert
         xterm-paste
         yaml-electric-backspace
@@ -39,7 +50,9 @@
 (setq mc/cmds-to-run-once
       '(
         delete-window
+        handle-switch-frame
         ivy-backward-delete-char
+        ivy-previous-line
         overwrite-mode
         save-buffers-kill-terminal
         swiper

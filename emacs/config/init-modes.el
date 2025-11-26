@@ -75,6 +75,10 @@
 
 (use-package auctex)
 
+(use-package swagger-mode
+  :straight (swagger-mode :type git :host github :repo "Nooby/swagger-mode")
+  )
+
 (require 'persp)
 (require 'elixir)
 (require 'git)

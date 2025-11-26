@@ -40,10 +40,8 @@ ROOT is the path to start in if NAME is relative."
 
 (require 'init-git)
 (require 'init-autocomplete)
-(require 'init-flycheck)
 (require 'init-ivy)
 (require 'init-avy)
-(require 'init-treemacs)
 (require 'init-modes)
 
 (require 'general-keybinds) ; Add additional general keybindings
