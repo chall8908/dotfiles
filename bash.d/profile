@@ -41,9 +41,7 @@ source "$CONFIG_DIR/fzf"
 
 # Load language version managers
 source "$CONFIG_DIR/kiex"
-source "$CONFIG_DIR/pyenv"
-source "$CONFIG_DIR/rvm"
-source "$CONFIG_DIR/nvm"
+source "$CONFIG_DIR/mise"
 source "$CONFIG_DIR/ocaml"
 source "$CONFIG_DIR/go"
 source "$CONFIG_DIR/rust"

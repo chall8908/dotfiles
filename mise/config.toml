@@ -1,0 +1,24 @@
+# Global user settings
+
+[tools]
+node = { version = "lts-krypton", postinstall = "corepack enable" }
+python = 'latest'
+ruby = 'latest'
+usage = "latest"
+
+[env]
+MISE_NODE_COREPACK = true
+
+[alias.ruby.versions]
+emacs = '3.4.7'
+tools = '3.4.7'
+
+[alias.node.versions]
+lts-hydrogen = '18'
+lts-iron = '20'
+lts-jod = '22'
+lts-krypton = '24'
+emacs = '24'
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby", "node"]

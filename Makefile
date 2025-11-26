@@ -34,7 +34,6 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/bin/git-pretty-history \
 	${DESTDIR}/.Xdefaults \
 	${DESTDIR}/.xprofile \
-	${DESTDIR}/.rvmrc \
 	${DESTDIR}/.bundle/config \
 	${DESTDIR}/.byobu/.tmux.conf \
 	${DESTDIR}/.byobu/keybindings.tmux \
@@ -53,7 +52,7 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.config/rofi/power_menu.rasi \
 	${DESTDIR}/.config/libinput-gestures.conf \
 	${DESTDIR}/.config/dunst/dunstrc \
-	${DESTDIR}/.rvm/hooks/after_cd_nvm \
+	${DESTDIR}/.config/mise/config.toml \
 	${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf \
 	${DESTDIR}/.local/share/fonts/FiraCodeNerdFont-Regular.ttf \
 	${DESTDIR}/.local/share/fonts/FiraCodeNerdFontMono-Regular.ttf \
@@ -77,7 +76,7 @@ SERVICES=${service_path}/emacs.service \
 # These are sub-modules inside this repository
 REMOTES=${srcdir}/bash.d/bash-git-prompt
 
-.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rvm nvm pyenv rustup spotify spotifyd byobu targets services work fonts user keyboard pam  yubikey-setup yubikey-reset
+.PHONY: all install install-desktop uninstall xrdb i3 emacs init clean rustup spotify spotifyd byobu targets services work fonts user keyboard pam  yubikey-setup yubikey-reset mise
 
 # Source files for our symlinks
 ${DESTDIR}/.emacs.d: ${srcdir}/emacs
@@ -88,7 +87,6 @@ ${DESTDIR}/bin/git-pretty-history: ${srcdir}/gitconf/git-pretty-history
 ${DESTDIR}/bin/power_menu: ${srcdir}/bin/power_menu
 ${DESTDIR}/.Xdefaults: ${srcdir}/x/defaults
 ${DESTDIR}/.xprofile: ${srcdir}/x/profile
-${DESTDIR}/.rvmrc: ${srcdir}/rvmrc
 ${DESTDIR}/.irbrc: ${srcdir}/irbrc
 ${DESTDIR}/.bundle/config: ${srcdir}/bundler
 ${DESTDIR}/.byobu/.tmux.conf: ${srcdir}/byobu/.tmux.conf
@@ -107,7 +105,7 @@ ${DESTDIR}/.config/rofi/slate.rasi: ${srcdir}/rofi/slate.rasi
 ${DESTDIR}/.config/rofi/power_menu.rasi: ${srcdir}/rofi/power_menu.rasi
 ${DESTDIR}/.config/libinput-gestures.conf: ${srcdir}/libinput-gestures/libinput-gestures.conf
 ${DESTDIR}/.config/dunst/dunstrc: ${srcdir}/i3/dunst.conf
-${DESTDIR}/.rvm/hooks/after_cd_nvm: ${srcdir}/rvm_hacks/after_cd_nvm
+${DESTDIR}/.config/mise/config.toml: ${srcdir}/mise/config.toml
 ${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf: ${srcdir}/fonts/PowerlineExtraSymbols.otf
 ${DESTDIR}/.local/share/fonts/FiraCodeNerdFont-Regular.ttf: ${srcdir}/fonts/FiraCodeNerdFont-Regular.ttf
 ${DESTDIR}/.local/share/fonts/FiraCodeNerdFontMono-Regular.ttf: ${srcdir}/fonts/FiraCodeNerdFontMono-Regular.ttf
@@ -122,7 +120,7 @@ ${DESTDIR}/.local/share/sounds/camera-shutter.mp3: ${srcdir}/sounds/camera-shutt
 /usr/share/pam-configs/yubikey: ${srcdir}/pam/yubikey
 
 # Service links and their dependencies
-${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs /usr/bin/emacs
+${service_path}/emacs.service: ${srcdir}/systemd/emacs.service /usr/bin/emacs
 ${service_path}/ssh-agent.service: ${srcdir}/systemd/ssh-agent.service
 
 $(REMOTES): init
@@ -151,10 +149,8 @@ work: /usr/local/bin/aws /usr/bin/kubectl /usr/bin/docker
 
 fonts: /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf /usr/share/fonts/truetype/noto/NotoSansSymbols2-Regular.ttf /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf ${DESTDIR}/.local/share/fonts/PowerlineExtraSymbols.otf ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf
 
-user: rvm nvm pyenv
-
 # Install things used by terminal-only applications
-install: targets services emacs rvm nvm pyenv rustup byobu pam /usr/bin/delta /usr/bin/fzf /usr/bin/bat
+install: targets services emacs mise rustup byobu pam /usr/bin/delta /usr/bin/fzf /usr/bin/bat
 
 # Install everything needed for a working DE
 install-desktop: install i3 /snap/bin/firefox /snap/bin/thunderbird /usr/bin/xdg-open
@@ -346,13 +342,24 @@ pam: ${HOME}/.ssh/authorized_keys /usr/share/pam-configs/yubikey /usr/bin/pkcs11
 	sudo pam-auth-update --enable yubikey
 
 # TODO: Unistall for emacs
-emacs: /usr/bin/emacs /usr/share/rvm/wrappers/emacs ${HOME}/.nvm/alias/emacs
+emacs: /usr/bin/emacs
 
-rvm: /usr/share/rvm/bin/rvm
+mise: /usr/bin/mise ${DESTDIR}/.config/mise/config.toml ${HOME}/.local/share/bash-completion/completions/mise
 
-nvm: ${DESTDIR}/.nvm/nvm.sh
+${HOME}/.local/share/bash-completion/completions/mise:
+	mkdir -p $(@D)
+	mise use -g usage
+	mise completion bash --include-bash-completion-lib > ~/.local/share/bash-completion/completions/mise
 
-pyenv: ${DESTDIR}/.pyenv/bin/pyenv
+/etc/apt/keyrings/mise-archive-keyring.gpg:
+	wget -qO - "https://mise.jdx.dev/gpg-key.pub" | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null
+
+/etc/apt/sources.list.d/mise.list:
+	echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
+	sudo apt update
+
+/usr/bin/mise: /etc/apt/keyrings/mise-archive-keyring.gpg /etc/apt/sources.list.d/mise.list
+	sudo apt install --yes mise
 
 rustup: ${HOME}/.cargo/bin/rustup
 	mkdir -p ${HOME}/.local/share/bash-completion/completions/
@@ -368,9 +375,6 @@ spotifyd: ${DESTDIR}/bin/spotifyd ${DESTDIR}/.config/systemd/user/spotifyd.servi
 uninstall: clean
 	systemctl --user disable spotifyd.service
 	systemctl --user stop spotifyd.service
-	rm -r ${DESTDIR}/.rvm
-	rm -r ${DESTDIR}/.nvm
-	rm -r ${DESTDIR}/.pyenv
 	rm ${DESTDIR}/.config/systemd/user/spotifyd.service
 	rm ${DESTDIR}/bin/spotifyd
 	rm ${DESTDIR}/bin/spt
@@ -387,25 +391,6 @@ xrdb: ${DESTDIR}/.Xdefaults ${DESTDIR}/.Xresources
 
 /usr/bin/xclip:
 	sudo apt install --yes xclip
-
-/usr/share/rvm/wrappers/emacs: /usr/share/rvm/bin/rvm
-	/usr/share/rvm/bin/rvm install 3.2.2
-	/usr/share/rvm/bin/rvm 3.2.2 gemset create emacs
-	/usr/share/rvm/bin/rvm alias create --create emacs 3.2.2@emacs
-
-${HOME}/.nvm/alias/emacs: ${HOME}/.nvm/nvm.sh
-	/bin/bash -lc "source ~/.nvm/nvm.sh; nvm install lts/hydrogen; nvm alias emacs lts/hydrogen"
-
-/usr/share/rvm/bin/rvm:
-	sudo apt-add-repository -y ppa:rael-gc/rvm
-	sudo apt-get install --yes rvm
-	sudo adduser ${USER} rvm
-
-${HOME}/.nvm/nvm.sh:
-	curl -o- 'https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh' | bash
-
-${HOME}/.pyenv/bin/pyenv:
-	curl -L 'https://raw.githubusercontent.com/pyenv/pyenv-installer/dd3f7d0914c5b4a416ca71ffabdf2954f2021596/bin/pyenv-installer' | bash
 
 ${HOME}/.cargo/bin/rustup:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
