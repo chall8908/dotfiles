@@ -16,6 +16,7 @@
   tags = tag --sort=version:refname
   stashes = stash list
   remotes = remote -v
+	gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\"
 
   # Tree Management
   co = checkout
@@ -32,6 +33,8 @@
   stat = status
   staged = diff --cached --diff-algorithm=minimal -w
   stagetool = difftool --cached
+  delete-merged = "!f() { git branch --merged | awk \"! /development|master|staging/\" | xargs git branch --delete; }; f"
+	delete-gone = !git gone | cut -f1 -d \" \" | xargs -I{} git branch -D {};
 
   # Remote commands
   ps = push
