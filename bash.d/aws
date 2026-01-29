@@ -3,40 +3,105 @@
 if command -v aws > /dev/null; then
   complete -C "$(which aws_completer)" aws
 
-  switch-aws-profile() {
-    export AWS_PROFILE=$1
+  _select() {
+    fzf --reverse --height=~1000 --border sharp --border-label="$1" --border-label-pos=3
+  }
+
+  aws-profile() {
+    export AWS_PROFILE=${1-"$(_get-aws-profiles | _select 'Choose AWS Profile')"}
+
     if ! aws sts get-caller-identity > /dev/null; then
       aws sso login
     fi
   }
 
-  _switch_aws_profile() {
+  _ensure-aws-profile() {
+    if [[ -z "$AWS_PROFILE" ]]; then
+      if [[ ! -z "$COMP_WORDS" ]]; then
+        # Looks like we might be in an autocompleter
+        # Interactive selection doesn't work here, so we should bail
+        echo -e "\n\nNo AWS profile selected. Use 'aws-profile' to select a profile." >&2
+        return 1
+      fi
+
+      aws-profile
+    fi
+  }
+
+  _get-aws-profiles() {
+    awk "BEGIN { print \"default\"} /\[profile/ { sub(/]/, \"\", \$2); print \$2 }" ~/.aws/config
+  }
+
+  _aws_profile_complete() {
     local cur=${COMP_WORDS[COMP_CWORD]}
-    local profiles="$(awk "BEGIN { print \"default\"} /\[profile/ { sub(/]/, \"\", \$2); print \$2 }" ~/.aws/config)"
+    local profiles="$(_get-aws-profiles)"
 
     COMPREPLY=( $( compgen -S ' ' -W "$profiles" -- $cur ) )
 
     return 0
   }
 
-  complete -F _switch_aws_profile -o nospace switch-aws-profile
+  complete -F _aws_profile_complete -o nospace aws-profile
+
+  list-instances() {
+    _ensure-aws-profile || return 1
+
+    local names=${1-'*'}
+    local cache_file="/dev/shm/list-instances.${AWS_PROFILE}.${names}"
+
+    if [ -f "$cache_file" ]; then
+      cat "$cache_file"
+      return 0
+    fi
+
+    aws ec2 describe-instances \
+        --query 'Reservations[].Instances[].Tags[?Key==`Name`].Value' \
+        --filter "Name=tag:Name,Values=${names}*" \
+        --output text \
+        | tee "${cache_file}"
+  }
 
   get-instance-id-by-name() {
     aws ec2 describe-instances --query 'Reservations[0].Instances[0].InstanceId' --filter "Name=tag:Name,Values=$1" | tr -d '"'
   }
 
+  _get-instance-id-by-name_completer() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local names="$(list-instances)"
+
+    COMPREPLY=( $(compgen -W "$names" -- $cur ) )
+
+    return 0
+  }
+
   ssm() {
+    _ensure-aws-profile
     local target=$1; shift
+
+    if [[ -z "$target" ]]; then
+      target="$(list-instances | _select 'Choose Instance')"
+    fi
+
+    if [[ -z "$target" ]]; then
+      echo "No instance selected" >&2
+      return 1
+    fi
 
     # If the target doesn't look like an instance ID, try looking it up
     if [[ "$target" != i-* ]]; then
       target="$(get-instance-id-by-name "$target")"
     fi
 
+    echo "Starting SSM session for instance ${target} with profile ${AWS_PROFILE}"
+
     aws ssm start-session --target="$target" "$@"
   }
 
+  complete -F _get-instance-id-by-name_completer -o nospace get-instance-id-by-name
+  complete -F _get-instance-id-by-name_completer -o nospace ssm
+
   send-ssh-public-key() {
+    _ensure-aws-profile
     local target=$1; shift
     local user=$1; shift
 
