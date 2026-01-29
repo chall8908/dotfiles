@@ -41,10 +41,10 @@ ROOT is the path to start in if NAME is relative."
 (use-package evil-nerd-commenter)
 
 (require 'init-git)
-(require 'init-autocomplete)
 (require 'init-ivy)
 (require 'init-avy)
 (require 'init-modes)
+(require 'init-autocomplete)
 
 (require 'general-keybinds) ; Add additional general keybindings
 

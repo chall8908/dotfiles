@@ -2,6 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package transient)
+
+(use-package aidermacs
+  :after transient
+  :bind (("C-c a"  . aidermacs-transient-menu))
+  :config
+  (setq aidermacs-exit-kills-buffer t)
+  :custom
+  (aidermacs-default-chat-mode 'architect))
+
 (use-package corfu
   :init
   (global-corfu-mode))
@@ -17,29 +27,20 @@
 
 (use-package pos-tip)
 
-(use-package tabnine
-  :commands (tabnine-start-process)
-  :hook (prog-mode . tabnine-mode)
-  :straight t
-  :diminish "⌬"
-  :custom
-  (tabnine-wait 1)
-  (tabnine-minimum-prefix-length 0)
-  :hook (kill-emacs . tabnine-kill-process)
-  :config
-  (add-to-list 'completion-at-point-functions #'tabnine-completion-at-point)
-  (tabnine-start-process)
-  (require 'tabnine-chat-curl) ; Ensure tabnine chat curl is loaded
-  :bind
-  (:map  tabnine-completion-map
-	 ("<tab>" . tabnine-accept-completion)
-	 ("TAB" . tabnine-accept-completion)
-	 ("M-f" . tabnine-accept-completion-by-word)
-	 ("M-<return>" . tabnine-accept-completion-by-line)
-	 ("M-RET" . tabnine-accept-completion-by-line)
-	 ("C-g" . tabnine-clear-overlay)
-	 ("M-[" . tabnine-previous-completion)
-	 ("M-]" . tabnine-next-completion)))
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("M-<return>" . 'copilot-accept-completion-by-line)
+              ("M-RET" . 'copilot-accept-completion-by-line)
+              ("C-g" . 'copilot-clear-overlay)
+              ("M-[" . 'copilot-previous-completion)
+              ("M-]" . 'copilot-next-completion))
+  :hook (prog-mode . copilot-mode)
+  :ensure t)
 
 (provide 'init-autocomplete)
 

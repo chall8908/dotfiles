@@ -57,7 +57,8 @@ TARGETS=${DESTDIR}/.emacs.d \
 	${DESTDIR}/.local/share/fonts/FiraCodeNerdFont-Regular.ttf \
 	${DESTDIR}/.local/share/fonts/FiraCodeNerdFontMono-Regular.ttf \
 	${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf \
-	${DESTDIR}/.local/share/sounds/camera-shutter.mp3
+	${DESTDIR}/.local/share/sounds/camera-shutter.mp3 \
+	${DESTDIR}/.cecli.config.yaml
 
 SYSTEM_TARGETS=/etc/X11/xorg.conf.d/touchpad.conf \
   /usr/local/bin/i3-grid \
@@ -111,6 +112,7 @@ ${DESTDIR}/.local/share/fonts/FiraCodeNerdFont-Regular.ttf: ${srcdir}/fonts/Fira
 ${DESTDIR}/.local/share/fonts/FiraCodeNerdFontMono-Regular.ttf: ${srcdir}/fonts/FiraCodeNerdFontMono-Regular.ttf
 ${DESTDIR}/.local/share/fonts/Font-Awesome-6-Free-Regular-400.otf: ${srcdir}/fonts/Font-Awesome-6-Free-Regular-400.otf
 ${DESTDIR}/.local/share/sounds/camera-shutter.mp3: ${srcdir}/sounds/camera-shutter.mp3
+${DESTDIR}/.cecli.config.yaml: ${srcdir}/aider/config.yaml
 
 # System level symlinks
 /etc/X11/xorg.conf.d/touchpad.conf: ${srcdir}/x/touchpad.conf
