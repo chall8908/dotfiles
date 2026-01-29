@@ -80,7 +80,6 @@
   )
 
 (require 'elixir)
-(require 'git)
 (require 'markdown)
 (require 'ruby)
 (require 'web)
