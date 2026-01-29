@@ -26,6 +26,8 @@ ROOT is the path to start in if NAME is relative."
 ;; Tell custom to write to custom.el instead of this file
 (setq custom-file (expand-file-name "customize-settings.el" config-dir))
 
+(require 'project)
+
 (require 'switches)
 
 (require 'whoami)

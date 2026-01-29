@@ -79,7 +79,6 @@
   :straight (swagger-mode :type git :host github :repo "Nooby/swagger-mode")
   )
 
-(require 'persp)
 (require 'elixir)
 (require 'git)
 (require 'markdown)

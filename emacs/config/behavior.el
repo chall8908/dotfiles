@@ -2,6 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq
+ ;; display project mode line
+ project-mode-line t
+ )
+
 (setq-default
  ;; Disable the welcome message
  inhibit-startup-message t
