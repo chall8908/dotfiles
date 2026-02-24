@@ -1,8 +1,20 @@
 #-*- sh -*- Emacs mode
 
+_update-session-name() {
+    # Get the name of the current TMux session and the name of the git repository (if any)
+    local session_name="$(tmux list-panes -a -F "#{?#{==:#{pane_tty},$(tty)},#{session_name},}" | grep '.')"
+    local repo_name="$(basename $(git rev-parse --show-toplevel) 2>/dev/null)"
+
+    if [ -n "$session_name" ] && [ -n "$repo_name" ] && [ "$session_name" != "$repo_name" ]; then
+      tmux rename-session -t "$session_name" "$repo_name"
+    fi
+}
+
 # cd into my work directory
 work-dir() {
     cd $WORK_DIR/$1
+
+    _update-session-name
 }
 
 # Autocomplete folders in my work directory
@@ -21,6 +33,8 @@ complete -F _work_dir -o nospace work-dir
 # cd into personal directory
 my-dir() {
     cd $PERSONAL_DIR/$1
+
+    _update-session-name
 }
 
 # Autocomplete folders in my personal directory
