@@ -3,7 +3,7 @@
 [tools]
 node = { version = "lts-krypton", postinstall = "corepack enable" }
 python = 'latest'
-ruby = 'latest'
+ruby = "latest"
 usage = "latest"
 uv = "latest"
 
@@ -23,4 +23,7 @@ lts-krypton = '24'
 emacs = '24'
 
 [settings]
-idiomatic_version_file_enable_tools = ["ruby", "node"]
+idiomatic_version_file_enable_tools = ["ruby", "node", "python"]
+
+[settings.ruby]
+compile = false
