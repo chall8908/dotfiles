@@ -1,4 +1,4 @@
-model: github_copilot/claude-sonnet-4.5
+model: github_copilot/claude-opus-4.5
 show-model-warnings: false
 agent: true
 auto-commits: true
@@ -29,6 +29,11 @@ mcp-servers:
     aws-knowledge:
       transport: http
       url: https://knowledge-mcp.global.api.aws
+    github:
+      transport: http
+      url: https://api.githubcopilot.com/mcp/
+      headers:
+        Authorization: "Bearer $GITHUB_AUTH_TOKEN"
 
 ##########################################################
 # Sample .aider.conf.yml
