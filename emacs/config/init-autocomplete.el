@@ -4,13 +4,65 @@
 
 (use-package transient)
 
-(use-package aidermacs
-  :after transient
-  :bind (("C-c a"  . aidermacs-transient-menu))
+(use-package acp)
+(use-package agent-shell
+  :after acp
+  :ensure t
+  :bind (("C-c a" . agent-shell)
+         (:map agent-shell-mode-map
+               ("RET" . agent-shell-newline)
+               ("M-RET" . agent-shell-submit)))
+
+  :ensure-system-package
+  ((claude . "curl -fsSL https://claude.ai/install.sh | bash")
+   (claude-agent-acp . "npm install -g @agentclientprotocol/claude-agent-acp"))
+
   :config
-  (setq aidermacs-exit-kills-buffer t)
-  :custom
-  (aidermacs-default-chat-mode 'architect))
+  (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)
+        agent-shell-session-strategy 'new
+        agent-shell-prefer-viewport-interaction t
+        agent-shell-mcp-servers
+        `(((name . "context7")
+           (type . "http")
+           (headers . (((name . "Authorization")
+                        (value . ,(concat "Bearer " (or (getenv "CONTEXT7_API_KEY") ""))))))
+           (url . "https://mcp.context7.com/mcp"))
+          ((name . "atlassian")
+           (type . "http")
+           (headers . [])
+           (url . "https://mcp.atlassian.com/v1/mcp"))
+          ((name . "aws-knowledge")
+           (type . "http")
+           (headers . [])
+           (url . "https://knowledge-mcp.global.api.aws"))
+          ((name . "aws-iac-knowledge")
+           (command . "uvx")
+           (args . ["awslabs.aws-iac-mcp-server@latest"]))
+          ((name . "datadog")
+           (type . "http")
+           (headers . (((name . "Authorization")
+                        (value . ,(concat "Bearer " (or (getenv "DD_PAT") ""))))))
+           (url . "https://mcp.us5.datadoghq.com/v1/mcp?toolsets=core,ddsql,error-tracking,kubernetes,onboarding,rum,security,software-delivery"))
+          ((name . "github")
+           (type . "http")
+           (headers . (((name . "Authorization")
+                        (value . ,(concat "Bearer " (or (getenv "GH_TOKEN") ""))))))
+           (url . "https://api.githubcopilot.com/mcp/"))
+          ;; ((name . "firefox-devtools")
+          ;;  (command . "npx")
+          ;;  (args . ["-y", "firefox-devtools-mcp@latest", "--headless", "--viewport", "1280x720"]))
+          ;; ((name . "rubocop")
+          ;;  (command . "bundle")
+          ;;  (args . ["exec", "rubocop", "--mcp"]))
+          )))
+
+(use-package agent-review
+  :straight '(agent-review
+              :type git
+              :host github
+              :repo "nineluj/agent-review")
+  :config
+)
 
 (use-package corfu
   :init

@@ -1,2 +1,6 @@
 .dir-locals.el
 .cecli*
+/.agent-shell/
+
+_bmad/
+_bmad-output/
