@@ -6,10 +6,13 @@ python = 'latest'
 ruby = "latest"
 usage = "latest"
 uv = "latest"
+gh = "latest"
+kubectl = "latest"
 
 [env]
 MISE_NODE_COREPACK = true
 MISE_JOBS = "{{ num_cpus() }}"
+GH_TOKEN = { value = "{{ exec(command='gh auth token') }}", tools = true }
 
 [tool_alias.ruby.versions]
 emacs = '3.4.7'
