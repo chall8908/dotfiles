@@ -4,3 +4,6 @@
 
 _bmad/
 _bmad-output/
+
+**/.claude/settings.local.json
+**/.claude/skills/

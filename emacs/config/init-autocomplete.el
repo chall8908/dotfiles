@@ -24,9 +24,8 @@
         agent-shell-mcp-servers
         `(((name . "context7")
            (type . "http")
-           (headers . (((name . "Authorization")
-                        (value . ,(concat "Bearer " (or (getenv "CONTEXT7_API_KEY") ""))))))
-           (url . "https://mcp.context7.com/mcp"))
+           (headers . [])
+           (url . "https://mcp.context7.com/mcp/oauth"))
           ((name . "atlassian")
            (type . "http")
            (headers . [])
@@ -52,7 +51,7 @@
           ;;  (command . "npx")
           ;;  (args . ["-y", "firefox-devtools-mcp@latest", "--headless", "--viewport", "1280x720"]))
           ;; ((name . "rubocop")
-          ;;  (command . "bundle")
+          ;;  (command . "mise")
           ;;  (args . ["exec", "rubocop", "--mcp"]))
           )))
 
@@ -62,7 +61,13 @@
               :host github
               :repo "nineluj/agent-review")
   :config
-)
+  (setq agent-shell-preferred-agent-config
+        (agent-shell-anthropic-make-claude-code-config)
+        agent-shell-chat-mode-enabled t
+        agent-shell-prefer-viewport-interaction nil
+        agent-shell-persistent-prompt-enabled t
+        agent-shell-show-cost-indicator t
+        agent-shell-show-busy-indicator t))
 
 (use-package corfu
   :init

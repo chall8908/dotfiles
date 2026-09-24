@@ -38,7 +38,8 @@ ROOT is the path to start in if NAME is relative."
 
 (require 'init-midnight)      ; setup midnight to clean unused buffers
 
-(use-package evil-nerd-commenter)
+(use-package evil-nerd-commenter :straight t)
+(use-package transient :straight t)
 
 (require 'init-git)
 (require 'init-ivy)

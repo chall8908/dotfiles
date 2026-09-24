@@ -1,13 +1,14 @@
 # Global user settings
 
 [tools]
-node = { version = "lts-krypton", postinstall = "corepack enable" }
+node = { version = "24", postinstall = "corepack enable" }
 python = 'latest'
 ruby = "latest"
 usage = "latest"
 uv = "latest"
 gh = "latest"
 kubectl = "latest"
+"gem:rubocop" = "latest"
 
 [env]
 MISE_NODE_COREPACK = true

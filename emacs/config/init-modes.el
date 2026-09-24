@@ -8,6 +8,7 @@
 
 (use-package tree-sitter
   :demand t
+  :diminish
   :config
   (global-tree-sitter-mode)
   )
@@ -89,6 +90,9 @@
 
 ;; Change default indentation in shell scripts to 2
 (setq sh-basic-offset 2)
+
+(add-to-list 'magic-mode-alist '("node" . js-mode))
+(add-to-list 'magic-mode-alist '("ts-node" . js-mode))
 
 (provide 'init-modes)
 
