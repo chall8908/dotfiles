@@ -73,14 +73,16 @@
   :init
   (global-corfu-mode))
 
-(use-package corfu-terminal
-  :after corfu
-  :straight '(corfu-terminal
-              :type git
-              :repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
-  :unless (display-graphic-p)
-  :init
-  (corfu-terminal-mode +1))
+;; corfu-terminal is not necessary after Emacs 31.
+(when (< emacs-major-version 31)
+  (use-package corfu-terminal
+    :after corfu
+    :straight '(corfu-terminal
+                :type git
+                :repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
+    :unless (display-graphic-p)
+    :init
+    (corfu-terminal-mode +1)))
 
 (use-package pos-tip)
 
