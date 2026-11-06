@@ -1,4 +1,4 @@
-;;; web -- Configuration for web-mode
+;;; web -- Configuration for web-mode -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

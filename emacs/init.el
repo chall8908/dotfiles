@@ -1,4 +1,4 @@
-;;; init --- User initialization file
+;;; init --- User initialization file  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

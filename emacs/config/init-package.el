@@ -1,4 +1,4 @@
-;;; init-package --- Setup package management
+;;; init-package --- Setup package management  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

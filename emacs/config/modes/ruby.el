@@ -1,4 +1,4 @@
-;;;; ruby --- Ruby mode configuration
+;;;; ruby --- Ruby mode configuration  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

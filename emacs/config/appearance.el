@@ -1,4 +1,4 @@
-;;; appearance --- Configure Emacs' general appearance
+;;; appearance --- Configure Emacs' general appearance  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

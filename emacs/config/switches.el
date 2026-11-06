@@ -1,4 +1,4 @@
-;;; switches.el --- Adds additional startup switches to Emacs
+;;; switches.el --- Adds additional startup switches to Emacs  -*- lexical-binding: t; -*-
 
 ;; Author: Chris Hall
 ;; Maintainer: Chris Hall

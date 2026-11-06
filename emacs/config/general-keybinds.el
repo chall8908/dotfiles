@@ -1,4 +1,4 @@
-;;; general-keybinds --- Provides Emeacs-wide keybindings
+;;; general-keybinds --- Provides Emeacs-wide keybindings -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

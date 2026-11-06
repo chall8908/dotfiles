@@ -1,4 +1,4 @@
-;;; whoami --- Tell emacs about yourself
+;;; whoami --- Tell emacs about yourself  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

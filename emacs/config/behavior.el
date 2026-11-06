@@ -1,4 +1,4 @@
-;;; behavior -- Configure general emacs behavior
+;;; behavior -- Configure general emacs behavior  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

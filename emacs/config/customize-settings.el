@@ -1,4 +1,4 @@
-;;; customize-settings --- Configure custom
+;;; customize-settings --- Configure custom  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
